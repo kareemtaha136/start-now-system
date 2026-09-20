@@ -21,6 +21,8 @@ import { marketingAssets, productConfig } from "../lib/zerohours-config";
 import { MediaPlaceholder } from "../components/MediaPlaceholder";
 import { openPaymentCheckout } from "../lib/paddle";
 import { PaymentTestModeBanner } from "../components/PaymentTestModeBanner";
+import wordmark from "../assets/zerohours-wordmark.png";
+import symbol from "../assets/zerohours-symbol.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -106,7 +108,8 @@ function Index() {
   const submitGuide = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     trackEvent("free_guide_submit");
-    setGuideMessage("The free guide email is not connected yet. No email was saved.");
+    window.open(productConfig.freeGuideUrl, "_blank", "noopener");
+    setGuideMessage("Your guide is downloading now. Email sending isn't connected yet, so your address wasn't saved.");
   };
 
   return (
@@ -115,8 +118,7 @@ function Index() {
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
         <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 px-4 sm:px-6 lg:px-8">
           <a href="#top" className="flex min-w-0 items-center gap-2 font-display text-base font-extrabold uppercase tracking-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-            <span className="grid size-8 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground"><Zap className="size-4" aria-hidden="true" /></span>
-            <span className="truncate">ZeroHours</span>
+            <img src={wordmark} alt="ZeroHours" className="h-6 w-auto sm:h-7" width={1511} height={222} />
           </a>
           <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
             {navItems.map(([label, href]) => <a key={href} href={href} className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">{label}</a>)}
@@ -228,7 +230,7 @@ function Index() {
         </section>
       </main>
 
-      <footer className="border-t border-border bg-background px-4 py-10 sm:px-6"><div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 sm:items-end"><div><div className="flex items-center gap-2 font-display font-extrabold uppercase"><span className="grid size-8 place-items-center rounded-md bg-primary text-primary-foreground"><Zap className="size-4" /></span>ZeroHours</div><p className="mt-3 max-w-sm text-sm text-muted-foreground">Stop staring at the assignment. Start it.</p></div><div className="sm:text-right"><div className="flex flex-wrap gap-4 sm:justify-end">{navItems.map(([label, href]) => <a key={href} className="text-sm font-semibold text-muted-foreground hover:text-foreground" href={href}>{label}</a>)}</div><p className="mt-4 text-xs text-muted-foreground">© 2026 ZeroHours. Digital delivery after purchase.</p></div></div></footer>
+      <footer className="border-t border-border bg-background px-4 py-10 sm:px-6"><div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 sm:items-end"><div><div className="flex items-center gap-2 font-display font-extrabold uppercase"><img src={symbol} alt="" aria-hidden="true" className="size-8 w-auto" />ZeroHours</div><p className="mt-3 max-w-sm text-sm text-muted-foreground">Stop staring at the assignment. Start it.</p></div><div className="sm:text-right"><div className="flex flex-wrap gap-4 sm:justify-end">{navItems.map(([label, href]) => <a key={href} className="text-sm font-semibold text-muted-foreground hover:text-foreground" href={href}>{label}</a>)}</div><p className="mt-4 text-xs text-muted-foreground">© 2026 ZeroHours. Digital delivery after purchase.</p></div></div></footer>
 
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 p-3 backdrop-blur-md md:hidden"><button className="btn-primary w-full" disabled={checkoutLoading} onClick={checkout}>{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button></div>
     </div>
