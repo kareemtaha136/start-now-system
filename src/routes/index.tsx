@@ -155,23 +155,20 @@ function Index() {
               </div>
               <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription</p>
             </div>
-            <div className="relative mt-10 overflow-hidden rounded-xl border border-border bg-card p-1.5 shadow-soft sm:mt-14 sm:p-3">
-              <div ref={demoFrameRef} className="relative">
-                <video
-                  ref={demoVideoRef}
-                  className="aspect-video w-full rounded-lg bg-ink object-contain"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster={productConfig.demoPosterUrl}
-                  aria-label="ZeroHours product demonstration"
-                >
-                  <source src={productConfig.demoVideoUrl} type="video/mp4" />
-                  Your browser does not support this video.
-                </video>
+            <div className="relative mt-10 sm:mt-14">
+              <ResponsiveVideo
+                desktopSrc={productConfig.demoVideoUrl}
+                mobileSrc={productConfig.demoVideoMobileUrl}
+                poster={productConfig.demoPosterUrl}
+                ariaLabel="ZeroHours product demonstration"
+                className="sm:rounded-xl"
+                frameRef={demoFrameRef}
+                videoRef={demoVideoRef}
+                caption="A real walkthrough of the ZeroHours app. Tap the expand icon for full screen."
+              >
                 <button type="button" onClick={openDemoFullscreen} className="icon-button absolute bottom-3 right-3 shadow-soft sm:hidden" aria-label="Watch demo fullscreen"><Maximize2 /></button>
-              </div>
-              <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-md border border-border bg-card/95 px-3 py-2 text-xs font-bold shadow-soft sm:left-6 sm:top-6"><span className="size-2 rounded-full bg-coral" /> REAL PRODUCT DEMO</div>
+              </ResponsiveVideo>
+              <div className="pointer-events-none absolute left-3 top-3 z-10 flex items-center gap-2 rounded-md border border-border bg-card/95 px-3 py-2 text-xs font-bold shadow-soft sm:left-6 sm:top-6"><span className="size-2 rounded-full bg-coral" /> REAL PRODUCT DEMO</div>
             </div>
             <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
               {["One-time payment", "Instant digital access", "Local-first", "Built for students"].map((item) => <div key={item} className="flex min-h-20 items-center justify-center gap-2 bg-card px-3 text-center text-sm font-semibold"><Check className="size-4 shrink-0 text-primary" />{item}</div>)}
