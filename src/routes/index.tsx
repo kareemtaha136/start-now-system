@@ -7,7 +7,6 @@ import {
   ChevronDown,
   Clock3,
   LockKeyhole,
-  Maximize2,
   Menu,
   Play,
   ShieldCheck,
@@ -77,8 +76,6 @@ function Index() {
   const [checkoutError, setCheckoutError] = useState("");
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const pricingRef = useRef<HTMLElement>(null);
-  const demoFrameRef = useRef<HTMLDivElement>(null);
-  const demoVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     trackEvent("page_view");
@@ -115,17 +112,6 @@ function Index() {
     setGuideMessage("Your guide is downloading now. Email sending isn't connected yet, so your address wasn't saved.");
   };
 
-  const openDemoFullscreen = async () => {
-    const frame = demoFrameRef.current;
-    const video = demoVideoRef.current;
-    if (frame?.requestFullscreen) {
-      await frame.requestFullscreen();
-      return;
-    }
-    const mobileVideo = video as HTMLVideoElement & { webkitEnterFullscreen?: () => void };
-    mobileVideo?.webkitEnterFullscreen?.();
-  };
-
   return (
     <div className="min-h-screen overflow-x-clip bg-background pb-20 text-foreground md:pb-0">
       <PaymentTestModeBanner />
@@ -157,10 +143,9 @@ function Index() {
               </div>
               <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription</p>
             </div>
-            <div ref={demoFrameRef} className="relative mt-10 overflow-hidden rounded-xl border border-border bg-card p-1.5 shadow-soft sm:mt-14 sm:p-3">
+            <div className="relative mt-10 overflow-hidden rounded-xl border border-border bg-card p-1.5 shadow-soft sm:mt-14 sm:p-3">
               <video
-                ref={demoVideoRef}
-                className="aspect-[9/16] w-full rounded-lg bg-ink object-cover sm:aspect-video"
+                className="aspect-video w-full rounded-lg bg-ink object-contain"
                 controls
                 playsInline
                 preload="metadata"
@@ -171,7 +156,6 @@ function Index() {
                 Your browser does not support this video.
               </video>
               <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-md border border-border bg-card/95 px-3 py-2 text-xs font-bold shadow-soft sm:left-6 sm:top-6"><span className="size-2 rounded-full bg-coral" /> REAL PRODUCT DEMO</div>
-              <button type="button" onClick={openDemoFullscreen} className="icon-button absolute bottom-4 right-4 z-10 shadow-soft sm:hidden" aria-label="View demo full screen" title="View full screen"><Maximize2 aria-hidden="true" /></button>
             </div>
             <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
               {["One-time payment", "Instant digital access", "Local-first", "Built for students"].map((item) => <div key={item} className="flex min-h-20 items-center justify-center gap-2 bg-card px-3 text-center text-sm font-semibold"><Check className="size-4 shrink-0 text-primary" />{item}</div>)}
@@ -184,7 +168,7 @@ function Index() {
             <div><p className="eyebrow text-coral">The problem</p><h2 className="section-title mt-4">You know what you need to do.<span className="block text-coral">You just can't start.</span></h2><p className="mt-6 max-w-xl text-lg leading-8 text-ink-muted">Another list isn't the answer. You already know the assignment exists. The hard part is crossing the gap between “I should do this” and “I'm actually doing it.”</p></div>
             <div>
               <div className="overflow-hidden rounded-lg border border-ink-border bg-ink-soft p-1.5 shadow-strong sm:p-3">
-                <img src={marketingAssets.problem.src} alt={marketingAssets.problem.alt} loading="lazy" className="aspect-[9/16] w-full rounded-md bg-background object-cover sm:aspect-video" />
+                <img src={marketingAssets.problem.src} alt={marketingAssets.problem.alt} loading="lazy" className="aspect-video w-full rounded-md bg-background object-contain" />
               </div>
               <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase text-ink-muted">{["Assignment", "Overthinking", "Avoidance", "Phone", "Pressure"].map((item, index) => <span key={item} className="contents"><span className="rounded-full border border-ink-border px-3 py-2">{item}</span>{index < 4 && <ArrowRight className="size-3" />}</span>)}</div>
             </div>
@@ -216,7 +200,7 @@ function Index() {
               {showcaseShots.map((shot) => (
                 <figure key={shot.title} className="showcase-card w-[82vw] max-w-96 shrink-0 snap-center sm:w-auto sm:max-w-none">
                   {shot.src ? (
-                    <img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-[9/16] w-full rounded-t-[inherit] bg-background object-cover sm:aspect-video" />
+                    <img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-video w-full rounded-t-[inherit] bg-background object-contain" />
                   ) : (
                     <MediaPlaceholder label={shot.alt} className="aspect-[4/3] min-h-0" />
                   )}
@@ -245,11 +229,11 @@ function Index() {
         </section>
 
         <section className="section-shell">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div className="overflow-hidden rounded-lg border border-border bg-card p-1.5 shadow-soft sm:p-3"><img src={marketingAssets.transformation.src} alt={marketingAssets.transformation.alt} loading="lazy" className="aspect-[9/16] w-full rounded-md bg-background object-cover sm:aspect-video" /></div><div><p className="eyebrow">The shift</p><h2 className="section-title mt-4"><span className="text-muted-foreground">From: “I'll do it later.”</span><span className="mt-3 block">To: “I'm already started.”</span></h2><div className="mt-8 grid grid-cols-2 gap-3">{["Overwhelm", "Clarity", "Small action", "Momentum"].map((x,i) => <div key={x} className={`rounded-lg border p-4 font-bold ${i === 3 ? "border-coral bg-coral-soft text-coral-strong" : "border-border bg-card"}`}>{String(i+1).padStart(2,"0")}<span className="mt-7 block text-sm">{x}</span></div>)}</div></div></div>
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div className="overflow-hidden rounded-lg border border-border bg-card p-1.5 shadow-soft sm:p-3"><img src={marketingAssets.transformation.src} alt={marketingAssets.transformation.alt} loading="lazy" className="aspect-video w-full rounded-md bg-background object-contain" /></div><div><p className="eyebrow">The shift</p><h2 className="section-title mt-4"><span className="text-muted-foreground">From: “I'll do it later.”</span><span className="mt-3 block">To: “I'm already started.”</span></h2><div className="mt-8 grid grid-cols-2 gap-3">{["Overwhelm", "Clarity", "Small action", "Momentum"].map((x,i) => <div key={x} className={`rounded-lg border p-4 font-bold ${i === 3 ? "border-coral bg-coral-soft text-coral-strong" : "border-border bg-card"}`}>{String(i+1).padStart(2,"0")}<span className="mt-7 block text-sm">{x}</span></div>)}</div></div></div>
         </section>
 
         <section className="section-shell bg-surface">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center"><div><p className="eyebrow">Beyond reminders</p><h2 className="section-title mt-4">More than a to-do list.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">ZeroHours doesn't just remind you that the work exists. It helps you move through the part that keeps you from starting.</p><div className="mt-7 grid grid-cols-2 gap-2 text-sm font-semibold">{["Next Action", "5-Minute Rescue", "Lock-In", "Study Sessions", "Exam Rescue", "Catch-Up"].map(x => <div className="flex items-center gap-2" key={x}><Check className="size-4 text-primary" />{x}</div>)}</div><a href="#showcase-title" className="btn-secondary mt-8 w-full sm:w-auto">See ZeroHours in action <Play className="size-4" /></a></div><div className="overflow-hidden rounded-lg border border-border bg-card p-1.5 shadow-soft sm:p-3"><img src={marketingAssets.features.src} alt={marketingAssets.features.alt} loading="lazy" className="aspect-[9/16] w-full rounded-md bg-background object-cover sm:aspect-video" /></div></div>
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center"><div><p className="eyebrow">Beyond reminders</p><h2 className="section-title mt-4">More than a to-do list.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">ZeroHours doesn't just remind you that the work exists. It helps you move through the part that keeps you from starting.</p><div className="mt-7 grid grid-cols-2 gap-2 text-sm font-semibold">{["Next Action", "5-Minute Rescue", "Lock-In", "Study Sessions", "Exam Rescue", "Catch-Up"].map(x => <div className="flex items-center gap-2" key={x}><Check className="size-4 text-primary" />{x}</div>)}</div><a href="#showcase-title" className="btn-secondary mt-8 w-full sm:w-auto">See ZeroHours in action <Play className="size-4" /></a></div><div className="overflow-hidden rounded-lg border border-border bg-card p-1.5 shadow-soft sm:p-3"><img src={marketingAssets.features.src} alt={marketingAssets.features.alt} loading="lazy" className="aspect-video w-full rounded-md bg-background object-contain" /></div></div>
         </section>
 
         <section className="section-shell">
