@@ -17,9 +17,10 @@ All images and the video are switched over to it, so swapping in a mobile asset 
 
 ### Phone treatment
 - Each visual becomes a large rounded card that fills the phone width with comfortable side margins, subtle shadow, and a short caption.
-- The picture inside stays complete — no important app UI is cut.
-- The card is tall enough that the screenshot reads large rather than as a thin strip; leftover space is styled as part of the card, not blank page.
+- The screenshot stays complete and at its natural shape — never cut, stretched, distorted, or blown up past its real size.
+- The card is sized to the screenshot plus tasteful padding and a soft background, so it feels substantial without leaving a big empty gap.
 - Screenshots stack vertically, one per screen, never side-by-side.
+- Every one of these changes lives inside phone-width styling only; desktop layout, spacing, ratios, type and positioning are untouched.
 
 ### Hero
 On phones the order becomes headline, supporting line, buttons, then the product visual — the visual sized to dominate the screen. Desktop keeps its current arrangement.
