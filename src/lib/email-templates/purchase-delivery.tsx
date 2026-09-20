@@ -82,6 +82,7 @@ const styles = {
 
 function PurchaseDeliveryEmail({ orderId }: PurchaseDeliveryProps) {
   const appUrl = `${SITE_URL}${productConfig.appDownloadUrl}`;
+  const includedGuideUrl = `${SITE_URL}${productConfig.includedGuideUrl}`;
   const guideUrl = `${SITE_URL}${productConfig.freeGuideUrl}`;
 
   return (
