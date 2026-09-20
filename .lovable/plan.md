@@ -8,7 +8,9 @@ Build a mobile-first, production-quality sales page that makes ZeroHours feel li
 - Preserve the supplied headlines and positioning while tightening supporting copy to avoid repetition and keep the page from feeling oversized.
 - Use a warm off-white, white surfaces, charcoal text, ZeroHours indigo, and restrained coral accents with geometric Sora-style headings and highly readable body text.
 - Add subtle reveal and interaction motion with reduced-motion support, strong focus states, semantic structure, and keyboard-accessible controls.
-- Build a compact mobile menu and tasteful sticky mobile purchase bar that never obscures content.
+- Design every section for phone visitors first, especially 375–414px screens, then progressively expand the composition for tablet and desktop.
+- Prioritize short mobile reading blocks, full-width calls to action, touch-friendly controls, readable product imagery, and fast access to the purchase path.
+- Build a compact mobile menu and tasteful sticky mobile purchase bar that never obscures content; desktop remains polished but secondary to the phone experience.
 
 ## Honest product presentation
 - Create polished, clearly labeled media placeholders for the hero, problem, transformation, feature showcase, logo, and application screens; no fake product UI or stock imagery.
@@ -36,7 +38,7 @@ Build a mobile-first, production-quality sales page that makes ZeroHours feel li
 
 ## Validation
 - Verify navigation, mobile menu, all active calls to action, disabled/unavailable states, guide form, FAQ behavior, focus order, image fallbacks, scrolling, and reduced-motion behavior.
-- Visually test 1440, 1280, 1024, 768, 414, 390, and 375 pixel widths for overflow, readable screenshots, button sizing, spacing, and sticky-bar collisions.
+- Validate 375, 390, and 414 pixel layouts first, including real touch-target sizes, one-handed CTA access, no horizontal overflow, and no sticky-bar collisions; then verify 768, 1024, 1280, and 1440 pixel layouts.
 - Confirm checkout success/cancel behavior and delivery only after the payment provider and product are enabled.
 
 ## Inputs still needed before launch
