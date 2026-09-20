@@ -63,7 +63,7 @@ const faqs: ReadonlyArray<readonly [string, string]> = [
   ["What do I receive after purchasing?", "Your ZeroHours app package is delivered by email after your payment is confirmed."],
   ["Does it work on mobile and desktop?", "ZeroHours has a responsive interface designed for desktop and mobile browsers."],
   ["Is my data private?", "ZeroHours uses local-first data storage, keeping your working data on your device. Import and export tools help you manage your own copy."],
-  ["Do I need an account?", "Account requirements will be confirmed before checkout is activated."],
+  ["Do I need an account?", "No. ZeroHours is a one-time purchase and your download link is sent to the email used at checkout."],
   ["Can I use it for different classes?", "Yes. Courses, assignments, exams, notes, reading, schedules, and grades can be organized across classes."],
   ["What if I'm already behind?", "Catch-Up Mode, Deadline Rescue, and Exam Rescue are designed to help you regain clarity and choose what to do next."],
 ];
