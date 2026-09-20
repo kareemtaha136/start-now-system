@@ -14,6 +14,12 @@ type LegalPageProps = {
 export function LegalPage({ eyebrow, title, summary, children }: LegalPageProps) {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <div className="border-b border-border bg-ink text-ink-muted">
+        <p className="mx-auto flex max-w-5xl items-center justify-center gap-2 px-4 py-2.5 text-center text-xs font-semibold sm:text-sm">
+          <Monitor className="size-3.5 shrink-0 text-coral sm:size-4" aria-hidden="true" />
+          <span>ZeroHours is desktop-only right now. Mobile support is coming soon.</span>
+        </p>
+      </div>
       <header className="border-b border-border bg-background">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
           <Link to="/" className="flex min-w-0 items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
