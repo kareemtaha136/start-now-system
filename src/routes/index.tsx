@@ -118,6 +118,7 @@ function Index() {
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
         <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 px-4 sm:px-6 lg:px-8">
           <a href="#top" className="flex min-w-0 items-center gap-2 font-display text-base font-extrabold uppercase tracking-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            <img src={symbol} alt="" aria-hidden="true" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
             <img src={wordmark} alt="ZeroHours" className="h-6 w-auto sm:h-7" width={1511} height={222} />
           </a>
           <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
