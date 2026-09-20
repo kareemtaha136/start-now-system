@@ -6,3 +6,5 @@
 - [x] Validate responsive layouts and interactions
 - [x] Re-run payment eligibility and request provider approval
 - [ ] Enable checkout and delivery after payment approval/assets are available
+- [ ] Add ZeroHours to payments and wire its checkout
+- [ ] Confirm purchase, subscription, and plan-change behavior
