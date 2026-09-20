@@ -15,6 +15,7 @@ import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as GuideThankYouRouteImport } from './routes/guide.thank-you'
+import { Route as ApiPublicExportGuideLeadsRouteImport } from './routes/api/public/export/guide-leads'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
@@ -48,6 +49,12 @@ const GuideThankYouRoute = GuideThankYouRouteImport.update({
   path: '/guide/thank-you',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicExportGuideLeadsRoute =
+  ApiPublicExportGuideLeadsRouteImport.update({
+    id: '/api/public/export/guide-leads',
+    path: '/api/public/export/guide-leads',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
@@ -68,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/guide/thank-you': typeof GuideThankYouRoute
+  '/api/public/export/guide-leads': typeof ApiPublicExportGuideLeadsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/guide/thank-you': typeof GuideThankYouRoute
+  '/api/public/export/guide-leads': typeof ApiPublicExportGuideLeadsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -89,6 +98,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/checkout/success': typeof CheckoutSuccessRoute
   '/guide/thank-you': typeof GuideThankYouRoute
+  '/api/public/export/guide-leads': typeof ApiPublicExportGuideLeadsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/checkout/success'
     | '/guide/thank-you'
+    | '/api/public/export/guide-leads'
     | '/api/public/payments/webhook'
     | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
@@ -111,6 +122,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/checkout/success'
     | '/guide/thank-you'
+    | '/api/public/export/guide-leads'
     | '/api/public/payments/webhook'
     | '/lovable/email/transactional/preview'
   id:
@@ -121,6 +133,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/checkout/success'
     | '/guide/thank-you'
+    | '/api/public/export/guide-leads'
     | '/api/public/payments/webhook'
     | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
@@ -132,6 +145,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   CheckoutSuccessRoute: typeof CheckoutSuccessRoute
   GuideThankYouRoute: typeof GuideThankYouRoute
+  ApiPublicExportGuideLeadsRoute: typeof ApiPublicExportGuideLeadsRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
@@ -180,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuideThankYouRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/export/guide-leads': {
+      id: '/api/public/export/guide-leads'
+      path: '/api/public/export/guide-leads'
+      fullPath: '/api/public/export/guide-leads'
+      preLoaderRoute: typeof ApiPublicExportGuideLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/payments/webhook': {
       id: '/api/public/payments/webhook'
       path: '/api/public/payments/webhook'
@@ -204,6 +225,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   CheckoutSuccessRoute: CheckoutSuccessRoute,
   GuideThankYouRoute: GuideThankYouRoute,
+  ApiPublicExportGuideLeadsRoute: ApiPublicExportGuideLeadsRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
