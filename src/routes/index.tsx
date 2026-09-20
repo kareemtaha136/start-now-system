@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowDown,
   ArrowRight,
@@ -231,7 +231,7 @@ function Index() {
         </section>
       </main>
 
-      <footer className="border-t border-border bg-background px-4 py-10 sm:px-6"><div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 sm:items-end"><div><div className="flex items-center gap-2 font-display font-extrabold uppercase"><img src={symbol} alt="" aria-hidden="true" className="size-8 w-auto" />ZeroHours</div><p className="mt-3 max-w-sm text-sm text-muted-foreground">Stop staring at the assignment. Start it.</p></div><div className="sm:text-right"><div className="flex flex-wrap gap-4 sm:justify-end">{navItems.map(([label, href]) => <a key={href} className="text-sm font-semibold text-muted-foreground hover:text-foreground" href={href}>{label}</a>)}</div><p className="mt-4 text-xs text-muted-foreground">© 2026 ZeroHours. Digital delivery after purchase.</p></div></div></footer>
+      <footer className="border-t border-border bg-background px-4 py-10 sm:px-6"><div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 sm:items-end"><div><div className="flex items-center gap-2 font-display font-extrabold uppercase"><img src={symbol} alt="" aria-hidden="true" className="size-8 w-auto" />ZeroHours</div><p className="mt-3 max-w-sm text-sm text-muted-foreground">Stop staring at the assignment. Start it.</p></div><div className="sm:text-right"><div className="flex flex-wrap gap-x-4 gap-y-3 sm:justify-end">{navItems.map(([label, href]) => <a key={href} className="text-sm font-semibold text-muted-foreground hover:text-foreground" href={href}>{label}</a>)}<Link to="/privacy" className="text-sm font-semibold text-muted-foreground hover:text-foreground">Privacy</Link><Link to="/terms" className="text-sm font-semibold text-muted-foreground hover:text-foreground">Terms</Link><Link to="/refund-policy" className="text-sm font-semibold text-muted-foreground hover:text-foreground">Refunds</Link></div><p className="mt-4 text-xs text-muted-foreground">© 2026 ZeroHours. Sold by Cameron Taha. Digital delivery after purchase.</p></div></div></footer>
 
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 p-3 backdrop-blur-md md:hidden"><button className="btn-primary w-full" disabled={checkoutLoading} onClick={checkout}>{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button></div>
     </div>
