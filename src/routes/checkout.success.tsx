@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, Mail } from "lucide-react";
+import { Check, Download, Mail } from "lucide-react";
+import { productConfig } from "@/lib/zerohours-config";
 
 export const Route = createFileRoute("/checkout/success")({
   head: () => ({
@@ -23,8 +24,9 @@ function CheckoutSuccess() {
         <span className="mx-auto grid size-14 place-items-center rounded-full bg-success-soft text-success"><Check className="size-7" /></span>
         <p className="eyebrow mt-6">Purchase received</p>
         <h1 className="mt-3 font-display text-3xl font-extrabold uppercase sm:text-4xl">You're in.</h1>
-        <div className="mt-6 flex items-start gap-3 rounded-lg bg-secondary p-4 text-left"><Mail className="mt-0.5 size-5 shrink-0 text-primary" /><p className="text-sm leading-6">Your download link will be sent to the email used at checkout once delivery is connected.</p></div>
-        <Link to="/" className="btn-primary mt-8 w-full">Return to ZeroHours</Link>
+        <div className="mt-6 flex items-start gap-3 rounded-lg bg-secondary p-4 text-left"><Mail className="mt-0.5 size-5 shrink-0 text-primary" /><p className="text-sm leading-6">A download link is on its way to the email you used at checkout — it usually arrives within a minute.</p></div>
+        <a href={productConfig.appDownloadUrl} download className="btn-primary mt-4 flex w-full items-center justify-center gap-2"><Download className="size-5" />Download ZeroHours now</a>
+        <Link to="/" className="btn-secondary mt-3 w-full">Return to ZeroHours</Link>
       </div>
     </main>
   );
