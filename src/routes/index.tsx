@@ -1,24 +1,223 @@
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  ArrowDown,
+  ArrowRight,
+  BookOpen,
+  Check,
+  ChevronDown,
+  Clock3,
+  LockKeyhole,
+  Menu,
+  Play,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  X,
+  Zap,
+} from "lucide-react";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { trackEvent } from "../lib/analytics";
+import { marketingAssets, productConfig } from "../lib/zerohours-config";
+import { MediaPlaceholder } from "../components/MediaPlaceholder";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "ZeroHours — Stop Procrastinating. Start Your Work." },
+      { name: "description", content: "ZeroHours is an anti-procrastination and academic productivity app built to help students stop avoiding schoolwork and actually get started." },
+      { property: "og:title", content: "ZeroHours — Stop Procrastinating. Start Your Work." },
+      { property: "og:description", content: "Break through procrastination, find the next action, and start your schoolwork." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify({ "@context": "https://schema.org", "@type": "SoftwareApplication", name: "ZeroHours", applicationCategory: "EducationalApplication", offers: { "@type": "Offer", price: "29.99", priceCurrency: "USD" } }) }],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const navItems = [
+  ["How It Works", "#how-it-works"],
+  ["Features", "#features"],
+  ["Pricing", "#pricing"],
+  ["FAQ", "#faq"],
+] as const;
+
+const groups = [
+  { title: "Start", icon: Zap, features: ["Next Action", "5-Minute Rescue", "I'm Stuck", "Emergency Procrastination Mode"], copy: "When starting feels impossible, reduce the task to something you can actually begin." },
+  { title: "Focus", icon: Target, features: ["Lock-In Mode", "Focus Timer", "Study Sessions"], copy: "Once you start, keep moving without losing the thread." },
+  { title: "Catch up", icon: Clock3, features: ["Catch-Up Mode", "Deadline Rescue", "Exam Rescue"], copy: "Falling behind doesn't have to become a spiral." },
+  { title: "Manage school", icon: BookOpen, features: ["Courses", "Assignments", "Exams", "Schedule", "Notes", "Reading", "Grades"], copy: "Keep your workload organized in the same system you use to act on it." },
+  { title: "Understand yourself", icon: Sparkles, features: ["Progress", "Weekly Review", "Behavior patterns", "Recovery"], copy: "Notice how you work and the patterns that keep getting in the way." },
+];
+
+const faqs = [
+  ["What is ZeroHours?", "An anti-procrastination and academic execution system that helps students identify what is blocking them, choose a smaller next action, and begin."],
+  ["Who is ZeroHours for?", "Students who know what they need to do but regularly feel stuck, overwhelmed, distracted, or behind."],
+  ["Is ZeroHours a planner?", "Not simply. It includes academic organization, but connects that workload directly to tools for starting and continuing the work."],
+  ["How does it help with procrastination?", "It guides you from the reason you are avoiding a task to one useful next action, a five-minute start, and focused continuation."],
+  ["Is it a subscription?", "No. ZeroHours is a one-time $29.99 purchase."],
+  ["What do I receive after purchasing?", "Your ZeroHours app package is delivered by email after your payment is confirmed."],
+  ["Does it work on mobile and desktop?", "ZeroHours has a responsive interface designed for desktop and mobile browsers."],
+  ["Is my data private?", "ZeroHours uses local-first data storage, keeping your working data on your device. Import and export tools help you manage your own copy."],
+  ["Do I need an account?", "Account requirements will be confirmed before checkout is activated."],
+  ["Can I use it for different classes?", "Yes. Courses, assignments, exams, notes, reading, schedules, and grades can be organized across classes."],
+  ["What if I'm already behind?", "Catch-Up Mode, Deadline Rescue, and Exam Rescue are designed to help you regain clarity and choose what to do next."],
+];
+
 function Index() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [guideMessage, setGuideMessage] = useState("");
+  const pricingRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    trackEvent("page_view");
+    const target = pricingRef.current;
+    if (!target) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry?.isIntersecting) {
+        trackEvent("pricing_view");
+        observer.disconnect();
+      }
+    }, { threshold: 0.4 });
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
+
+  const checkout = () => {
+    trackEvent("checkout_click");
+    if (productConfig.checkoutUrl) window.location.assign(productConfig.checkoutUrl);
+    else document.querySelector("#pricing")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const submitGuide = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    trackEvent("free_guide_submit");
+    setGuideMessage("The free guide email is not connected yet. No email was saved.");
+  };
+
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen overflow-x-clip bg-background pb-20 text-foreground md:pb-0">
+      <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
+        <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 px-4 sm:px-6 lg:px-8">
+          <a href="#top" className="flex min-w-0 items-center gap-2 font-display text-base font-extrabold uppercase tracking-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            <span className="grid size-8 shrink-0 place-items-center rounded-md bg-primary text-primary-foreground"><Zap className="size-4" aria-hidden="true" /></span>
+            <span className="truncate">ZeroHours</span>
+          </a>
+          <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
+            {navItems.map(([label, href]) => <a key={href} href={href} className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">{label}</a>)}
+          </nav>
+          <button className="btn-primary hidden md:inline-flex" onClick={checkout}>Get ZeroHours — $29.99</button>
+          <button className="icon-button md:hidden" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
+        </div>
+        {menuOpen && <nav className="border-t border-border bg-background px-4 py-4 md:hidden" aria-label="Mobile navigation">{navItems.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="block border-b border-border py-3 font-semibold last:border-0">{label}</a>)}</nav>}
+      </header>
+
+      <main id="top">
+        <section className="section-shell pt-12 sm:pt-20 lg:pt-24">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-4xl">
+              <p className="eyebrow">The anti-procrastination system for students</p>
+              <h1 className="mt-5 font-display text-[clamp(2.65rem,9vw,6.8rem)] font-extrabold uppercase leading-[0.93] tracking-normal">Stop staring at the assignment.<span className="mt-2 block text-primary">Start it.</span></h1>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">ZeroHours helps you break through procrastination, figure out what to do next, and actually get moving.</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <button onClick={checkout} className="btn-primary w-full sm:w-auto">Get ZeroHours — $29.99 <ArrowRight aria-hidden="true" /></button>
+                <a href="#guide" onClick={() => trackEvent("free_guide_click")} className="btn-secondary w-full sm:w-auto">Get the free guide</a>
+              </div>
+              <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription</p>
+            </div>
+            <div className="relative mt-10 rounded-xl border border-border bg-card p-2 shadow-soft sm:mt-14 sm:p-4">
+              <MediaPlaceholder label={marketingAssets.hero} className="aspect-[4/3] min-h-0 sm:aspect-[16/9]" />
+              <div className="absolute -bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card px-4 py-2 text-xs font-bold shadow-soft"><span className="size-2 rounded-full bg-coral" /> REAL PRODUCT UI</div>
+            </div>
+            <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
+              {["One-time payment", "Instant digital access", "Local-first", "Built for students"].map((item) => <div key={item} className="flex min-h-20 items-center justify-center gap-2 bg-card px-3 text-center text-sm font-semibold"><Check className="size-4 shrink-0 text-primary" />{item}</div>)}
+            </div>
+          </div>
+        </section>
+
+        <section className="section-shell bg-ink text-ink-foreground">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+            <div><p className="eyebrow text-coral">The problem</p><h2 className="section-title mt-4">You know what you need to do.<span className="block text-coral">You just can't start.</span></h2><p className="mt-6 max-w-xl text-lg leading-8 text-ink-muted">Another list isn't the answer. You already know the assignment exists. The hard part is crossing the gap between “I should do this” and “I'm actually doing it.”</p></div>
+            <div>
+              <MediaPlaceholder label={marketingAssets.problem} compact className="border-ink-border bg-ink-soft text-ink-foreground" />
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase text-ink-muted">{["Assignment", "Overthinking", "Avoidance", "Phone", "Pressure"].map((item, index) => <span key={item} className="contents"><span className="rounded-full border border-ink-border px-3 py-2">{item}</span>{index < 4 && <ArrowRight className="size-3" />}</span>)}</div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-shell" id="how-it-works">
+          <div className="mx-auto max-w-7xl">
+            <div className="max-w-4xl"><p className="eyebrow">The ZeroHours method</p><h2 className="section-title mt-4">Built around the moment you want to quit.</h2><p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">Instead of dropping another giant dashboard in front of you, ZeroHours meets procrastination where it happens.</p></div>
+            <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {["Why am I avoiding this?", "What's the smallest next action?", "Start for 5 minutes.", "Lock in. Keep going."].map((text, index) => <div key={text} className={`step-card ${index === 2 ? "border-coral bg-coral-soft" : ""}`}><span className="step-number">0{index + 1}</span><h3 className="mt-8 font-display text-xl font-bold">{text}</h3>{index < 3 && <ArrowDown className="mt-6 size-5 text-primary lg:rotate-[-90deg]" aria-hidden="true" />}</div>)}
+            </div>
+            <div className="mt-16 grid gap-10 lg:grid-cols-2 lg:items-start">
+              <div><p className="eyebrow">How it works</p><h2 className="section-title mt-4">Turn “write the essay” into one move.</h2></div>
+              <ol className="space-y-8 border-l border-border pl-6 sm:pl-9">
+                {[["Choose what you're avoiding", "History essay"], ["Name what's stopping you", "Too overwhelming. Don't know where to start."], ["Shrink the action", "Open the document and write the thesis."], ["Start", "5-Minute Rescue → Lock-In Mode → continue."]].map(([title, copy], i) => <li key={title} className="relative"><span className="absolute -left-[2.55rem] grid size-8 place-items-center rounded-full bg-primary text-xs font-bold text-primary-foreground sm:-left-[3.3rem]">{i + 1}</span><h3 className="font-display text-lg font-bold">{title}</h3><p className="mt-2 leading-7 text-muted-foreground">{copy}</p></li>)}
+              </ol>
+            </div>
+            <div className="mt-10"><button className="btn-primary w-full sm:w-auto" onClick={checkout}>Start with ZeroHours <ArrowRight /></button></div>
+          </div>
+        </section>
+
+        <section className="section-shell bg-surface" aria-labelledby="showcase-title">
+          <div className="mx-auto max-w-7xl">
+            <p className="eyebrow">See the system</p><h2 id="showcase-title" className="section-title mt-4">A real workspace for the moments that stop you.</h2>
+            <div className="mt-10 grid gap-8 lg:grid-cols-2">
+              <article><MediaPlaceholder label="Dashboard and Next Action screen" className="aspect-[4/3] min-h-0" /><p className="mt-4 text-lg font-bold">Don't know where to start?</p><p className="mt-1 text-muted-foreground">ZeroHours turns vague schoolwork into one clear next action.</p></article>
+              <article className="lg:mt-20"><MediaPlaceholder label="Lock-In Mode screen" className="aspect-[4/3] min-h-0" /><p className="mt-4 text-lg font-bold">Already started?</p><p className="mt-1 text-muted-foreground">Once you're moving, Lock-In helps you stay focused.</p></article>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-shell" id="features">
+          <div className="mx-auto max-w-7xl"><p className="eyebrow">Built for execution</p><h2 className="section-title mt-4 max-w-4xl">Not 30 disconnected tools. One system that moves with you.</h2>
+            <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-6">{groups.map((group, index) => { const Icon = group.icon; return <article key={group.title} className={`feature-card ${index < 2 ? "lg:col-span-3" : "lg:col-span-2"}`} onPointerEnter={() => trackEvent("feature_interaction", { group: group.title })}><Icon className="size-6 text-primary" /><h3 className="mt-6 font-display text-2xl font-bold uppercase">{group.title}</h3><p className="mt-3 leading-7 text-muted-foreground">{group.copy}</p><ul className="mt-6 flex flex-wrap gap-2">{group.features.map(feature => <li key={feature} className="rounded-md bg-secondary px-3 py-2 text-xs font-semibold">{feature}</li>)}</ul></article> })}</div>
+          </div>
+        </section>
+
+        <section className="section-shell bg-primary text-primary-foreground">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center">
+            <div><p className="eyebrow text-primary-muted">Academic workspace</p><h2 className="section-title mt-4">Your schoolwork. One place.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-primary-muted">Academic organization connected directly to getting the work done—not another place to collect tasks and avoid them.</p><div className="mt-7 flex flex-wrap gap-2">{["Courses", "Assignments", "Exams", "Schedule", "Notes", "Reading", "Grades"].map(x => <span className="rounded-md border border-primary-border px-3 py-2 text-sm font-semibold" key={x}>{x}</span>)}</div></div>
+            <div className="rounded-lg bg-primary-foreground p-5 text-foreground shadow-strong"><div className="space-y-3">{["Assignment", "Start", "Why am I avoiding this?", "Next action", "5-Minute Rescue"].map((x, i) => <div key={x} className="flex items-center gap-3"><span className="grid size-7 shrink-0 place-items-center rounded-full bg-coral-soft text-xs font-bold text-coral-strong">{i + 1}</span><span className="font-semibold">{x}</span></div>)}</div></div>
+          </div>
+        </section>
+
+        <section className="section-shell">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><MediaPlaceholder label={marketingAssets.transformation} className="aspect-[4/3] min-h-0" /><div><p className="eyebrow">The shift</p><h2 className="section-title mt-4"><span className="text-muted-foreground">From: “I'll do it later.”</span><span className="mt-3 block">To: “I'm already started.”</span></h2><div className="mt-8 grid grid-cols-2 gap-3">{["Overwhelm", "Clarity", "Small action", "Momentum"].map((x,i) => <div key={x} className={`rounded-lg border p-4 font-bold ${i === 3 ? "border-coral bg-coral-soft text-coral-strong" : "border-border bg-card"}`}>{String(i+1).padStart(2,"0")}<span className="mt-7 block text-sm">{x}</span></div>)}</div></div></div>
+        </section>
+
+        <section className="section-shell bg-surface">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center"><div><p className="eyebrow">Beyond reminders</p><h2 className="section-title mt-4">More than a to-do list.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">ZeroHours doesn't just remind you that the work exists. It helps you move through the part that keeps you from starting.</p><div className="mt-7 grid grid-cols-2 gap-2 text-sm font-semibold">{["Next Action", "5-Minute Rescue", "Lock-In", "Study Sessions", "Exam Rescue", "Catch-Up"].map(x => <div className="flex items-center gap-2" key={x}><Check className="size-4 text-primary" />{x}</div>)}</div><a href="#showcase-title" className="btn-secondary mt-8 w-full sm:w-auto">See ZeroHours in action <Play className="size-4" /></a></div><MediaPlaceholder label={marketingAssets.features} className="aspect-[4/3] min-h-0" /></div>
+        </section>
+
+        <section className="section-shell">
+          <div className="mx-auto max-w-7xl"><p className="eyebrow">Who it's for</p><h2 className="section-title mt-4">Built for students who keep saying...</h2><div className="mt-9 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{["I'll do it later.", "I'll start after I check my phone.", "I don't even know where to begin.", "I have too much to do.", "I work better under pressure.", "I'll do it tomorrow."].map((x,i) => <div key={x} className={`quote-card ${i === 2 || i === 5 ? "border-coral" : ""}`}>“{x}”</div>)}</div><p className="mt-8 max-w-2xl text-lg font-semibold">If that sounds familiar, ZeroHours was built around that exact moment.</p></div>
+        </section>
+
+        <section id="guide" className="section-shell bg-ink text-ink-foreground">
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div><p className="eyebrow text-coral">Not ready for the full system?</p><h2 className="section-title mt-4">Get the free procrastination guide.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">The guide teaches you how to make starting easier. ZeroHours gives you the tools to actually do it.</p></div><form onSubmit={submitGuide} className="rounded-lg border border-ink-border bg-ink-soft p-5 sm:p-7"><label htmlFor="guide-email" className="block text-sm font-bold">Email address</label><input id="guide-email" type="email" required autoComplete="email" placeholder="you@example.com" className="mt-2 h-12 w-full rounded-md border border-ink-border bg-ink px-4 text-base outline-none placeholder:text-ink-muted focus:border-coral focus:ring-2 focus:ring-coral" /><button className="btn-coral mt-3 w-full" type="submit">Get the free guide <ArrowRight /></button><p className="mt-3 text-xs leading-5 text-ink-muted">Email delivery is being connected. Submitting now will not save your address.</p>{guideMessage && <p role="status" className="mt-3 rounded-md border border-coral/50 bg-coral/10 p-3 text-sm">{guideMessage}</p>}</form></div>
+        </section>
+
+        <section id="pricing" ref={pricingRef} className="section-shell">
+          <div className="mx-auto max-w-5xl"><div className="text-center"><p className="eyebrow">Simple pricing</p><h2 className="section-title mt-4">Start getting your work moving.</h2></div><div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-xl border border-primary bg-card shadow-strong"><div className="border-b border-border bg-primary px-6 py-4 text-center text-sm font-bold uppercase text-primary-foreground">ZeroHours — Complete system</div><div className="p-6 sm:p-10"><div className="flex items-end gap-3"><span className="font-display text-5xl font-extrabold">$29.99</span><span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span></div><ul className="mt-8 grid gap-3 sm:grid-cols-2">{["Anti-procrastination system", "Next-action workflow", "5-Minute Rescue", "Lock-In Mode", "Study Sessions", "Exam Rescue", "Catch-Up Mode", "Academic workspace", "Progress tracking", "Local-first app"].map(x => <li key={x} className="flex items-center gap-2 text-sm font-medium"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" /></span>{x}</li>)}</ul><button onClick={checkout} className="btn-coral mt-9 w-full">Get ZeroHours — $29.99 <ArrowRight /></button><p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No monthly subscription.</p>{!productConfig.checkoutUrl && <p className="mt-5 rounded-md bg-secondary p-3 text-center text-sm text-muted-foreground">Secure checkout is being connected. This button will activate when checkout is ready.</p>}</div></div></div>
+        </section>
+
+        <section id="faq" className="section-shell bg-surface">
+          <div className="mx-auto max-w-4xl"><p className="eyebrow">Questions, answered</p><h2 className="section-title mt-4">Before you start.</h2><div className="mt-9 divide-y divide-border border-y border-border">{faqs.map(([question, answer]) => <details key={question} className="group" onToggle={e => { if (e.currentTarget.open) trackEvent("faq_open", { question }); }}><summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-4 font-display font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"><span>{question}</span><ChevronDown className="size-5 shrink-0 transition-transform group-open:rotate-180" /></summary><p className="max-w-2xl pb-5 leading-7 text-muted-foreground">{answer}</p></details>)}</div></div>
+        </section>
+
+        <section className="section-shell bg-primary text-center text-primary-foreground">
+          <div className="mx-auto max-w-5xl"><p className="eyebrow text-primary-muted">Your next move</p><h2 className="mt-4 font-display text-[clamp(2.5rem,8vw,6rem)] font-extrabold uppercase leading-[0.95]">You don't need to feel ready.<span className="mt-2 block text-coral-light">You just need to start.</span></h2><p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-primary-muted">ZeroHours helps you figure out what to do next, make the first step smaller, and get moving.</p><div className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center"><button className="btn-coral w-full sm:w-auto" onClick={checkout}>Get ZeroHours — $29.99 <ArrowRight /></button><a href="#guide" className="btn-on-primary w-full sm:w-auto">Get the free guide</a></div></div>
+        </section>
+      </main>
+
+      <footer className="border-t border-border bg-background px-4 py-10 sm:px-6"><div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 sm:items-end"><div><div className="flex items-center gap-2 font-display font-extrabold uppercase"><span className="grid size-8 place-items-center rounded-md bg-primary text-primary-foreground"><Zap className="size-4" /></span>ZeroHours</div><p className="mt-3 max-w-sm text-sm text-muted-foreground">Stop staring at the assignment. Start it.</p></div><div className="sm:text-right"><div className="flex flex-wrap gap-4 sm:justify-end">{navItems.map(([label, href]) => <a key={href} className="text-sm font-semibold text-muted-foreground hover:text-foreground" href={href}>{label}</a>)}</div><p className="mt-4 text-xs text-muted-foreground">© 2026 ZeroHours. Digital delivery after purchase.</p></div></div></footer>
+
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 p-3 backdrop-blur-md md:hidden"><button className="btn-primary w-full" onClick={checkout}>Get ZeroHours — $29.99 <ArrowRight /></button></div>
     </div>
   );
 }
