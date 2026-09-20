@@ -19,6 +19,9 @@ export type Database = {
           consented_at: string | null
           created_at: string
           email: string
+          followup1_sent_at: string | null
+          followup2_sent_at: string | null
+          followup3_sent_at: string | null
           id: string
           marketing_consent: boolean
           purchased_at: string | null
@@ -27,6 +30,9 @@ export type Database = {
           consented_at?: string | null
           created_at?: string
           email: string
+          followup1_sent_at?: string | null
+          followup2_sent_at?: string | null
+          followup3_sent_at?: string | null
           id?: string
           marketing_consent?: boolean
           purchased_at?: string | null
@@ -35,6 +41,9 @@ export type Database = {
           consented_at?: string | null
           created_at?: string
           email?: string
+          followup1_sent_at?: string | null
+          followup2_sent_at?: string | null
+          followup3_sent_at?: string | null
           id?: string
           marketing_consent?: boolean
           purchased_at?: string | null

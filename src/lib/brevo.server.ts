@@ -41,6 +41,17 @@ export async function addGuideLeadToBrevo(email: string): Promise<void> {
   });
 }
 
+/** Send one saved Brevo template to one recipient (used by the follow-up sequence). */
+export async function sendBrevoTemplate(
+  email: string,
+  templateId: number,
+): Promise<void> {
+  await brevoFetch("/smtp/email", {
+    method: "POST",
+    body: JSON.stringify({ to: [{ email }], templateId }),
+  });
+}
+
 /** Remove a lead from marketing once they've bought — they should stop getting "come back and buy" emails. */
 export async function removeGuideLeadFromBrevo(email: string): Promise<void> {
   await brevoFetch(`/contacts/lists/${GUIDE_LEADS_LIST_ID}/contacts/remove`, {

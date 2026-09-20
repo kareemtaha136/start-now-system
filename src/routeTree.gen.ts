@@ -16,6 +16,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as CheckoutSuccessRouteImport } from './routes/checkout.success'
 import { Route as GuideThankYouRouteImport } from './routes/guide.thank-you'
 import { Route as ApiPublicExportGuideLeadsRouteImport } from './routes/api/public/export/guide-leads'
+import { Route as ApiPublicMarketingFollowupsRouteImport } from './routes/api/public/marketing/followups'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
@@ -55,6 +56,12 @@ const ApiPublicExportGuideLeadsRoute =
     path: '/api/public/export/guide-leads',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicMarketingFollowupsRoute =
+  ApiPublicMarketingFollowupsRouteImport.update({
+    id: '/api/public/marketing/followups',
+    path: '/api/public/marketing/followups',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicPaymentsWebhookRoute =
   ApiPublicPaymentsWebhookRouteImport.update({
     id: '/api/public/payments/webhook',
@@ -76,6 +83,7 @@ export interface FileRoutesByFullPath {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/guide/thank-you': typeof GuideThankYouRoute
   '/api/public/export/guide-leads': typeof ApiPublicExportGuideLeadsRoute
+  '/api/public/marketing/followups': typeof ApiPublicMarketingFollowupsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesByTo {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/guide/thank-you': typeof GuideThankYouRoute
   '/api/public/export/guide-leads': typeof ApiPublicExportGuideLeadsRoute
+  '/api/public/marketing/followups': typeof ApiPublicMarketingFollowupsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -99,6 +108,7 @@ export interface FileRoutesById {
   '/checkout/success': typeof CheckoutSuccessRoute
   '/guide/thank-you': typeof GuideThankYouRoute
   '/api/public/export/guide-leads': typeof ApiPublicExportGuideLeadsRoute
+  '/api/public/marketing/followups': typeof ApiPublicMarketingFollowupsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
   '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
@@ -112,6 +122,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/guide/thank-you'
     | '/api/public/export/guide-leads'
+    | '/api/public/marketing/followups'
     | '/api/public/payments/webhook'
     | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
@@ -123,6 +134,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/guide/thank-you'
     | '/api/public/export/guide-leads'
+    | '/api/public/marketing/followups'
     | '/api/public/payments/webhook'
     | '/lovable/email/transactional/preview'
   id:
@@ -134,6 +146,7 @@ export interface FileRouteTypes {
     | '/checkout/success'
     | '/guide/thank-you'
     | '/api/public/export/guide-leads'
+    | '/api/public/marketing/followups'
     | '/api/public/payments/webhook'
     | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
@@ -146,6 +159,7 @@ export interface RootRouteChildren {
   CheckoutSuccessRoute: typeof CheckoutSuccessRoute
   GuideThankYouRoute: typeof GuideThankYouRoute
   ApiPublicExportGuideLeadsRoute: typeof ApiPublicExportGuideLeadsRoute
+  ApiPublicMarketingFollowupsRoute: typeof ApiPublicMarketingFollowupsRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
   LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
@@ -201,6 +215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicExportGuideLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/marketing/followups': {
+      id: '/api/public/marketing/followups'
+      path: '/api/public/marketing/followups'
+      fullPath: '/api/public/marketing/followups'
+      preLoaderRoute: typeof ApiPublicMarketingFollowupsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/payments/webhook': {
       id: '/api/public/payments/webhook'
       path: '/api/public/payments/webhook'
@@ -226,6 +247,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutSuccessRoute: CheckoutSuccessRoute,
   GuideThankYouRoute: GuideThankYouRoute,
   ApiPublicExportGuideLeadsRoute: ApiPublicExportGuideLeadsRoute,
+  ApiPublicMarketingFollowupsRoute: ApiPublicMarketingFollowupsRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
   LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }

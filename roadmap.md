@@ -13,5 +13,6 @@
 - [x] Connect Brevo for guide-lead marketing emails
 - [x] Create "Guide leads" audience (Brevo list id 5), auto-add consented signups, remove buyers from the list on purchase
 - [x] Write the 3 follow-up emails and load them into Brevo as templates (ids 1, 2, 3)
-- [ ] Turn the 3 templates into a Brevo automation (Day 2 / 4 / 7 from "Guide leads") — must be clicked together in Brevo's automation builder; also verify a zerohours.store sender in Brevo
+- [x] Sender switched to mail@zerohours.store on all 3 templates
+- [x] Built the Day 2 / 4 / 7 follow-up sequence in-app (daily scheduled job sends Brevo templates 1/2/3 to consented, non-buying leads)
 - [ ] Publish so guide delivery emails send from the live site
