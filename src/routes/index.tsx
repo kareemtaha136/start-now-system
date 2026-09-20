@@ -143,16 +143,16 @@ function Index() {
     <div className="min-h-screen overflow-x-clip bg-background pb-20 text-foreground md:pb-0">
       <PaymentTestModeBanner />
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
-        <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 px-4 sm:px-6 lg:px-8">
-          <a href="#top" className="flex min-w-0 items-center gap-2 font-display text-base font-extrabold uppercase tracking-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 px-4 sm:px-6 lg:px-8">
+          <a href="#top" className="flex min-w-0 items-center gap-2 justify-self-start font-display text-base font-extrabold uppercase tracking-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <img src={symbol} alt="" aria-hidden="true" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
             <img src={wordmark} alt="ZeroHours" className="h-6 w-auto sm:h-7" width={1511} height={222} />
           </a>
-          <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
+          <nav className="hidden items-center gap-7 justify-self-center md:flex" aria-label="Primary navigation">
             {navItems.map(([label, href]) => <a key={href} href={href} className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">{label}</a>)}
           </nav>
-          <button className="btn-primary hidden md:inline-flex" disabled={checkoutLoading} onClick={checkout}>{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"}</button>
-          <button className="icon-button md:hidden" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
+          <div className="hidden justify-self-end md:block"><button className="btn-primary" disabled={checkoutLoading} onClick={checkout}>{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"}</button></div>
+          <button className="icon-button justify-self-end md:hidden" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
         </div>
         {menuOpen && <nav className="border-t border-border bg-background px-4 py-4 md:hidden" aria-label="Mobile navigation">{navItems.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="block border-b border-border py-3 font-semibold last:border-0">{label}</a>)}</nav>}
       </header>
