@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Monitor } from "lucide-react";
 import type { ReactNode } from "react";
 import symbol from "../assets/zerohours-symbol.png";
 import wordmark from "../assets/zerohours-wordmark.png";
