@@ -7,6 +7,7 @@ import {
   ChevronDown,
   Clock3,
   LockKeyhole,
+  Maximize2,
   Menu,
   Play,
   ShieldCheck,
@@ -75,7 +76,10 @@ function Index() {
   const [guideMessage, setGuideMessage] = useState("");
   const [checkoutError, setCheckoutError] = useState("");
   const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [guideSubmitted, setGuideSubmitted] = useState(false);
   const pricingRef = useRef<HTMLElement>(null);
+  const demoFrameRef = useRef<HTMLDivElement>(null);
+  const demoVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     trackEvent("page_view");
@@ -109,7 +113,15 @@ function Index() {
     event.preventDefault();
     trackEvent("free_guide_submit");
     window.open(productConfig.freeGuideUrl, "_blank", "noopener");
+    setGuideSubmitted(true);
     setGuideMessage("Your guide is downloading now. Email sending isn't connected yet, so your address wasn't saved.");
+  };
+
+  const openDemoFullscreen = () => {
+    const frame = demoFrameRef.current;
+    if (frame?.requestFullscreen) { void frame.requestFullscreen(); return; }
+    const video = demoVideoRef.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    video?.webkitEnterFullscreen?.();
   };
 
   return (
@@ -144,17 +156,21 @@ function Index() {
               <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription</p>
             </div>
             <div className="relative mt-10 overflow-hidden rounded-xl border border-border bg-card p-1.5 shadow-soft sm:mt-14 sm:p-3">
-              <video
-                className="aspect-video w-full rounded-lg bg-ink object-contain"
-                controls
-                playsInline
-                preload="metadata"
-                poster={productConfig.demoPosterUrl}
-                aria-label="ZeroHours product demonstration"
-              >
-                <source src={productConfig.demoVideoUrl} type="video/mp4" />
-                Your browser does not support this video.
-              </video>
+              <div ref={demoFrameRef} className="relative">
+                <video
+                  ref={demoVideoRef}
+                  className="aspect-video w-full rounded-lg bg-ink object-contain"
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={productConfig.demoPosterUrl}
+                  aria-label="ZeroHours product demonstration"
+                >
+                  <source src={productConfig.demoVideoUrl} type="video/mp4" />
+                  Your browser does not support this video.
+                </video>
+                <button type="button" onClick={openDemoFullscreen} className="icon-button absolute bottom-3 right-3 shadow-soft sm:hidden" aria-label="Watch demo fullscreen"><Maximize2 /></button>
+              </div>
               <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-md border border-border bg-card/95 px-3 py-2 text-xs font-bold shadow-soft sm:left-6 sm:top-6"><span className="size-2 rounded-full bg-coral" /> REAL PRODUCT DEMO</div>
             </div>
             <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
@@ -241,11 +257,20 @@ function Index() {
         </section>
 
         <section id="guide" className="section-shell bg-ink text-ink-foreground">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div><p className="eyebrow text-coral">Not ready for the full system?</p><h2 className="section-title mt-4">Get the free procrastination guide.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">The guide teaches you how to make starting easier. ZeroHours gives you the tools to actually do it.</p></div><form onSubmit={submitGuide} className="rounded-lg border border-ink-border bg-ink-soft p-5 sm:p-7"><label htmlFor="guide-email" className="block text-sm font-bold">Email address</label><input id="guide-email" type="email" required autoComplete="email" placeholder="you@example.com" className="mt-2 h-12 w-full rounded-md border border-ink-border bg-ink px-4 text-base outline-none placeholder:text-ink-muted focus:border-coral focus:ring-2 focus:ring-coral" /><button className="btn-coral mt-3 w-full" type="submit">Get the free guide <ArrowRight /></button><p className="mt-3 text-xs leading-5 text-ink-muted">Email delivery is being connected. Submitting now will not save your address.</p>{guideMessage && <p role="status" className="mt-3 rounded-md border border-coral/50 bg-coral/10 p-3 text-sm">{guideMessage}</p>}</form></div>
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div><p className="eyebrow text-coral">Not ready for the full system?</p><h2 className="section-title mt-4">Get the free procrastination guide.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">The guide teaches you how to make starting easier. ZeroHours gives you the tools to actually do it.</p></div><form onSubmit={submitGuide} className="rounded-lg border border-ink-border bg-ink-soft p-5 sm:p-7"><label htmlFor="guide-email" className="block text-sm font-bold">Email address</label><input id="guide-email" type="email" required autoComplete="email" placeholder="you@example.com" className="mt-2 h-12 w-full rounded-md border border-ink-border bg-ink px-4 text-base outline-none placeholder:text-ink-muted focus:border-coral focus:ring-2 focus:ring-coral" /><button className="btn-coral mt-3 w-full" type="submit">Get the free guide <ArrowRight /></button><p className="mt-3 text-xs leading-5 text-ink-muted">Email delivery is being connected. Submitting now will not save your address.</p>{guideMessage && <p role="status" className="mt-3 rounded-md border border-coral/50 bg-coral/10 p-3 text-sm">{guideMessage}</p>}
+            {guideSubmitted && (
+              <div className="mt-5 rounded-lg border border-coral/60 bg-coral/10 p-5">
+                <p className="text-xs font-extrabold uppercase tracking-[0.12em] text-coral-light">While you're here</p>
+                <p className="mt-2 font-display text-lg font-bold leading-snug">The guide and ZeroHours go hand in hand.</p>
+                <p className="mt-2 text-sm leading-6 text-ink-muted">The guide shows you why starting feels so hard. ZeroHours is the system that walks you through actually starting — next action, 5-minute start, lock-in. Most people read the guide, nod along, and still don't start. The app closes that gap.</p>
+                <button type="button" onClick={checkout} disabled={checkoutLoading} className="btn-coral mt-4 w-full">{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button>
+                <p className="mt-2 text-center text-xs text-ink-muted">One-time purchase • No subscription</p>
+              </div>
+            )}</form></div>
         </section>
 
         <section id="pricing" ref={pricingRef} className="section-shell">
-          <div className="mx-auto max-w-5xl"><div className="text-center"><p className="eyebrow">Simple pricing</p><h2 className="section-title mt-4">Start getting your work moving.</h2></div><div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-xl border border-primary bg-card shadow-strong"><div className="border-b border-border bg-primary px-6 py-4 text-center text-sm font-bold uppercase text-primary-foreground">ZeroHours — Complete system</div><div className="p-6 sm:p-10"><div className="flex items-end gap-3"><span className="font-display text-5xl font-extrabold">$29.99</span><span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span></div><ul className="mt-8 grid gap-3 sm:grid-cols-2">{["Anti-procrastination system", "Next-action workflow", "5-Minute Rescue", "Lock-In Mode", "Study Sessions", "Exam Rescue", "Catch-Up Mode", "Academic workspace", "Progress tracking", "Local-first app"].map(x => <li key={x} className="flex items-center gap-2 text-sm font-medium"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" /></span>{x}</li>)}</ul><button onClick={checkout} disabled={checkoutLoading} className="btn-coral mt-9 w-full">{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button><p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No monthly subscription.</p>{checkoutError && <p role="alert" className="mt-5 rounded-md bg-coral-soft p-3 text-center text-sm text-coral-strong">{checkoutError}</p>}</div></div></div>
+          <div className="mx-auto max-w-5xl"><div className="text-center"><p className="eyebrow">Simple pricing</p><h2 className="section-title mt-4">Start getting your work moving.</h2></div><div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-xl border border-primary bg-card shadow-strong"><div className="border-b border-border bg-primary px-6 py-4 text-center text-sm font-bold uppercase text-primary-foreground">ZeroHours — Complete system</div><div className="p-6 sm:p-10"><div className="flex items-end gap-3"><span className="font-display text-5xl font-extrabold">$29.99</span><span className="pb-1.5 font-display text-xl font-bold text-muted-foreground line-through">$30.99</span><span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span></div><ul className="mt-8 grid gap-3 sm:grid-cols-2">{["Anti-procrastination system", "Next-action workflow", "5-Minute Rescue", "Lock-In Mode", "Study Sessions", "Exam Rescue", "Catch-Up Mode", "Academic workspace", "Progress tracking", "Local-first app"].map(x => <li key={x} className="flex items-center gap-2 text-sm font-medium"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" /></span>{x}</li>)}</ul><button onClick={checkout} disabled={checkoutLoading} className="btn-coral mt-9 w-full">{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button><p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No monthly subscription.</p>{checkoutError && <p role="alert" className="mt-5 rounded-md bg-coral-soft p-3 text-center text-sm text-coral-strong">{checkoutError}</p>}</div></div></div>
         </section>
 
         <section id="faq" className="section-shell bg-surface">
