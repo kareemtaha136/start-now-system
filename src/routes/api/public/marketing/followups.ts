@@ -66,7 +66,9 @@ export const Route = createFileRoute("/api/public/marketing/followups")({
               await sendBrevoTemplate(lead.email, step.templateId);
               await supabaseAdmin
                 .from("guide_leads")
-                .update({ [step.column]: new Date().toISOString() })
+                .update({
+                  [step.column]: new Date().toISOString(),
+                } as Record<string, string>)
                 .eq("id", lead.id);
               sent++;
             } catch (err) {
