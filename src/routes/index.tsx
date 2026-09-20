@@ -143,7 +143,7 @@ function Index() {
     <div className="min-h-screen overflow-x-clip bg-background pb-20 text-foreground md:pb-0">
       <PaymentTestModeBanner />
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
-        <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto grid h-16 max-w-7xl grid-cols-[auto_auto_minmax(0,1fr)] items-center gap-2 px-4 sm:px-6 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:px-8 lg:px-8">
           <a href="#top" className="flex min-w-0 items-center gap-2 justify-self-start font-display text-base font-extrabold uppercase tracking-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <img src={symbol} alt="" aria-hidden="true" className="h-7 w-7 shrink-0 sm:h-8 sm:w-8" />
             <img src={wordmark} alt="ZeroHours" className="h-6 w-auto sm:h-7" width={1511} height={222} />
