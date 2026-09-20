@@ -65,20 +65,22 @@ export async function sendTemplateEmail(
       ? template.subject(templateData)
       : template.subject
 
+  const payload = {
+    to: recipient,
+    from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
+    sender_domain: SENDER_DOMAIN,
+    subject,
+    html,
+    text,
+    purpose: 'transactional' as const,
+    label: templateName,
+    idempotency_key: options.idempotencyKey || crypto.randomUUID(),
+    ...(options.replyTo ? { reply_to: options.replyTo } : {}),
+  }
+
   try {
     await sendLovableEmail(
-      {
-        to: recipient,
-        from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
-        sender_domain: SENDER_DOMAIN,
-        subject,
-        html,
-        text,
-        purpose: 'transactional',
-        label: templateName,
-        idempotency_key: options.idempotencyKey || crypto.randomUUID(),
-        reply_to: options.replyTo,
-      },
+      payload,
       { apiKey, sendUrl: process.env['LOVABLE_SEND_URL'] }
     )
   } catch (error) {
