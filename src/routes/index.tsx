@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
   ArrowDown,
   ArrowRight,
@@ -22,6 +22,7 @@ import { marketingAssets, productConfig, showcaseShots } from "../lib/zerohours-
 import { MediaPlaceholder } from "../components/MediaPlaceholder";
 import { ResponsiveMedia, ResponsiveVideo } from "../components/ResponsiveMedia";
 import { openPaymentCheckout } from "../lib/paddle";
+import { sendFreeGuide } from "../lib/guide.functions";
 import { PaymentTestModeBanner } from "../components/PaymentTestModeBanner";
 import wordmark from "../assets/zerohours-wordmark.png";
 import symbol from "../assets/zerohours-symbol.png";
@@ -77,7 +78,9 @@ function Index() {
   const [guideMessage, setGuideMessage] = useState("");
   const [checkoutError, setCheckoutError] = useState("");
   const [checkoutLoading, setCheckoutLoading] = useState(false);
-  const [guideSubmitted, setGuideSubmitted] = useState(false);
+  const [guideSending, setGuideSending] = useState(false);
+  const navigate = useNavigate();
+  const sendGuide = sendFreeGuide;
   const pricingRef = useRef<HTMLElement>(null);
   const demoFrameRef = useRef<HTMLDivElement>(null);
   const demoVideoRef = useRef<HTMLVideoElement>(null);
