@@ -20,6 +20,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { trackEvent } from "../lib/analytics";
 import { marketingAssets, productConfig, showcaseShots } from "../lib/zerohours-config";
 import { MediaPlaceholder } from "../components/MediaPlaceholder";
+import { ResponsiveMedia, ResponsiveVideo } from "../components/ResponsiveMedia";
 import { openPaymentCheckout } from "../lib/paddle";
 import { PaymentTestModeBanner } from "../components/PaymentTestModeBanner";
 import wordmark from "../assets/zerohours-wordmark.png";
@@ -155,23 +156,20 @@ function Index() {
               </div>
               <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription</p>
             </div>
-            <div className="relative mt-10 overflow-hidden rounded-xl border border-border bg-card p-1.5 shadow-soft sm:mt-14 sm:p-3">
-              <div ref={demoFrameRef} className="relative">
-                <video
-                  ref={demoVideoRef}
-                  className="aspect-video w-full rounded-lg bg-ink object-contain"
-                  controls
-                  playsInline
-                  preload="metadata"
-                  poster={productConfig.demoPosterUrl}
-                  aria-label="ZeroHours product demonstration"
-                >
-                  <source src={productConfig.demoVideoUrl} type="video/mp4" />
-                  Your browser does not support this video.
-                </video>
+            <div className="relative mt-10 sm:mt-14">
+              <ResponsiveVideo
+                desktopSrc={productConfig.demoVideoUrl}
+                mobileSrc={productConfig.demoVideoMobileUrl}
+                poster={productConfig.demoPosterUrl}
+                ariaLabel="ZeroHours product demonstration"
+                className="sm:rounded-xl"
+                frameRef={demoFrameRef}
+                videoRef={demoVideoRef}
+                caption="A real walkthrough of the ZeroHours app. Tap the expand icon for full screen."
+              >
                 <button type="button" onClick={openDemoFullscreen} className="icon-button absolute bottom-3 right-3 shadow-soft sm:hidden" aria-label="Watch demo fullscreen"><Maximize2 /></button>
-              </div>
-              <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-md border border-border bg-card/95 px-3 py-2 text-xs font-bold shadow-soft sm:left-6 sm:top-6"><span className="size-2 rounded-full bg-coral" /> REAL PRODUCT DEMO</div>
+              </ResponsiveVideo>
+              <div className="pointer-events-none absolute left-3 top-3 z-10 flex items-center gap-2 rounded-md border border-border bg-card/95 px-3 py-2 text-xs font-bold shadow-soft sm:left-6 sm:top-6"><span className="size-2 rounded-full bg-coral" /> REAL PRODUCT DEMO</div>
             </div>
             <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
               {["One-time payment", "Instant digital access", "Local-first", "Built for students"].map((item) => <div key={item} className="flex min-h-20 items-center justify-center gap-2 bg-card px-3 text-center text-sm font-semibold"><Check className="size-4 shrink-0 text-primary" />{item}</div>)}
@@ -183,9 +181,14 @@ function Index() {
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
             <div><p className="eyebrow text-coral">The problem</p><h2 className="section-title mt-4">You know what you need to do.<span className="block text-coral">You just can't start.</span></h2><p className="mt-6 max-w-xl text-lg leading-8 text-ink-muted">Another list isn't the answer. You already know the assignment exists. The hard part is crossing the gap between “I should do this” and “I'm actually doing it.”</p></div>
             <div>
-              <div className="overflow-hidden rounded-lg border border-ink-border bg-ink-soft p-1.5 shadow-strong sm:p-3">
-                <img src={marketingAssets.problem.src} alt={marketingAssets.problem.alt} loading="lazy" className="aspect-video w-full rounded-md bg-background object-contain" />
-              </div>
+              <ResponsiveMedia
+                desktopSrc={marketingAssets.problem.src}
+                mobileSrc={marketingAssets.problem.mobileSrc}
+                mobileRatio={marketingAssets.problem.mobileRatio}
+                alt={marketingAssets.problem.alt}
+                caption={marketingAssets.problem.caption}
+                tone="dark"
+              />
               <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase text-ink-muted">{["Assignment", "Overthinking", "Avoidance", "Phone", "Pressure"].map((item, index) => <span key={item} className="contents"><span className="rounded-full border border-ink-border px-3 py-2">{item}</span>{index < 4 && <ArrowRight className="size-3" />}</span>)}</div>
             </div>
           </div>
@@ -212,15 +215,24 @@ function Index() {
             <p className="eyebrow">See the system</p>
             <h2 id="showcase-title" className="section-title mt-4 max-w-4xl">A real workspace for the moments that stop you.</h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">Every screen below is the actual ZeroHours app — no mockups, no renders.</p>
-            <div className="-mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+            <div className="-mx-2 mt-8 grid gap-5 sm:mx-0 sm:mt-10 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
               {showcaseShots.map((shot) => (
-                <figure key={shot.title} className="showcase-card w-[82vw] max-w-96 shrink-0 snap-center sm:w-auto sm:max-w-none">
+                <figure key={shot.title} className="showcase-card">
+
                   {shot.src ? (
-                    <img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-video w-full rounded-t-[inherit] bg-background object-contain" />
+                    <picture>
+                      {shot.mobileSrc && <source media="(max-width: 639px)" srcSet={shot.mobileSrc} />}
+                      <img
+                        src={shot.src}
+                        alt={shot.alt}
+                        loading="lazy"
+                        className={`w-full rounded-t-[inherit] bg-background sm:aspect-video sm:object-contain ${shot.mobileSrc ? "aspect-[4/5] object-cover" : "aspect-video object-contain"}`}
+                      />
+                    </picture>
                   ) : (
                     <MediaPlaceholder label={shot.alt} className="aspect-[4/3] min-h-0" />
                   )}
-                  <figcaption className="p-5">
+                  <figcaption className="p-4 sm:p-5">
                     <p className="font-display text-lg font-bold">{shot.title}</p>
                     <p className="mt-1 text-sm leading-6 text-muted-foreground">{shot.description}</p>
                   </figcaption>
@@ -245,11 +257,11 @@ function Index() {
         </section>
 
         <section className="section-shell">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div className="overflow-hidden rounded-lg border border-border bg-card p-1.5 shadow-soft sm:p-3"><img src={marketingAssets.transformation.src} alt={marketingAssets.transformation.alt} loading="lazy" className="aspect-video w-full rounded-md bg-background object-contain" /></div><div><p className="eyebrow">The shift</p><h2 className="section-title mt-4"><span className="text-muted-foreground">From: “I'll do it later.”</span><span className="mt-3 block">To: “I'm already started.”</span></h2><div className="mt-8 grid grid-cols-2 gap-3">{["Overwhelm", "Clarity", "Small action", "Momentum"].map((x,i) => <div key={x} className={`rounded-lg border p-4 font-bold ${i === 3 ? "border-coral bg-coral-soft text-coral-strong" : "border-border bg-card"}`}>{String(i+1).padStart(2,"0")}<span className="mt-7 block text-sm">{x}</span></div>)}</div></div></div>
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><ResponsiveMedia desktopSrc={marketingAssets.transformation.src} mobileSrc={marketingAssets.transformation.mobileSrc} mobileRatio={marketingAssets.transformation.mobileRatio} alt={marketingAssets.transformation.alt} caption={marketingAssets.transformation.caption} /><div><p className="eyebrow">The shift</p><h2 className="section-title mt-4"><span className="text-muted-foreground">From: “I'll do it later.”</span><span className="mt-3 block">To: “I'm already started.”</span></h2><div className="mt-8 grid grid-cols-2 gap-3">{["Overwhelm", "Clarity", "Small action", "Momentum"].map((x,i) => <div key={x} className={`rounded-lg border p-4 font-bold ${i === 3 ? "border-coral bg-coral-soft text-coral-strong" : "border-border bg-card"}`}>{String(i+1).padStart(2,"0")}<span className="mt-7 block text-sm">{x}</span></div>)}</div></div></div>
         </section>
 
         <section className="section-shell bg-surface">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center"><div><p className="eyebrow">Beyond reminders</p><h2 className="section-title mt-4">More than a to-do list.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">ZeroHours doesn't just remind you that the work exists. It helps you move through the part that keeps you from starting.</p><div className="mt-7 grid grid-cols-2 gap-2 text-sm font-semibold">{["Next Action", "5-Minute Rescue", "Lock-In", "Study Sessions", "Exam Rescue", "Catch-Up"].map(x => <div className="flex items-center gap-2" key={x}><Check className="size-4 text-primary" />{x}</div>)}</div><a href="#showcase-title" className="btn-secondary mt-8 w-full sm:w-auto">See ZeroHours in action <Play className="size-4" /></a></div><div className="overflow-hidden rounded-lg border border-border bg-card p-1.5 shadow-soft sm:p-3"><img src={marketingAssets.features.src} alt={marketingAssets.features.alt} loading="lazy" className="aspect-video w-full rounded-md bg-background object-contain" /></div></div>
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center"><div><p className="eyebrow">Beyond reminders</p><h2 className="section-title mt-4">More than a to-do list.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">ZeroHours doesn't just remind you that the work exists. It helps you move through the part that keeps you from starting.</p><div className="mt-7 grid grid-cols-2 gap-2 text-sm font-semibold">{["Next Action", "5-Minute Rescue", "Lock-In", "Study Sessions", "Exam Rescue", "Catch-Up"].map(x => <div className="flex items-center gap-2" key={x}><Check className="size-4 text-primary" />{x}</div>)}</div><a href="#showcase-title" className="btn-secondary mt-8 w-full sm:w-auto">See ZeroHours in action <Play className="size-4" /></a></div><ResponsiveMedia desktopSrc={marketingAssets.features.src} mobileSrc={marketingAssets.features.mobileSrc} mobileRatio={marketingAssets.features.mobileRatio} alt={marketingAssets.features.alt} caption={marketingAssets.features.caption} /></div>
         </section>
 
         <section className="section-shell">
@@ -284,7 +296,7 @@ function Index() {
 
       <footer className="border-t border-border bg-background px-4 py-10 sm:px-6"><div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 sm:items-end"><div><div className="flex items-center gap-2 font-display font-extrabold uppercase"><img src={symbol} alt="" aria-hidden="true" className="size-8 w-auto" />ZeroHours</div><p className="mt-3 max-w-sm text-sm text-muted-foreground">Stop staring at the assignment. Start it.</p></div><div className="sm:text-right"><div className="flex flex-wrap gap-x-4 gap-y-3 sm:justify-end">{navItems.map(([label, href]) => <a key={href} className="text-sm font-semibold text-muted-foreground hover:text-foreground" href={href}>{label}</a>)}<Link to="/privacy" className="text-sm font-semibold text-muted-foreground hover:text-foreground">Privacy</Link><Link to="/terms" className="text-sm font-semibold text-muted-foreground hover:text-foreground">Terms</Link><Link to="/refund-policy" className="text-sm font-semibold text-muted-foreground hover:text-foreground">Refunds</Link></div><p className="mt-4 text-xs text-muted-foreground">© 2026 ZeroHours. Sold by Cameron Taha. Digital delivery after purchase.</p></div></div></footer>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 p-3 backdrop-blur-md md:hidden"><button className="btn-primary w-full" disabled={checkoutLoading} onClick={checkout}>{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button></div>
+      <div className="sticky-cta fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 backdrop-blur-md md:hidden"><button className="btn-primary w-full" disabled={checkoutLoading} onClick={checkout}>{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button></div>
     </div>
   );
 }

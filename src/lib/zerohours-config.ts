@@ -19,7 +19,13 @@ export const productConfig = {
   appDownloadUrl: appAsset.url,
   /** The full ZeroHours guide PDF included with every purchase. */
   includedGuideUrl: includedGuideAsset.url,
+  /** Wide (16:9) demo video used on tablet and desktop. */
   demoVideoUrl: demoAsset.url,
+  /**
+   * Optional vertical (9:16) demo cut used on phones.
+   * Leave empty to fall back to the desktop video.
+   */
+  demoVideoMobileUrl: "",
   demoPosterUrl: dashboardAsset.url,
   studyPackUrl: "",
   examRescueUrl: "",
@@ -30,18 +36,33 @@ export const productConfig = {
   },
 } as const;
 
+/**
+ * Marketing visuals.
+ * `mobileSrc` is an optional purpose-built portrait version. While it is empty
+ * the full desktop screenshot is shown at its natural ratio on phones so no
+ * part of the app UI is cropped.
+ */
 export const marketingAssets = {
   problem: {
     src: tasksAsset.url,
+    mobileSrc: "",
+    mobileRatio: "4 / 5",
     alt: "ZeroHours task list showing schoolwork ordered by urgency and priority",
+    caption: "Every assignment in one ordered list.",
   },
   transformation: {
     src: lockInAsset.url,
+    mobileSrc: "",
+    mobileRatio: "4 / 5",
     alt: "ZeroHours Lock-In Mode turning a difficult assignment into one focused next action",
+    caption: "Lock-In Mode turns the assignment into one move.",
   },
   features: {
     src: rescueAsset.url,
+    mobileSrc: "",
+    mobileRatio: "4 / 5",
     alt: "ZeroHours Rescue screen offering practical ways to restart when work feels stuck",
+    caption: "Rescue gets you moving again when you stall.",
   },
 } as const;
 
@@ -54,6 +75,10 @@ export const marketingAssets = {
 export type ShowcaseShot = {
   /** Empty string = placeholder shown. */
   src: string;
+  /** Optional portrait version used on phones. Empty = use `src` uncropped. */
+  mobileSrc?: string;
+  /** Mobile aspect ratio, only applied when `mobileSrc` is provided. */
+  mobileRatio?: string;
   alt: string;
   title: string;
   description: string;
