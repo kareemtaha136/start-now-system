@@ -115,6 +115,36 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
           return new Response("Delivery failed", { status: 500 });
         }
 
+        // Buyer is no longer a marketing lead: record the purchase and pull
+        // them out of the Brevo "Guide leads" audience.
+        const buyerEmail = email.toLowerCase();
+        try {
+          const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+          await supabaseAdmin
+            .from("guide_leads")
+            .update({ purchased_at: new Date().toISOString() })
+            .eq("email", buyerEmail);
+        } catch (err) {
+          console.error("[payments webhook] failed to mark lead purchased", err);
+        }
+        try {
+          const { removeGuideLeadFromBrevo } = await import("@/lib/brevo.server");
+          await removeGuideLeadFromBrevo(buyerEmail);
+        } catch (err) {
+          console.error("[payments webhook] failed to remove buyer from Brevo list", err);
+        }
+
+        return Response.json({ ok: true });
+      },
+    },
+  },
+});
+          console.error("[payments webhook] delivery email failed", err);
+          // Non-2xx makes the provider retry the event; the idempotency key
+          // prevents duplicate emails on retry.
+          return new Response("Delivery failed", { status: 500 });
+        }
+
         return Response.json({ ok: true });
       },
     },

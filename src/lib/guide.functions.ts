@@ -32,6 +32,17 @@ export const sendFreeGuide = createServerFn({ method: "POST" })
       console.error("guide lead capture failed", error);
     }
 
+    // Consented leads also join the Brevo marketing audience so follow-up
+    // campaigns can reach people who haven't purchased yet.
+    if (data.marketingConsent) {
+      try {
+        const { addGuideLeadToBrevo } = await import("./brevo.server");
+        await addGuideLeadToBrevo(email);
+      } catch (error) {
+        console.error("brevo guide lead sync failed", error);
+      }
+    }
+
     try {
       const result = await sendTemplateEmail("free-guide", email, {
         idempotencyKey: `free-guide-${email}`,
