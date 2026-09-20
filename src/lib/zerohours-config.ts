@@ -19,7 +19,13 @@ export const productConfig = {
   appDownloadUrl: appAsset.url,
   /** The full ZeroHours guide PDF included with every purchase. */
   includedGuideUrl: includedGuideAsset.url,
+  /** Wide (16:9) demo video used on tablet and desktop. */
   demoVideoUrl: demoAsset.url,
+  /**
+   * Optional vertical (9:16) demo cut used on phones.
+   * Leave empty to fall back to the desktop video.
+   */
+  demoVideoMobileUrl: "",
   demoPosterUrl: dashboardAsset.url,
   studyPackUrl: "",
   examRescueUrl: "",
