@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
   ArrowDown,
   ArrowRight,
@@ -22,6 +22,7 @@ import { marketingAssets, productConfig, showcaseShots } from "../lib/zerohours-
 import { MediaPlaceholder } from "../components/MediaPlaceholder";
 import { ResponsiveMedia, ResponsiveVideo } from "../components/ResponsiveMedia";
 import { openPaymentCheckout } from "../lib/paddle";
+import { sendFreeGuide } from "../lib/guide.functions";
 import { PaymentTestModeBanner } from "../components/PaymentTestModeBanner";
 import wordmark from "../assets/zerohours-wordmark.png";
 import symbol from "../assets/zerohours-symbol.png";
@@ -77,7 +78,9 @@ function Index() {
   const [guideMessage, setGuideMessage] = useState("");
   const [checkoutError, setCheckoutError] = useState("");
   const [checkoutLoading, setCheckoutLoading] = useState(false);
-  const [guideSubmitted, setGuideSubmitted] = useState(false);
+  const [guideSending, setGuideSending] = useState(false);
+  const navigate = useNavigate();
+  const sendGuide = sendFreeGuide;
   const pricingRef = useRef<HTMLElement>(null);
   const demoFrameRef = useRef<HTMLDivElement>(null);
   const demoVideoRef = useRef<HTMLVideoElement>(null);
@@ -110,12 +113,23 @@ function Index() {
     }
   };
 
-  const submitGuide = (event: FormEvent<HTMLFormElement>) => {
+  const submitGuide = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
+    const email = new FormData(form).get("email");
+    if (typeof email !== "string" || !email) return;
     trackEvent("free_guide_submit");
-    window.open(productConfig.freeGuideUrl, "_blank", "noopener");
-    setGuideSubmitted(true);
-    setGuideMessage("Your guide is downloading now. Email sending isn't connected yet, so your address wasn't saved.");
+    setGuideSending(true);
+    setGuideMessage("");
+    try {
+      await sendGuide({ data: { email } });
+    } catch {
+      // The guide is still delivered on the next page; email may retry later.
+      setGuideMessage("We couldn't email your copy, but you can download it on the next page.");
+    } finally {
+      setGuideSending(false);
+    }
+    await navigate({ to: "/guide/thank-you" });
   };
 
   const openDemoFullscreen = () => {
@@ -269,16 +283,7 @@ function Index() {
         </section>
 
         <section id="guide" className="section-shell bg-ink text-ink-foreground">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div><p className="eyebrow text-coral">Not ready for the full system?</p><h2 className="section-title mt-4">Get the free procrastination guide.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">The guide teaches you how to make starting easier. ZeroHours gives you the tools to actually do it.</p></div><form onSubmit={submitGuide} className="rounded-lg border border-ink-border bg-ink-soft p-5 sm:p-7"><label htmlFor="guide-email" className="block text-sm font-bold">Email address</label><input id="guide-email" type="email" required autoComplete="email" placeholder="you@example.com" className="mt-2 h-12 w-full rounded-md border border-ink-border bg-ink px-4 text-base outline-none placeholder:text-ink-muted focus:border-coral focus:ring-2 focus:ring-coral" /><button className="btn-coral mt-3 w-full" type="submit">Get the free guide <ArrowRight /></button><p className="mt-3 text-xs leading-5 text-ink-muted">Email delivery is being connected. Submitting now will not save your address.</p>{guideMessage && <p role="status" className="mt-3 rounded-md border border-coral/50 bg-coral/10 p-3 text-sm">{guideMessage}</p>}
-            {guideSubmitted && (
-              <div className="mt-5 rounded-lg border border-coral/60 bg-coral/10 p-5">
-                <p className="text-xs font-extrabold uppercase tracking-[0.12em] text-coral-light">While you're here</p>
-                <p className="mt-2 font-display text-lg font-bold leading-snug">The guide and ZeroHours go hand in hand.</p>
-                <p className="mt-2 text-sm leading-6 text-ink-muted">The guide shows you why starting feels so hard. ZeroHours is the system that walks you through actually starting — next action, 5-minute start, lock-in. Most people read the guide, nod along, and still don't start. The app closes that gap.</p>
-                <button type="button" onClick={checkout} disabled={checkoutLoading} className="btn-coral mt-4 w-full">{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button>
-                <p className="mt-2 text-center text-xs text-ink-muted">One-time purchase • No subscription</p>
-              </div>
-            )}</form></div>
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div><p className="eyebrow text-coral">Not ready for the full system?</p><h2 className="section-title mt-4">Get the free procrastination guide.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">The guide teaches you how to make starting easier. ZeroHours gives you the tools to actually do it.</p></div><form onSubmit={submitGuide} className="rounded-lg border border-ink-border bg-ink-soft p-5 sm:p-7"><label htmlFor="guide-email" className="block text-sm font-bold">Email address</label><input id="guide-email" name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="mt-2 h-12 w-full rounded-md border border-ink-border bg-ink px-4 text-base outline-none placeholder:text-ink-muted focus:border-coral focus:ring-2 focus:ring-coral" /><button className="btn-coral mt-3 w-full" type="submit" disabled={guideSending}>{guideSending ? "Sending your guide…" : "Get the free guide"} <ArrowRight /></button><p className="mt-3 text-xs leading-5 text-ink-muted">We email your copy straight away. No spam, unsubscribe any time.</p>{guideMessage && <p role="status" className="mt-3 rounded-md border border-coral/50 bg-coral/10 p-3 text-sm">{guideMessage}</p>}</form></div>
         </section>
 
         <section id="pricing" ref={pricingRef} className="section-shell">
