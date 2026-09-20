@@ -116,13 +116,15 @@ function Index() {
   const submitGuide = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    const email = new FormData(form).get("email");
+    const data = new FormData(form);
+    const email = data.get("email");
+    const marketingConsent = data.get("marketingConsent") === "on";
     if (typeof email !== "string" || !email) return;
     trackEvent("free_guide_submit");
     setGuideSending(true);
     setGuideMessage("");
     try {
-      await sendGuide({ data: { email } });
+      await sendGuide({ data: { email, marketingConsent } });
     } catch {
       // The guide is still delivered on the next page; email may retry later.
       setGuideMessage("We couldn't email your copy, but you can download it on the next page.");
