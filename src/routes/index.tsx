@@ -172,20 +172,18 @@ function Index() {
               </div>
               <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription</p>
             </div>
-            <div className="relative mt-10 sm:mt-14">
-              <ResponsiveVideo
-                desktopSrc={productConfig.demoVideoUrl}
-                mobileSrc={productConfig.demoVideoMobileUrl}
-                poster={productConfig.demoPosterUrl}
-                ariaLabel="ZeroHours product demonstration"
+            <div className="mt-10 sm:mt-14">
+              <ResponsiveMedia
+                desktopSrc={marketingAssets.hero.src}
+                mobileSrc={marketingAssets.hero.mobileSrc}
+                desktopRatio={marketingAssets.hero.desktopRatio}
+                mobileRatio={marketingAssets.hero.mobileRatio}
+                alt={marketingAssets.hero.alt}
+                caption={marketingAssets.hero.caption}
+                loading="eager"
+                mediaClassName="rounded-lg object-cover"
                 className="sm:rounded-xl"
-                frameRef={demoFrameRef}
-                videoRef={demoVideoRef}
-                caption="A real walkthrough of the ZeroHours app. Tap the expand icon for full screen."
-              >
-                <button type="button" onClick={openDemoFullscreen} className="icon-button absolute bottom-3 right-3 shadow-soft sm:hidden" aria-label="Watch demo fullscreen"><Maximize2 /></button>
-              </ResponsiveVideo>
-              <div className="pointer-events-none absolute left-3 top-3 z-10 flex items-center gap-2 rounded-md border border-border bg-card/95 px-3 py-2 text-xs font-bold shadow-soft sm:left-6 sm:top-6"><span className="size-2 rounded-full bg-coral" /> REAL PRODUCT DEMO</div>
+              />
             </div>
             <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
               {["One-time payment", "Instant digital access", "Local-first", "Built for students"].map((item) => <div key={item} className="flex min-h-20 items-center justify-center gap-2 bg-card px-3 text-center text-sm font-semibold"><Check className="size-4 shrink-0 text-primary" />{item}</div>)}
@@ -254,6 +252,25 @@ function Index() {
                   </figcaption>
                 </figure>
               ))}
+            </div>
+            <div className="mt-14 border-t border-border pt-10 sm:mt-16 sm:pt-12">
+              <div className="mb-7 max-w-3xl">
+                <p className="eyebrow">Watch the walkthrough</p>
+                <h3 className="mt-3 font-display text-2xl font-extrabold uppercase sm:text-3xl">See ZeroHours in action.</h3>
+                <p className="mt-3 leading-7 text-muted-foreground">A real walkthrough of the app, from choosing the next move to locking in.</p>
+              </div>
+              <ResponsiveVideo
+                desktopSrc={productConfig.demoVideoUrl}
+                mobileSrc={productConfig.demoVideoMobileUrl}
+                poster={productConfig.demoPosterUrl}
+                ariaLabel="ZeroHours product demonstration"
+                className="sm:rounded-xl"
+                frameRef={demoFrameRef}
+                videoRef={demoVideoRef}
+                caption="A real walkthrough of the ZeroHours app. Tap the expand icon for full screen."
+              >
+                <button type="button" onClick={openDemoFullscreen} className="icon-button absolute bottom-3 right-3 shadow-soft sm:hidden" aria-label="Watch demo fullscreen"><Maximize2 /></button>
+              </ResponsiveVideo>
             </div>
             <div className="mt-8"><button className="btn-primary w-full sm:w-auto" disabled={checkoutLoading} onClick={checkout}>Get ZeroHours — $29.99 <ArrowRight aria-hidden="true" /></button></div>
           </div>
