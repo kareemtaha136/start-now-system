@@ -8,6 +8,8 @@ import lockInAsset from "../assets/product/lock-in.png.asset.json";
 import rescueAsset from "../assets/product/rescue.png.asset.json";
 import studySessionAsset from "../assets/product/study-session.png.asset.json";
 import tasksAsset from "../assets/product/tasks.png.asset.json";
+import studentHeroDesktop from "../assets/zerohours-student-hero-desktop.jpg";
+import studentHeroMobile from "../assets/zerohours-student-hero-mobile-v2.jpg";
 
 export const productConfig = {
   name: "ZeroHours",
@@ -43,6 +45,14 @@ export const productConfig = {
  * part of the app UI is cropped.
  */
 export const marketingAssets = {
+  hero: {
+    src: studentHeroDesktop,
+    mobileSrc: studentHeroMobile,
+    desktopRatio: "8 / 5",
+    mobileRatio: "4 / 5",
+    alt: "Student using ZeroHours on a laptop at a clean study desk",
+    caption: "ZeroHours open and ready for the next move.",
+  },
   problem: {
     src: tasksAsset.url,
     mobileSrc: "",
