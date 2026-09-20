@@ -197,6 +197,7 @@
 @utility step-number { font-family: var(--font-display); font-size: .75rem; font-weight: 800; color: var(--color-primary); }
 @utility feature-card { border: 1px solid var(--color-border); border-radius: .5rem; background: var(--color-card); padding: 1.5rem; transition: transform .2s ease, box-shadow .2s ease; &:hover { transform: translateY(-2px); box-shadow: 0 16px 35px -28px color-mix(in oklab, var(--color-foreground) 40%, transparent); } }
 @utility quote-card { display: flex; min-height: 8rem; align-items: flex-end; border: 1px solid var(--color-border); border-radius: .5rem; background: var(--color-card); padding: 1.25rem; font-family: var(--font-display); font-size: 1.12rem; font-weight: 700; }
+@utility showcase-card { overflow: hidden; border: 1px solid var(--color-border); border-radius: .75rem; background: var(--color-card); box-shadow: 0 10px 30px -24px color-mix(in oklab, var(--color-foreground) 35%, transparent); }
 @utility shadow-soft { box-shadow: 0 18px 50px -35px color-mix(in oklab, var(--color-foreground) 32%, transparent); }
 @utility shadow-strong { box-shadow: 0 28px 70px -38px color-mix(in oklab, var(--color-foreground) 45%, transparent); }
 
