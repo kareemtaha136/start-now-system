@@ -220,11 +220,19 @@ function Index() {
                 <figure key={shot.title} className="showcase-card">
 
                   {shot.src ? (
-                    <img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-video w-full rounded-t-[inherit] bg-background object-contain" />
+                    <picture>
+                      {shot.mobileSrc && <source media="(max-width: 639px)" srcSet={shot.mobileSrc} />}
+                      <img
+                        src={shot.src}
+                        alt={shot.alt}
+                        loading="lazy"
+                        className={`w-full rounded-t-[inherit] bg-background sm:aspect-video sm:object-contain ${shot.mobileSrc ? "aspect-[4/5] object-cover" : "aspect-video object-contain"}`}
+                      />
+                    </picture>
                   ) : (
                     <MediaPlaceholder label={shot.alt} className="aspect-[4/3] min-h-0" />
                   )}
-                  <figcaption className="p-5">
+                  <figcaption className="p-4 sm:p-5">
                     <p className="font-display text-lg font-bold">{shot.title}</p>
                     <p className="mt-1 text-sm leading-6 text-muted-foreground">{shot.description}</p>
                   </figcaption>
