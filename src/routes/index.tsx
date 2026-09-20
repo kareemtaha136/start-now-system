@@ -20,6 +20,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { trackEvent } from "../lib/analytics";
 import { marketingAssets, productConfig, showcaseShots } from "../lib/zerohours-config";
 import { MediaPlaceholder } from "../components/MediaPlaceholder";
+import { ResponsiveMedia, ResponsiveVideo } from "../components/ResponsiveMedia";
 import { openPaymentCheckout } from "../lib/paddle";
 import { PaymentTestModeBanner } from "../components/PaymentTestModeBanner";
 import wordmark from "../assets/zerohours-wordmark.png";
