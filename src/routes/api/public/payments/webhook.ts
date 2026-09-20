@@ -139,14 +139,3 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
     },
   },
 });
-          console.error("[payments webhook] delivery email failed", err);
-          // Non-2xx makes the provider retry the event; the idempotency key
-          // prevents duplicate emails on retry.
-          return new Response("Delivery failed", { status: 500 });
-        }
-
-        return Response.json({ ok: true });
-      },
-    },
-  },
-});
