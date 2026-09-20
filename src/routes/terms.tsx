@@ -29,7 +29,7 @@ function TermsPage() {
     >
       <section>
         <h2>1. Seller and acceptance</h2>
-        <p>ZeroHours is sold by <strong>Cameron Taha, trading as ZeroHours</strong> (“ZeroHours,” “we,” “us,” or “our”). You are contracting with Cameron Taha for the digital product and related services described here.</p>
+        <p>ZeroHours is sold by <strong>Arrow Wilder, trading as ZeroHours</strong> (“ZeroHours,” “we,” “us,” or “our”). You are contracting with Arrow Wilder for the digital product and related services described here.</p>
         <p>By purchasing, downloading, accessing, or continuing to use ZeroHours, you agree to these Terms &amp; Conditions and the <Link to="/privacy">Privacy Notice</Link>. If you do not agree, do not use the product. If you purchase or use ZeroHours for an organization, you confirm that you have authority to bind it. You must be legally able to enter this agreement or have permission from a parent or guardian where required.</p>
       </section>
 
@@ -42,7 +42,7 @@ function TermsPage() {
       <section>
         <h2>3. License and ownership</h2>
         <p>After a valid purchase, we grant you a limited, personal, non-exclusive, non-transferable, and revocable license to use your copy of ZeroHours for your own lawful purposes. The product is licensed, not sold, except for ownership of the physical or digital copy delivered to you where applicable.</p>
-        <p>Cameron Taha retains all rights in ZeroHours, including its software, design, workflows, text, documentation, graphics, branding, and other intellectual property. These terms do not transfer ownership of that intellectual property to you.</p>
+        <p>Arrow Wilder retains all rights in ZeroHours, including its software, design, workflows, text, documentation, graphics, branding, and other intellectual property. These terms do not transfer ownership of that intellectual property to you.</p>
         <p>You may create, enter, and export your own content. You retain your rights in that content and grant us only the limited rights needed to process content you deliberately send to us for support or service delivery.</p>
       </section>
 
@@ -83,7 +83,7 @@ function TermsPage() {
 
       <section>
         <h2>8. Intellectual-property complaints</h2>
-        <p>If you believe material connected with ZeroHours infringes your rights, contact Cameron Taha through the support contact included with a purchase and describe the work, the allegedly infringing material, its location, your contact information, and the basis for your claim. We may remove or restrict material while reviewing a complaint and may terminate repeat infringers.</p>
+        <p>If you believe material connected with ZeroHours infringes your rights, contact Arrow Wilder through the support contact included with a purchase and describe the work, the allegedly infringing material, its location, your contact information, and the basis for your claim. We may remove or restrict material while reviewing a complaint and may terminate repeat infringers.</p>
       </section>
 
       <section>
@@ -93,19 +93,19 @@ function TermsPage() {
 
       <section>
         <h2>10. Limitation of liability</h2>
-        <p>To the fullest extent permitted by law, Cameron Taha will not be liable for indirect, incidental, special, consequential, or punitive loss, or for lost profits, opportunities, goodwill, or data arising from ZeroHours. Our total liability relating to the product will not exceed the amount you paid for ZeroHours during the 12 months before the event giving rise to the claim.</p>
+        <p>To the fullest extent permitted by law, Arrow Wilder will not be liable for indirect, incidental, special, consequential, or punitive loss, or for lost profits, opportunities, goodwill, or data arising from ZeroHours. Our total liability relating to the product will not exceed the amount you paid for ZeroHours during the 12 months before the event giving rise to the claim.</p>
         <p>Nothing in these terms excludes or limits liability that cannot legally be excluded, including liability for fraud or for death or personal injury caused by negligence where applicable.</p>
       </section>
 
       <section>
         <h2>11. Your responsibility</h2>
-        <p>You are responsible for your lawful use, your content, and reasonable backups. To the extent permitted by law, you agree to indemnify Cameron Taha against third-party claims caused by your unlawful content, infringement of another person’s rights, misuse of ZeroHours, or material breach of these terms.</p>
+        <p>You are responsible for your lawful use, your content, and reasonable backups. To the extent permitted by law, you agree to indemnify Arrow Wilder against third-party claims caused by your unlawful content, infringement of another person’s rights, misuse of ZeroHours, or material breach of these terms.</p>
       </section>
 
       <section>
         <h2>12. General terms</h2>
         <p>We are not responsible for delay or failure caused by events beyond reasonable control. You may not assign these terms without our consent; we may assign them as part of a business transfer or reorganization. If one provision is unenforceable, the remaining provisions continue in effect. A delay in enforcement is not a waiver.</p>
-        <p>These terms are governed by the laws applicable where Cameron Taha is established, without depriving you of mandatory consumer protections in your home jurisdiction. Courts with lawful jurisdiction may resolve disputes. Before filing a claim, both parties should try in good faith to resolve it through the available support channel.</p>
+        <p>These terms are governed by the laws applicable where Arrow Wilder is established, without depriving you of mandatory consumer protections in your home jurisdiction. Courts with lawful jurisdiction may resolve disputes. Before filing a claim, both parties should try in good faith to resolve it through the available support channel.</p>
       </section>
 
       <section>

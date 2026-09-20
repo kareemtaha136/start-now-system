@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { LegalPage } from "../components/LegalPage";
 
 const title = "Privacy Notice — ZeroHours";
-const description = "How Cameron Taha collects, uses, stores, and shares personal data when you use ZeroHours.";
+const description = "How Arrow Wilder collects, uses, stores, and shares personal data when you use ZeroHours.";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
@@ -29,7 +29,7 @@ function PrivacyPage() {
     >
       <section>
         <h2>1. Who controls your information</h2>
-        <p><strong>Cameron Taha, trading as ZeroHours</strong>, is the seller and data controller for the personal data described in this notice. “ZeroHours,” “we,” “us,” and “our” refer to Cameron Taha.</p>
+        <p><strong>Arrow Wilder, trading as ZeroHours</strong>, is the seller and data controller for the personal data described in this notice. “ZeroHours,” “we,” “us,” and “our” refer to Arrow Wilder.</p>
         <p>Paddle.com Market Limited or another Paddle group company acts as Merchant of Record for purchases. Paddle handles checkout, payment, tax, subscription administration where applicable, invoicing, fraud prevention, and payment-related support under its own privacy notice.</p>
       </section>
 
@@ -87,7 +87,7 @@ function PrivacyPage() {
       <section>
         <h2>8. Your rights</h2>
         <p>Depending on where you live, you may have rights to access, correct, delete, restrict, or receive a portable copy of your personal data; object to certain processing; withdraw consent; and appeal or complain to your local data-protection authority. UK and EEA requests are generally answered within one month, subject to lawful extensions.</p>
-        <p>To make a request concerning ZeroHours data, contact Cameron Taha using the support contact included with your purchase. For payment information controlled by Paddle, use <a href="https://paddle.net" rel="noreferrer">paddle.net</a>. We may need to verify your identity before completing a request.</p>
+        <p>To make a request concerning ZeroHours data, contact Arrow Wilder using the support contact included with your purchase. For payment information controlled by Paddle, use <a href="https://paddle.net" rel="noreferrer">paddle.net</a>. We may need to verify your identity before completing a request.</p>
       </section>
 
       <section>

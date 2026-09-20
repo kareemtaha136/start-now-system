@@ -41,7 +41,7 @@ export function LegalPage({ eyebrow, title, summary, children }: LegalPageProps)
 
       <footer className="border-t border-border px-4 py-8 sm:px-6">
         <div className="mx-auto flex max-w-5xl flex-col gap-5 text-sm sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-muted-foreground">© 2026 ZeroHours. Sold by Cameron Taha.</p>
+          <p className="text-muted-foreground">© 2026 ZeroHours. Sold by Arrow Wilder.</p>
           <nav className="flex flex-wrap gap-x-5 gap-y-3" aria-label="Legal pages">
             <Link to="/privacy" className="font-semibold hover:text-primary">Privacy</Link>
             <Link to="/terms" className="font-semibold hover:text-primary">Terms</Link>
