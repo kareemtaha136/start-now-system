@@ -23,6 +23,7 @@ function verifyPaddleSignature(
   const expected = createHmac("sha256", secret)
     .update(`${ts}:${rawBody}`)
     .digest("hex");
+  console.error("[webhook-debug]", JSON.stringify({ ts, h1: h1.slice(0, 10), expected: expected.slice(0, 10), bodyLen: rawBody.length }));
   const a = Buffer.from(h1, "hex");
   const b = Buffer.from(expected, "hex");
   if (a.length !== b.length) return false;
