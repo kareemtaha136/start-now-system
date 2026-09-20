@@ -181,9 +181,14 @@ function Index() {
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
             <div><p className="eyebrow text-coral">The problem</p><h2 className="section-title mt-4">You know what you need to do.<span className="block text-coral">You just can't start.</span></h2><p className="mt-6 max-w-xl text-lg leading-8 text-ink-muted">Another list isn't the answer. You already know the assignment exists. The hard part is crossing the gap between “I should do this” and “I'm actually doing it.”</p></div>
             <div>
-              <div className="overflow-hidden rounded-lg border border-ink-border bg-ink-soft p-1.5 shadow-strong sm:p-3">
-                <img src={marketingAssets.problem.src} alt={marketingAssets.problem.alt} loading="lazy" className="aspect-video w-full rounded-md bg-background object-contain" />
-              </div>
+              <ResponsiveMedia
+                desktopSrc={marketingAssets.problem.src}
+                mobileSrc={marketingAssets.problem.mobileSrc}
+                mobileRatio={marketingAssets.problem.mobileRatio}
+                alt={marketingAssets.problem.alt}
+                caption={marketingAssets.problem.caption}
+                tone="dark"
+              />
               <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase text-ink-muted">{["Assignment", "Overthinking", "Avoidance", "Phone", "Pressure"].map((item, index) => <span key={item} className="contents"><span className="rounded-full border border-ink-border px-3 py-2">{item}</span>{index < 4 && <ArrowRight className="size-3" />}</span>)}</div>
             </div>
           </div>
