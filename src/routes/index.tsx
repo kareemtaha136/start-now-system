@@ -190,7 +190,7 @@ function Index() {
                   {shot.src ? (
                     <img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-[4/3] w-full rounded-t-[inherit] object-cover" />
                   ) : (
-                    <MediaPlaceholder label={shot.alt} className="aspect-[4/3] min-h-0 rounded-b-none border-0 border-b border-dashed" />
+                    <MediaPlaceholder label={shot.alt} className="aspect-[4/3] min-h-0" />
                   )}
                   <figcaption className="p-5">
                     <p className="font-display text-lg font-bold">{shot.title}</p>
