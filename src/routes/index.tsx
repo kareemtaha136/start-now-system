@@ -52,7 +52,7 @@ const groups = [
   { title: "Understand yourself", icon: Sparkles, features: ["Progress", "Weekly Review", "Behavior patterns", "Recovery"], copy: "Notice how you work and the patterns that keep getting in the way." },
 ];
 
-const faqs = [
+const faqs: ReadonlyArray<readonly [string, string]> = [
   ["What is ZeroHours?", "An anti-procrastination and academic execution system that helps students identify what is blocking them, choose a smaller next action, and begin."],
   ["Who is ZeroHours for?", "Students who know what they need to do but regularly feel stuck, overwhelmed, distracted, or behind."],
   ["Is ZeroHours a planner?", "Not simply. It includes academic organization, but connects that workload directly to tools for starting and continuing the work."],
