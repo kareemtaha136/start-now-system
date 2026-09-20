@@ -9,6 +9,8 @@ import {
   LockKeyhole,
   Maximize2,
   Menu,
+  Monitor,
+
   Play,
   ShieldCheck,
   Sparkles,

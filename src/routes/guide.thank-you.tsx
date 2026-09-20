@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Check, Download, Mail } from "lucide-react";
+import { ArrowRight, Check, Download, Mail, Monitor } from "lucide-react";
 import { useEffect, useState } from "react";
 import { productConfig, showcaseShots } from "@/lib/zerohours-config";
 import { openPaymentCheckout } from "@/lib/paddle";
