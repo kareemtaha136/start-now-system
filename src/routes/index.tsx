@@ -116,13 +116,15 @@ function Index() {
   const submitGuide = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    const email = new FormData(form).get("email");
+    const data = new FormData(form);
+    const email = data.get("email");
+    const marketingConsent = data.get("marketingConsent") === "on";
     if (typeof email !== "string" || !email) return;
     trackEvent("free_guide_submit");
     setGuideSending(true);
     setGuideMessage("");
     try {
-      await sendGuide({ data: { email } });
+      await sendGuide({ data: { email, marketingConsent } });
     } catch {
       // The guide is still delivered on the next page; email may retry later.
       setGuideMessage("We couldn't email your copy, but you can download it on the next page.");
@@ -283,7 +285,7 @@ function Index() {
         </section>
 
         <section id="guide" className="section-shell bg-ink text-ink-foreground">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div><p className="eyebrow text-coral">Not ready for the full system?</p><h2 className="section-title mt-4">Get the free procrastination guide.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">The guide teaches you how to make starting easier. ZeroHours gives you the tools to actually do it.</p></div><form onSubmit={submitGuide} className="rounded-lg border border-ink-border bg-ink-soft p-5 sm:p-7"><label htmlFor="guide-email" className="block text-sm font-bold">Email address</label><input id="guide-email" name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="mt-2 h-12 w-full rounded-md border border-ink-border bg-ink px-4 text-base outline-none placeholder:text-ink-muted focus:border-coral focus:ring-2 focus:ring-coral" /><button className="btn-coral mt-3 w-full" type="submit" disabled={guideSending}>{guideSending ? "Sending your guide…" : "Get the free guide"} <ArrowRight /></button><p className="mt-3 text-xs leading-5 text-ink-muted">We email your copy straight away. No spam, unsubscribe any time.</p>{guideMessage && <p role="status" className="mt-3 rounded-md border border-coral/50 bg-coral/10 p-3 text-sm">{guideMessage}</p>}</form></div>
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div><p className="eyebrow text-coral">Not ready for the full system?</p><h2 className="section-title mt-4">Get the free procrastination guide.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-ink-muted">The guide teaches you how to make starting easier. ZeroHours gives you the tools to actually do it.</p></div><form onSubmit={submitGuide} className="rounded-lg border border-ink-border bg-ink-soft p-5 sm:p-7"><label htmlFor="guide-email" className="block text-sm font-bold">Email address</label><input id="guide-email" name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="mt-2 h-12 w-full rounded-md border border-ink-border bg-ink px-4 text-base outline-none placeholder:text-ink-muted focus:border-coral focus:ring-2 focus:ring-coral" /><label htmlFor="guide-consent" className="mt-4 flex items-start gap-2.5 text-xs leading-5 text-ink-muted"><input id="guide-consent" name="marketingConsent" type="checkbox" required className="mt-0.5 size-4 shrink-0 rounded border-ink-border bg-ink accent-coral" /><span>Yes, email me the free guide and occasional ZeroHours tips and offers. Unsubscribe any time.</span></label><button className="btn-coral mt-3 w-full" type="submit" disabled={guideSending}>{guideSending ? "Sending your guide…" : "Get the free guide"} <ArrowRight /></button><p className="mt-3 text-xs leading-5 text-ink-muted">We email your copy straight away. No spam, unsubscribe any time.</p>{guideMessage && <p role="status" className="mt-3 rounded-md border border-coral/50 bg-coral/10 p-3 text-sm">{guideMessage}</p>}</form></div>
         </section>
 
         <section id="pricing" ref={pricingRef} className="section-shell">
