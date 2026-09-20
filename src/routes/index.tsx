@@ -215,9 +215,10 @@ function Index() {
             <p className="eyebrow">See the system</p>
             <h2 id="showcase-title" className="section-title mt-4 max-w-4xl">A real workspace for the moments that stop you.</h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">Every screen below is the actual ZeroHours app — no mockups, no renders.</p>
-            <div className="-mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+            <div className="-mx-2 mt-8 grid gap-5 sm:mx-0 sm:mt-10 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
               {showcaseShots.map((shot) => (
-                <figure key={shot.title} className="showcase-card w-[82vw] max-w-96 shrink-0 snap-center sm:w-auto sm:max-w-none">
+                <figure key={shot.title} className="showcase-card">
+
                   {shot.src ? (
                     <img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-video w-full rounded-t-[inherit] bg-background object-contain" />
                   ) : (
