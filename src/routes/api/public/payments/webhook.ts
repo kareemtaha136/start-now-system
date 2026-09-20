@@ -36,22 +36,23 @@ export const Route = createFileRoute("/api/public/payments/webhook")({
         const url = new URL(request.url);
         const env: PaddleEnv =
           url.searchParams.get("env") === "live" ? "live" : "sandbox";
-        const secret = process.env[
-          env === "live" ? "PADDLE_WEBHOOK_SECRET_LIVE" : "PADDLE_WEBHOOK_SECRET"
-        ];
-        if (!secret) {
+        // Two webhook endpoints exist per environment (platform-managed and
+        // app-managed), each with its own signing secret. Accept either.
+        const secretNames =
+          env === "live"
+            ? ["PADDLE_WEBHOOK_SECRET_LIVE", "PAYMENTS_LIVE_WEBHOOK_SECRET"]
+            : ["PADDLE_WEBHOOK_SECRET", "PAYMENTS_SANDBOX_WEBHOOK_SECRET"];
+        const secrets = secretNames
+          .map((name) => process.env[name])
+          .filter((v): v is string => Boolean(v));
+        if (secrets.length === 0) {
           console.error("[payments webhook] missing webhook secret for", env);
           return new Response("Webhook not configured", { status: 500 });
         }
 
         const rawBody = await request.text();
-        if (
-          !verifyPaddleSignature(
-            rawBody,
-            request.headers.get("Paddle-Signature"),
-            secret,
-          )
-        ) {
+        const signature = request.headers.get("Paddle-Signature");
+        if (!secrets.some((s) => verifyPaddleSignature(rawBody, signature, s))) {
           return new Response("Invalid signature", { status: 401 });
         }
 
