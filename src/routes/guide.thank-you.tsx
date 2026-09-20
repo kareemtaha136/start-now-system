@@ -70,7 +70,7 @@ function GuideThankYou() {
             <div className="p-6 sm:p-8">
               <div className="flex items-end gap-3">
                 <span className="font-display text-5xl font-extrabold">$29.99</span>
-                <span className="pb-1.5 font-display text-xl font-bold text-muted-foreground line-through">$30.99</span>
+                <span className="pb-1.5 font-display text-xl font-bold text-muted-foreground line-through">$39.99</span>
                 <span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span>
               </div>
               <ul className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -121,7 +121,7 @@ function GuideThankYou() {
           <div className="p-6 sm:p-10">
             <div className="flex items-end gap-3">
               <span className="font-display text-5xl font-extrabold">$29.99</span>
-              <span className="pb-1.5 font-display text-xl font-bold text-muted-foreground line-through">$30.99</span>
+              <span className="pb-1.5 font-display text-xl font-bold text-muted-foreground line-through">$39.99</span>
               <span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span>
             </div>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
