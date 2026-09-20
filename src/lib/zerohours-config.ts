@@ -75,6 +75,10 @@ export const marketingAssets = {
 export type ShowcaseShot = {
   /** Empty string = placeholder shown. */
   src: string;
+  /** Optional portrait version used on phones. Empty = use `src` uncropped. */
+  mobileSrc?: string;
+  /** Mobile aspect ratio, only applied when `mobileSrc` is provided. */
+  mobileRatio?: string;
   alt: string;
   title: string;
   description: string;
