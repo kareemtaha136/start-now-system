@@ -28,11 +28,18 @@ export const productConfig = {
 } as const;
 
 export const marketingAssets = {
-  logo: "ZeroHours logo",
-  hero: "ZeroHours product overview",
-  problem: "The procrastination cycle",
-  transformation: "From avoidance to momentum",
-  features: "ZeroHours feature showcase",
+  problem: {
+    src: tasksAsset.url,
+    alt: "ZeroHours task list showing schoolwork ordered by urgency and priority",
+  },
+  transformation: {
+    src: lockInAsset.url,
+    alt: "ZeroHours Lock-In Mode turning a difficult assignment into one focused next action",
+  },
+  features: {
+    src: rescueAsset.url,
+    alt: "ZeroHours Rescue screen offering practical ways to restart when work feels stuck",
+  },
 } as const;
 
 /**
