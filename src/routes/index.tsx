@@ -113,7 +113,15 @@ function Index() {
     event.preventDefault();
     trackEvent("free_guide_submit");
     window.open(productConfig.freeGuideUrl, "_blank", "noopener");
+    setGuideSubmitted(true);
     setGuideMessage("Your guide is downloading now. Email sending isn't connected yet, so your address wasn't saved.");
+  };
+
+  const openDemoFullscreen = () => {
+    const frame = demoFrameRef.current;
+    if (frame?.requestFullscreen) { void frame.requestFullscreen(); return; }
+    const video = demoVideoRef.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
+    video?.webkitEnterFullscreen?.();
   };
 
   return (
