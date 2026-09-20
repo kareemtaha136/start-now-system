@@ -146,6 +146,12 @@ function Index() {
   return (
     <div className="min-h-screen overflow-x-clip bg-background pb-20 text-foreground md:pb-0">
       <PaymentTestModeBanner />
+      <div className="border-b border-border/80 bg-ink text-ink-muted">
+        <p className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2.5 text-center text-xs font-semibold sm:px-6 sm:text-sm">
+          <Monitor className="size-3.5 shrink-0 text-coral sm:size-4" aria-hidden="true" />
+          <span>ZeroHours is desktop-only right now. Mobile support is coming soon.</span>
+        </p>
+      </div>
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
         <div className="mx-auto grid h-16 max-w-7xl grid-cols-[auto_auto_minmax(0,1fr)] items-center gap-2 px-4 sm:px-6 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:px-8 lg:px-8">
           <a href="#top" className="flex min-w-0 items-center gap-2 justify-self-start font-display text-base font-extrabold uppercase tracking-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
