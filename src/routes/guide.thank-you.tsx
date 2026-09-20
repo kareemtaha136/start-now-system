@@ -52,14 +52,37 @@ function GuideThankYou() {
     <main className="min-h-screen bg-background pb-24 text-foreground md:pb-0">
       <section className="section-shell bg-ink text-ink-foreground">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="mx-auto grid size-14 place-items-center rounded-full bg-success-soft text-success"><Check className="size-7" /></span>
-          <p className="eyebrow mt-6 text-coral">Your guide is ready</p>
-          <h1 className="section-title mt-4">Check your inbox.</h1>
-          <div className="mt-6 flex items-start gap-3 rounded-lg border border-ink-border bg-ink-soft p-4 text-left">
-            <Mail className="mt-0.5 size-5 shrink-0 text-coral" />
-            <p className="text-sm leading-6 text-ink-muted">We just emailed your copy of <strong className="text-ink-foreground">ZeroHours — Just Start</strong>. It usually arrives within a minute. You can also download it right here.</p>
+          <div className="flex items-start gap-3 rounded-lg border border-ink-border bg-ink-soft p-4 text-left">
+            <span className="grid size-9 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-5" /></span>
+            <div>
+              <p className="text-sm font-bold text-ink-foreground">Your guide is on its way.</p>
+              <p className="mt-1 text-sm leading-6 text-ink-muted"><Mail className="mr-1.5 inline size-4 text-coral" />Check your inbox — <strong className="text-ink-foreground">ZeroHours — Just Start</strong> usually arrives within a minute.</p>
+              <a href={productConfig.freeGuideUrl} download onClick={() => trackEvent("free_guide_download")} className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-coral underline underline-offset-4"><Download className="size-4" />Or download it now (PDF)</a>
+            </div>
           </div>
-          <a href={productConfig.freeGuideUrl} download onClick={() => trackEvent("free_guide_download")} className="btn-coral mt-4 flex w-full items-center justify-center gap-2"><Download className="size-5" />Download the free guide (PDF)</a>
+
+          <p className="eyebrow mt-10 text-coral">Before you go</p>
+          <h1 className="section-title mt-4">The guide tells you why.<span className="block text-coral">ZeroHours makes you start.</span></h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-ink-muted">You grabbed the guide because starting is the hard part. ZeroHours is the system built for exactly that moment — and it pairs with everything in the guide.</p>
+
+          <div className="mt-8 overflow-hidden rounded-xl border border-coral bg-card text-left text-foreground shadow-strong">
+            <div className="border-b border-border bg-coral px-6 py-3 text-center text-sm font-bold uppercase text-white">Guide readers — get the full system</div>
+            <div className="p-6 sm:p-8">
+              <div className="flex items-end gap-3">
+                <span className="font-display text-5xl font-extrabold">$29.99</span>
+                <span className="pb-1.5 font-display text-xl font-bold text-muted-foreground line-through">$30.99</span>
+                <span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span>
+              </div>
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                {["Next-action workflow", "5-Minute Rescue", "Lock-In Mode", "Exam Rescue", "Catch-Up Mode", "Full academic workspace"].map((x) => (
+                  <li key={x} className="flex items-center gap-2 text-sm font-medium"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" /></span>{x}</li>
+                ))}
+              </ul>
+              <button onClick={buy} disabled={loading} className="btn-coral mt-7 w-full">{loading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button>
+              <p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No subscription. Delivered by email.</p>
+              {error && <p role="alert" className="mt-4 rounded-md bg-coral-soft p-3 text-center text-sm text-coral-strong">{error}</p>}
+            </div>
+          </div>
         </div>
       </section>
 
