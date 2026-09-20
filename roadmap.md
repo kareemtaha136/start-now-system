@@ -5,6 +5,6 @@
 - [x] Add analytics integration points and SEO metadata
 - [x] Validate responsive layouts and interactions
 - [x] Re-run payment eligibility and request provider approval
-- [ ] Enable checkout and delivery after payment approval/assets are available
-- [ ] Add ZeroHours to payments and wire its checkout
-- [ ] Confirm purchase, subscription, and plan-change behavior
+- [ ] Connect emailed delivery after the download file and sender domain are ready
+- [x] Add ZeroHours to payments and wire its checkout
+- [x] Confirm purchase, subscription, and plan-change behavior

@@ -1,7 +1,7 @@
 export const productConfig = {
   name: "ZeroHours",
   price: "$29.99",
-  checkoutUrl: "",
+  checkoutPriceId: "zerohours_one_time",
   freeGuideUrl: "",
   studyPackUrl: "",
   examRescueUrl: "",

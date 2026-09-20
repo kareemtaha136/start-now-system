@@ -19,6 +19,8 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { trackEvent } from "../lib/analytics";
 import { marketingAssets, productConfig } from "../lib/zerohours-config";
 import { MediaPlaceholder } from "../components/MediaPlaceholder";
+import { openPaymentCheckout } from "../lib/paddle";
+import { PaymentTestModeBanner } from "../components/PaymentTestModeBanner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -61,7 +63,7 @@ const faqs: ReadonlyArray<readonly [string, string]> = [
   ["What do I receive after purchasing?", "Your ZeroHours app package is delivered by email after your payment is confirmed."],
   ["Does it work on mobile and desktop?", "ZeroHours has a responsive interface designed for desktop and mobile browsers."],
   ["Is my data private?", "ZeroHours uses local-first data storage, keeping your working data on your device. Import and export tools help you manage your own copy."],
-  ["Do I need an account?", "Account requirements will be confirmed before checkout is activated."],
+  ["Do I need an account?", "No. ZeroHours is a one-time purchase and your download link is sent to the email used at checkout."],
   ["Can I use it for different classes?", "Yes. Courses, assignments, exams, notes, reading, schedules, and grades can be organized across classes."],
   ["What if I'm already behind?", "Catch-Up Mode, Deadline Rescue, and Exam Rescue are designed to help you regain clarity and choose what to do next."],
 ];
@@ -69,6 +71,8 @@ const faqs: ReadonlyArray<readonly [string, string]> = [
 function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [guideMessage, setGuideMessage] = useState("");
+  const [checkoutError, setCheckoutError] = useState("");
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
   const pricingRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -85,10 +89,18 @@ function Index() {
     return () => observer.disconnect();
   }, []);
 
-  const checkout = () => {
+  const checkout = async () => {
     trackEvent("checkout_click");
-    if (productConfig.checkoutUrl) window.location.assign(productConfig.checkoutUrl);
-    else document.querySelector("#pricing")?.scrollIntoView({ behavior: "smooth" });
+    setCheckoutLoading(true);
+    setCheckoutError("");
+    try {
+      await openPaymentCheckout(productConfig.checkoutPriceId);
+    } catch {
+      setCheckoutError("Checkout couldn't open. Please try again.");
+      document.querySelector("#pricing")?.scrollIntoView({ behavior: "smooth" });
+    } finally {
+      setCheckoutLoading(false);
+    }
   };
 
   const submitGuide = (event: FormEvent<HTMLFormElement>) => {
@@ -99,6 +111,7 @@ function Index() {
 
   return (
     <div className="min-h-screen overflow-x-clip bg-background pb-20 text-foreground md:pb-0">
+      <PaymentTestModeBanner />
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
         <div className="mx-auto grid h-16 max-w-7xl grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 px-4 sm:px-6 lg:px-8">
           <a href="#top" className="flex min-w-0 items-center gap-2 font-display text-base font-extrabold uppercase tracking-normal focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
@@ -108,7 +121,7 @@ function Index() {
           <nav className="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
             {navItems.map(([label, href]) => <a key={href} href={href} className="text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground">{label}</a>)}
           </nav>
-          <button className="btn-primary hidden md:inline-flex" onClick={checkout}>Get ZeroHours — $29.99</button>
+          <button className="btn-primary hidden md:inline-flex" disabled={checkoutLoading} onClick={checkout}>{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"}</button>
           <button className="icon-button md:hidden" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X /> : <Menu />}</button>
         </div>
         {menuOpen && <nav className="border-t border-border bg-background px-4 py-4 md:hidden" aria-label="Mobile navigation">{navItems.map(([label, href]) => <a key={href} href={href} onClick={() => setMenuOpen(false)} className="block border-b border-border py-3 font-semibold last:border-0">{label}</a>)}</nav>}
@@ -122,7 +135,7 @@ function Index() {
               <h1 className="mt-5 font-display text-[clamp(2.65rem,9vw,6.8rem)] font-extrabold uppercase leading-[0.93] tracking-normal">Stop staring at the assignment.<span className="mt-2 block text-primary">Start it.</span></h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground sm:text-xl">ZeroHours helps you break through procrastination, figure out what to do next, and actually get moving.</p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <button onClick={checkout} className="btn-primary w-full sm:w-auto">Get ZeroHours — $29.99 <ArrowRight aria-hidden="true" /></button>
+                <button onClick={checkout} disabled={checkoutLoading} className="btn-primary w-full sm:w-auto">{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight aria-hidden="true" /></button>
                 <a href="#guide" onClick={() => trackEvent("free_guide_click")} className="btn-secondary w-full sm:w-auto">Get the free guide</a>
               </div>
               <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription</p>
@@ -159,7 +172,7 @@ function Index() {
                 {[["Choose what you're avoiding", "History essay"], ["Name what's stopping you", "Too overwhelming. Don't know where to start."], ["Shrink the action", "Open the document and write the thesis."], ["Start", "5-Minute Rescue → Lock-In Mode → continue."]].map(([title, copy], i) => <li key={title} className="relative"><span className="absolute -left-[2.55rem] grid size-8 place-items-center rounded-full bg-primary text-xs font-bold text-primary-foreground sm:-left-[3.3rem]">{i + 1}</span><h3 className="font-display text-lg font-bold">{title}</h3><p className="mt-2 leading-7 text-muted-foreground">{copy}</p></li>)}
               </ol>
             </div>
-            <div className="mt-10"><button className="btn-primary w-full sm:w-auto" onClick={checkout}>Start with ZeroHours <ArrowRight /></button></div>
+            <div className="mt-10"><button className="btn-primary w-full sm:w-auto" disabled={checkoutLoading} onClick={checkout}>Start with ZeroHours <ArrowRight /></button></div>
           </div>
         </section>
 
@@ -203,7 +216,7 @@ function Index() {
         </section>
 
         <section id="pricing" ref={pricingRef} className="section-shell">
-          <div className="mx-auto max-w-5xl"><div className="text-center"><p className="eyebrow">Simple pricing</p><h2 className="section-title mt-4">Start getting your work moving.</h2></div><div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-xl border border-primary bg-card shadow-strong"><div className="border-b border-border bg-primary px-6 py-4 text-center text-sm font-bold uppercase text-primary-foreground">ZeroHours — Complete system</div><div className="p-6 sm:p-10"><div className="flex items-end gap-3"><span className="font-display text-5xl font-extrabold">$29.99</span><span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span></div><ul className="mt-8 grid gap-3 sm:grid-cols-2">{["Anti-procrastination system", "Next-action workflow", "5-Minute Rescue", "Lock-In Mode", "Study Sessions", "Exam Rescue", "Catch-Up Mode", "Academic workspace", "Progress tracking", "Local-first app"].map(x => <li key={x} className="flex items-center gap-2 text-sm font-medium"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" /></span>{x}</li>)}</ul><button onClick={checkout} className="btn-coral mt-9 w-full">Get ZeroHours — $29.99 <ArrowRight /></button><p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No monthly subscription.</p>{!productConfig.checkoutUrl && <p className="mt-5 rounded-md bg-secondary p-3 text-center text-sm text-muted-foreground">Secure checkout is being connected. This button will activate when checkout is ready.</p>}</div></div></div>
+          <div className="mx-auto max-w-5xl"><div className="text-center"><p className="eyebrow">Simple pricing</p><h2 className="section-title mt-4">Start getting your work moving.</h2></div><div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-xl border border-primary bg-card shadow-strong"><div className="border-b border-border bg-primary px-6 py-4 text-center text-sm font-bold uppercase text-primary-foreground">ZeroHours — Complete system</div><div className="p-6 sm:p-10"><div className="flex items-end gap-3"><span className="font-display text-5xl font-extrabold">$29.99</span><span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span></div><ul className="mt-8 grid gap-3 sm:grid-cols-2">{["Anti-procrastination system", "Next-action workflow", "5-Minute Rescue", "Lock-In Mode", "Study Sessions", "Exam Rescue", "Catch-Up Mode", "Academic workspace", "Progress tracking", "Local-first app"].map(x => <li key={x} className="flex items-center gap-2 text-sm font-medium"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" /></span>{x}</li>)}</ul><button onClick={checkout} disabled={checkoutLoading} className="btn-coral mt-9 w-full">{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button><p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No monthly subscription.</p>{checkoutError && <p role="alert" className="mt-5 rounded-md bg-coral-soft p-3 text-center text-sm text-coral-strong">{checkoutError}</p>}</div></div></div>
         </section>
 
         <section id="faq" className="section-shell bg-surface">
@@ -217,7 +230,7 @@ function Index() {
 
       <footer className="border-t border-border bg-background px-4 py-10 sm:px-6"><div className="mx-auto grid max-w-7xl gap-8 sm:grid-cols-2 sm:items-end"><div><div className="flex items-center gap-2 font-display font-extrabold uppercase"><span className="grid size-8 place-items-center rounded-md bg-primary text-primary-foreground"><Zap className="size-4" /></span>ZeroHours</div><p className="mt-3 max-w-sm text-sm text-muted-foreground">Stop staring at the assignment. Start it.</p></div><div className="sm:text-right"><div className="flex flex-wrap gap-4 sm:justify-end">{navItems.map(([label, href]) => <a key={href} className="text-sm font-semibold text-muted-foreground hover:text-foreground" href={href}>{label}</a>)}</div><p className="mt-4 text-xs text-muted-foreground">© 2026 ZeroHours. Digital delivery after purchase.</p></div></div></footer>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 p-3 backdrop-blur-md md:hidden"><button className="btn-primary w-full" onClick={checkout}>Get ZeroHours — $29.99 <ArrowRight /></button></div>
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 p-3 backdrop-blur-md md:hidden"><button className="btn-primary w-full" disabled={checkoutLoading} onClick={checkout}>{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button></div>
     </div>
   );
 }
