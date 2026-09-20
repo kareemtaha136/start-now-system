@@ -2,6 +2,8 @@ export type ZeroHoursEvent =
   | "page_view"
   | "free_guide_click"
   | "free_guide_submit"
+  | "free_guide_download"
+  | "guide_thank_you_view"
   | "pricing_view"
   | "checkout_click"
   | "faq_open"
