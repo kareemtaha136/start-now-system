@@ -7,6 +7,7 @@ import {
   ChevronDown,
   Clock3,
   LockKeyhole,
+  Maximize2,
   Menu,
   Play,
   ShieldCheck,
@@ -75,7 +76,10 @@ function Index() {
   const [guideMessage, setGuideMessage] = useState("");
   const [checkoutError, setCheckoutError] = useState("");
   const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [guideSubmitted, setGuideSubmitted] = useState(false);
   const pricingRef = useRef<HTMLElement>(null);
+  const demoFrameRef = useRef<HTMLDivElement>(null);
+  const demoVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     trackEvent("page_view");
