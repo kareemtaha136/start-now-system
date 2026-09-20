@@ -1,4 +1,5 @@
 import guideAsset from "../assets/zerohours-guide.pdf.asset.json";
+import includedGuideAsset from "../assets/zerohours-included-guide.pdf.asset.json";
 import appAsset from "../assets/zerohours-app.html.asset.json";
 import coursesAsset from "../assets/product/courses.png.asset.json";
 import dashboardAsset from "../assets/product/dashboard.png.asset.json";
@@ -16,6 +17,8 @@ export const productConfig = {
   freeGuideUrl: guideAsset.url,
   /** The ZeroHours app file delivered to buyers after purchase. */
   appDownloadUrl: appAsset.url,
+  /** The full ZeroHours guide PDF included with every purchase. */
+  includedGuideUrl: includedGuideAsset.url,
   demoVideoUrl: demoAsset.url,
   demoPosterUrl: dashboardAsset.url,
   studyPackUrl: "",

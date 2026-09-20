@@ -82,6 +82,7 @@ const styles = {
 
 function PurchaseDeliveryEmail({ orderId }: PurchaseDeliveryProps) {
   const appUrl = `${SITE_URL}${productConfig.appDownloadUrl}`;
+  const includedGuideUrl = `${SITE_URL}${productConfig.includedGuideUrl}`;
   const guideUrl = `${SITE_URL}${productConfig.freeGuideUrl}`;
 
   return (
@@ -104,6 +105,14 @@ function PurchaseDeliveryEmail({ orderId }: PurchaseDeliveryProps) {
               data on your own device. Save the file somewhere you'll find it
               again.
             </Text>
+            <Hr style={styles.hr} />
+            <Text style={styles.text}>
+              Your purchase also includes <strong>The ZeroHours Guide</strong>{" "}
+              (PDF):
+            </Text>
+            <Button href={includedGuideUrl} style={styles.secondaryButton}>
+              Download the ZeroHours Guide
+            </Button>
             <Hr style={styles.hr} />
             <Text style={styles.text}>
               You also have the free guide,{" "}
