@@ -143,9 +143,19 @@ function Index() {
               </div>
               <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription</p>
             </div>
-            <div className="relative mt-10 rounded-xl border border-border bg-card p-2 shadow-soft sm:mt-14 sm:p-4">
-              <MediaPlaceholder label={marketingAssets.hero} className="aspect-[4/3] min-h-0 sm:aspect-[16/9]" />
-              <div className="absolute -bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card px-4 py-2 text-xs font-bold shadow-soft"><span className="size-2 rounded-full bg-coral" /> REAL PRODUCT UI</div>
+            <div className="relative mt-10 overflow-hidden rounded-xl border border-border bg-card p-1.5 shadow-soft sm:mt-14 sm:p-3">
+              <video
+                className="aspect-video w-full rounded-lg bg-ink object-contain"
+                controls
+                playsInline
+                preload="metadata"
+                poster={productConfig.demoPosterUrl}
+                aria-label="ZeroHours product demonstration"
+              >
+                <source src={productConfig.demoVideoUrl} type="video/mp4" />
+                Your browser does not support this video.
+              </video>
+              <div className="pointer-events-none absolute left-4 top-4 flex items-center gap-2 rounded-md border border-border bg-card/95 px-3 py-2 text-xs font-bold shadow-soft sm:left-6 sm:top-6"><span className="size-2 rounded-full bg-coral" /> REAL PRODUCT DEMO</div>
             </div>
             <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
               {["One-time payment", "Instant digital access", "Local-first", "Built for students"].map((item) => <div key={item} className="flex min-h-20 items-center justify-center gap-2 bg-card px-3 text-center text-sm font-semibold"><Check className="size-4 shrink-0 text-primary" />{item}</div>)}
@@ -188,7 +198,7 @@ function Index() {
               {showcaseShots.map((shot) => (
                 <figure key={shot.title} className="showcase-card w-[82vw] max-w-96 shrink-0 snap-center sm:w-auto sm:max-w-none">
                   {shot.src ? (
-                    <img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-[4/3] w-full rounded-t-[inherit] object-cover" />
+                    <img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-video w-full rounded-t-[inherit] bg-background object-contain" />
                   ) : (
                     <MediaPlaceholder label={shot.alt} className="aspect-[4/3] min-h-0" />
                   )}

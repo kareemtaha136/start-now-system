@@ -1,5 +1,12 @@
 import guideAsset from "../assets/zerohours-guide.pdf.asset.json";
 import appAsset from "../assets/zerohours-app.html.asset.json";
+import coursesAsset from "../assets/product/courses.png.asset.json";
+import dashboardAsset from "../assets/product/dashboard.png.asset.json";
+import demoAsset from "../assets/product/demo.mp4.asset.json";
+import lockInAsset from "../assets/product/lock-in.png.asset.json";
+import rescueAsset from "../assets/product/rescue.png.asset.json";
+import studySessionAsset from "../assets/product/study-session.png.asset.json";
+import tasksAsset from "../assets/product/tasks.png.asset.json";
 
 export const productConfig = {
   name: "ZeroHours",
@@ -9,6 +16,8 @@ export const productConfig = {
   freeGuideUrl: guideAsset.url,
   /** The ZeroHours app file delivered to buyers after purchase. */
   appDownloadUrl: appAsset.url,
+  demoVideoUrl: demoAsset.url,
+  demoPosterUrl: dashboardAsset.url,
   studyPackUrl: "",
   examRescueUrl: "",
   offers: {
@@ -41,10 +50,10 @@ export type ShowcaseShot = {
 };
 
 export const showcaseShots: ShowcaseShot[] = [
-  { src: "", alt: "ZeroHours home dashboard", title: "Home dashboard", description: "See your day, your next action, and what needs attention first." },
-  { src: "", alt: "ZeroHours tasks and next action", title: "Tasks & Next Action", description: "Turn vague schoolwork into one clear next move." },
-  { src: "", alt: "ZeroHours Lock-In Mode", title: "Lock-In Mode", description: "Once you start, stay focused and keep the thread." },
-  { src: "", alt: "ZeroHours Study Session Builder", title: "Study Session Builder", description: "Build a focused session around the work in front of you." },
-  { src: "", alt: "ZeroHours Exam Rescue", title: "Exam Rescue", description: "When an exam is close, get a clear plan for what to do next." },
-  { src: "", alt: "ZeroHours academic workspace", title: "Academic workspace", description: "Courses, assignments, exams, notes, and grades in one place." },
+  { src: dashboardAsset.url, alt: "ZeroHours home dashboard showing the recommended next move and upcoming work", title: "Know what to do next", description: "See the work that matters now, the smallest next action, and what is coming up." },
+  { src: tasksAsset.url, alt: "ZeroHours task list ranked by urgency and priority", title: "Put every task in order", description: "Keep active schoolwork together and quickly start the task that needs attention first." },
+  { src: studySessionAsset.url, alt: "ZeroHours Study Session Builder with selected tasks and energy level", title: "Build a realistic study session", description: "Choose your available time, energy level, and the work you want to move forward." },
+  { src: lockInAsset.url, alt: "ZeroHours Lock-In Mode focused on one physics problem set", title: "Lock in on one next action", description: "Give one task your attention with a clear action and a focused timer." },
+  { src: rescueAsset.url, alt: "ZeroHours Rescue screen with procrastination and catch-up options", title: "Recover when you are stuck", description: "Use Rescue or Catch-Up Mode to stop avoiding the work and restart with a concrete move." },
+  { src: coursesAsset.url, alt: "ZeroHours courses overview with class progress, tasks, and exams", title: "Keep schoolwork connected", description: "Organize courses, tasks, exams, notes, and grades in the same academic workspace." },
 ];
