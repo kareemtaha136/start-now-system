@@ -179,13 +179,27 @@ function Index() {
           </div>
         </section>
 
-        <section className="section-shell bg-surface" aria-labelledby="showcase-title">
+        <section className="section-shell bg-surface" aria-labelledby="showcase-title" id="showcase">
           <div className="mx-auto max-w-7xl">
-            <p className="eyebrow">See the system</p><h2 id="showcase-title" className="section-title mt-4">A real workspace for the moments that stop you.</h2>
-            <div className="mt-10 grid gap-8 lg:grid-cols-2">
-              <article><MediaPlaceholder label="Dashboard and Next Action screen" className="aspect-[4/3] min-h-0" /><p className="mt-4 text-lg font-bold">Don't know where to start?</p><p className="mt-1 text-muted-foreground">ZeroHours turns vague schoolwork into one clear next action.</p></article>
-              <article className="lg:mt-20"><MediaPlaceholder label="Lock-In Mode screen" className="aspect-[4/3] min-h-0" /><p className="mt-4 text-lg font-bold">Already started?</p><p className="mt-1 text-muted-foreground">Once you're moving, Lock-In helps you stay focused.</p></article>
+            <p className="eyebrow">See the system</p>
+            <h2 id="showcase-title" className="section-title mt-4 max-w-4xl">A real workspace for the moments that stop you.</h2>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">Every screen below is the actual ZeroHours app — no mockups, no renders.</p>
+            <div className="-mx-4 mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+              {showcaseShots.map((shot) => (
+                <figure key={shot.title} className="showcase-card w-[82vw] max-w-96 shrink-0 snap-center sm:w-auto sm:max-w-none">
+                  {shot.src ? (
+                    <img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-[4/3] w-full rounded-t-[inherit] object-cover" />
+                  ) : (
+                    <MediaPlaceholder label={shot.alt} className="aspect-[4/3] min-h-0 rounded-b-none border-0 border-b border-dashed" />
+                  )}
+                  <figcaption className="p-5">
+                    <p className="font-display text-lg font-bold">{shot.title}</p>
+                    <p className="mt-1 text-sm leading-6 text-muted-foreground">{shot.description}</p>
+                  </figcaption>
+                </figure>
+              ))}
             </div>
+            <div className="mt-8"><button className="btn-primary w-full sm:w-auto" disabled={checkoutLoading} onClick={checkout}>Get ZeroHours — $29.99 <ArrowRight aria-hidden="true" /></button></div>
           </div>
         </section>
 
