@@ -8,3 +8,4 @@
 - [x] Connect emailed delivery after the download file and sender domain are ready
 - [x] Add ZeroHours to payments and wire its checkout
 - [x] Confirm purchase, subscription, and plan-change behavior
+- [x] Add public Privacy Notice, Terms & Conditions, and Refund Policy
