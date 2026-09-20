@@ -56,7 +56,7 @@ function GuideThankYou() {
             <span className="grid size-9 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-5" /></span>
             <div>
               <p className="text-sm font-bold text-ink-foreground">Your guide is on its way.</p>
-              <p className="mt-1 flex items-start gap-1.5 text-sm leading-6 text-ink-muted"><Mail className="mt-1 size-4 shrink-0 text-coral" />Check your inbox — <strong className="text-ink-foreground">ZeroHours — Just Start</strong> usually arrives within a minute.</p>
+              <p className="mt-1 text-sm leading-6 text-ink-muted"><Mail className="mr-1.5 inline size-4 text-coral" />Check your inbox — <strong className="text-ink-foreground">ZeroHours — Just Start</strong> usually arrives within a minute.</p>
               <a href={productConfig.freeGuideUrl} download onClick={() => trackEvent("free_guide_download")} className="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-coral underline underline-offset-4"><Download className="size-4" />Or download it now (PDF)</a>
             </div>
           </div>
