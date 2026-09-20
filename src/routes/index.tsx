@@ -110,12 +110,23 @@ function Index() {
     }
   };
 
-  const submitGuide = (event: FormEvent<HTMLFormElement>) => {
+  const submitGuide = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
+    const email = new FormData(form).get("email");
+    if (typeof email !== "string" || !email) return;
     trackEvent("free_guide_submit");
-    window.open(productConfig.freeGuideUrl, "_blank", "noopener");
-    setGuideSubmitted(true);
-    setGuideMessage("Your guide is downloading now. Email sending isn't connected yet, so your address wasn't saved.");
+    setGuideSending(true);
+    setGuideMessage("");
+    try {
+      await sendGuide({ data: { email } });
+    } catch {
+      // The guide is still delivered on the next page; email may retry later.
+      setGuideMessage("We couldn't email your copy, but you can download it on the next page.");
+    } finally {
+      setGuideSending(false);
+    }
+    await navigate({ to: "/guide/thank-you" });
   };
 
   const openDemoFullscreen = () => {
