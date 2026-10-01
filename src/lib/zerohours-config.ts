@@ -1,6 +1,5 @@
 import guideAsset from "../assets/zerohours-guide.pdf.asset.json";
 import includedGuideAsset from "../assets/zerohours-included-guide.pdf.asset.json";
-import appAsset from "../assets/zerohours-app.html.asset.json";
 import coursesAsset from "../assets/product/courses.png.asset.json";
 import dashboardAsset from "../assets/product/dashboard.png.asset.json";
 import demoAsset from "../assets/product/demo.mp4.asset.json";
@@ -17,8 +16,9 @@ export const productConfig = {
   checkoutPriceId: "zerohours_one_time",
   /** Free lead-magnet PDF (ZeroHours — Just Start). */
   freeGuideUrl: guideAsset.url,
-  /** The ZeroHours app file delivered to buyers after purchase. */
-  appDownloadUrl: appAsset.url,
+  /** Browser access details delivered to buyers after purchase. */
+  appAccessUrl: "https://app.zerohours.store",
+  appAccessCode: "LOCKEDIN2026",
   /** The full ZeroHours guide PDF included with every purchase. */
   includedGuideUrl: includedGuideAsset.url,
   /** Wide (16:9) demo video used on tablet and desktop. */

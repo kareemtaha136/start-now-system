@@ -17,7 +17,7 @@ export function LegalPage({ eyebrow, title, summary, children }: LegalPageProps)
       <div className="border-b border-border bg-ink text-ink-muted">
         <p className="mx-auto flex max-w-5xl items-center justify-center gap-2 px-4 py-2.5 text-center text-xs font-semibold sm:text-sm">
           <Monitor className="size-3.5 shrink-0 text-coral sm:size-4" aria-hidden="true" />
-          <span>ZeroHours is desktop-only right now. Mobile support is coming soon.</span>
+          <span>ZeroHours works on mobile and desktop — open it in your browser.</span>
         </p>
       </div>
       <header className="border-b border-border bg-background">

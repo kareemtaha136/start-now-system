@@ -67,10 +67,10 @@ const faqs: ReadonlyArray<readonly [string, string]> = [
   ["Is ZeroHours a planner?", "Not simply. It includes academic organization, but connects that workload directly to tools for starting and continuing the work."],
   ["How does it help with procrastination?", "It guides you from the reason you are avoiding a task to one useful next action, a five-minute start, and focused continuation."],
   ["Is it a subscription?", "No. ZeroHours is a one-time $29.99 purchase."],
-  ["What do I receive after purchasing?", "Your ZeroHours app package is delivered by email after your payment is confirmed."],
-  ["Does it work on mobile and desktop?", "ZeroHours is currently available on desktop only. Mobile support is coming soon."],
+  ["What do I receive after purchasing?", "You'll get the ZeroHours access link and code by email after payment. Open the link in any browser, enter the code once, and you're unlocked on that device. No download or install needed."],
+  ["Does it work on mobile and desktop?", "Yes. ZeroHours works on mobile and desktop, right in your browser."],
   ["Is my data private?", "ZeroHours uses local-first data storage, keeping your working data on your device. Import and export tools help you manage your own copy."],
-  ["Do I need an account?", "No. ZeroHours is a one-time purchase and your download link is sent to the email used at checkout."],
+  ["Do I need an account?", "No. After your one-time purchase, we email you the access link and code. Enter the code once on your device to unlock ZeroHours there permanently."],
   ["Can I use it for different classes?", "Yes. Courses, assignments, exams, notes, reading, schedules, and grades can be organized across classes."],
   ["What if I'm already behind?", "Catch-Up Mode, Deadline Rescue, and Exam Rescue are designed to help you regain clarity and choose what to do next."],
 ];
@@ -149,7 +149,7 @@ function Index() {
       <div className="border-b border-border/80 bg-ink text-ink-muted">
         <p className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2.5 text-center text-xs font-semibold sm:px-6 sm:text-sm">
           <Monitor className="size-3.5 shrink-0 text-coral sm:size-4" aria-hidden="true" />
-          <span>ZeroHours is desktop-only right now. Mobile support is coming soon.</span>
+          <span>ZeroHours works on mobile and desktop — open it in your browser.</span>
         </p>
       </div>
       <header className="sticky top-0 z-50 border-b border-border/80 bg-background/95 backdrop-blur-md">
@@ -178,7 +178,7 @@ function Index() {
                 <button onClick={checkout} disabled={checkoutLoading} className="btn-primary w-full sm:w-auto">{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight aria-hidden="true" /></button>
                 <a href="#guide" onClick={() => trackEvent("free_guide_click")} className="btn-secondary w-full sm:w-auto">Get the free guide</a>
               </div>
-              <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription</p>
+              <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription • Works in your browser, no install needed</p>
             </div>
             <div className="mt-10 sm:mt-14">
               <ResponsiveMedia
@@ -314,7 +314,7 @@ function Index() {
         </section>
 
         <section id="pricing" ref={pricingRef} className="section-shell">
-          <div className="mx-auto max-w-5xl"><div className="text-center"><p className="eyebrow">Simple pricing</p><h2 className="section-title mt-4">Start getting your work moving.</h2></div><div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-xl border border-primary bg-card shadow-strong"><div className="border-b border-border bg-primary px-6 py-4 text-center text-sm font-bold uppercase text-primary-foreground">ZeroHours — Complete system</div><div className="p-6 sm:p-10"><div className="flex items-end gap-3"><span className="font-display text-5xl font-extrabold">$29.99</span><span className="pb-1.5 font-display text-xl font-bold text-muted-foreground line-through">$39.99</span><span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span></div><ul className="mt-8 grid gap-3 sm:grid-cols-2">{["Anti-procrastination system", "Next-action workflow", "5-Minute Rescue", "Lock-In Mode", "Study Sessions", "Exam Rescue", "Catch-Up Mode", "Academic workspace", "Progress tracking", "Local-first app"].map(x => <li key={x} className="flex items-center gap-2 text-sm font-medium"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" /></span>{x}</li>)}</ul><button onClick={checkout} disabled={checkoutLoading} className="btn-coral mt-9 w-full">{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button><p className="mt-4 flex items-center justify-center gap-1.5 rounded-md bg-surface px-3 py-2 text-center text-xs font-semibold text-foreground"><Monitor className="size-3.5 shrink-0" aria-hidden="true" />Desktop only right now. Mobile support is coming soon.</p><p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No monthly subscription.</p>{checkoutError && <p role="alert" className="mt-5 rounded-md bg-coral-soft p-3 text-center text-sm text-coral-strong">{checkoutError}</p>}</div></div></div>
+          <div className="mx-auto max-w-5xl"><div className="text-center"><p className="eyebrow">Simple pricing</p><h2 className="section-title mt-4">Start getting your work moving.</h2></div><div className="mx-auto mt-10 max-w-2xl overflow-hidden rounded-xl border border-primary bg-card shadow-strong"><div className="border-b border-border bg-primary px-6 py-4 text-center text-sm font-bold uppercase text-primary-foreground">ZeroHours — Complete system</div><div className="p-6 sm:p-10"><div className="flex items-end gap-3"><span className="font-display text-5xl font-extrabold">$29.99</span><span className="pb-1.5 font-display text-xl font-bold text-muted-foreground line-through">$39.99</span><span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span></div><ul className="mt-8 grid gap-3 sm:grid-cols-2">{["Anti-procrastination system", "Next-action workflow", "5-Minute Rescue", "Lock-In Mode", "Study Sessions", "Exam Rescue", "Catch-Up Mode", "Academic workspace", "Progress tracking", "Local-first app"].map(x => <li key={x} className="flex items-center gap-2 text-sm font-medium"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" /></span>{x}</li>)}</ul><button onClick={checkout} disabled={checkoutLoading} className="btn-coral mt-9 w-full">{checkoutLoading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button><p className="mt-4 flex items-center justify-center gap-1.5 rounded-md bg-surface px-3 py-2 text-center text-xs font-semibold text-foreground"><Monitor className="size-3.5 shrink-0" aria-hidden="true" />Works on mobile and desktop in your browser. No install needed.</p><p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No monthly subscription.</p>{checkoutError && <p role="alert" className="mt-5 rounded-md bg-coral-soft p-3 text-center text-sm text-coral-strong">{checkoutError}</p>}</div></div></div>
         </section>
 
         <section id="faq" className="section-shell bg-surface">

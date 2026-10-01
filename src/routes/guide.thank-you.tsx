@@ -79,7 +79,7 @@ function GuideThankYou() {
                 ))}
               </ul>
               <button onClick={buy} disabled={loading} className="btn-coral mt-7 w-full">{loading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button>
-              <p className="mt-4 flex items-center justify-center gap-1.5 rounded-md bg-surface px-3 py-2 text-center text-xs font-semibold text-foreground"><Monitor className="size-3.5 shrink-0" aria-hidden="true" />Desktop only right now. Mobile support is coming soon.</p>
+              <p className="mt-4 flex items-center justify-center gap-1.5 rounded-md bg-surface px-3 py-2 text-center text-xs font-semibold text-foreground"><Monitor className="size-3.5 shrink-0" aria-hidden="true" />Works on mobile and desktop in your browser. No install needed.</p>
               <p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No subscription. Delivered by email.</p>
               {error && <p role="alert" className="mt-4 rounded-md bg-coral-soft p-3 text-center text-sm text-coral-strong">{error}</p>}
             </div>
@@ -131,7 +131,7 @@ function GuideThankYou() {
               ))}
             </ul>
             <button onClick={buy} disabled={loading} className="btn-coral mt-9 w-full">{loading ? "Opening checkout…" : "Get ZeroHours — $29.99"} <ArrowRight /></button>
-            <p className="mt-4 flex items-center justify-center gap-1.5 rounded-md bg-surface px-3 py-2 text-center text-xs font-semibold text-foreground"><Monitor className="size-3.5 shrink-0" aria-hidden="true" />Desktop only right now. Mobile support is coming soon.</p>
+            <p className="mt-4 flex items-center justify-center gap-1.5 rounded-md bg-surface px-3 py-2 text-center text-xs font-semibold text-foreground"><Monitor className="size-3.5 shrink-0" aria-hidden="true" />Works on mobile and desktop in your browser. No install needed.</p>
             <p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No monthly subscription. Delivered by email.</p>
             {error && <p role="alert" className="mt-5 rounded-md bg-coral-soft p-3 text-center text-sm text-coral-strong">{error}</p>}
             <Link to="/" className="mt-4 block text-center text-sm font-semibold text-muted-foreground underline underline-offset-4 hover:text-foreground">No thanks — just the free guide</Link>

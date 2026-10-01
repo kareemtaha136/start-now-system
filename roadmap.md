@@ -16,4 +16,5 @@
 - [x] Sender switched to mail@zerohours.store on all 3 templates
 - [x] Built the Day 2 / 4 / 7 follow-up sequence in-app (daily scheduled job sends Brevo templates 1/2/3 to consented, non-buying leads)
 - [x] Replace the opening video with a student laptop image and move the demo below the screenshot gallery
+- [x] Update mobile support messaging and switch purchase delivery from app file to browser link and code
 - [ ] Publish so guide delivery emails send from the live site

@@ -30,18 +30,18 @@ function TermsPage() {
       <section>
         <h2>1. Seller and acceptance</h2>
         <p>ZeroHours is sold by <strong>Arrow Wilder, trading as ZeroHours</strong> (“ZeroHours,” “we,” “us,” or “our”). You are contracting with Arrow Wilder for the digital product and related services described here.</p>
-        <p>By purchasing, downloading, accessing, or continuing to use ZeroHours, you agree to these Terms &amp; Conditions and the <Link to="/privacy">Privacy Notice</Link>. If you do not agree, do not use the product. If you purchase or use ZeroHours for an organization, you confirm that you have authority to bind it. You must be legally able to enter this agreement or have permission from a parent or guardian where required.</p>
+        <p>By purchasing, accessing, or continuing to use ZeroHours, you agree to these Terms &amp; Conditions and the <Link to="/privacy">Privacy Notice</Link>. If you do not agree, do not use the product. If you purchase or use ZeroHours for an organization, you confirm that you have authority to bind it. You must be legally able to enter this agreement or have permission from a parent or guardian where required.</p>
       </section>
 
       <section>
         <h2>2. What ZeroHours provides</h2>
-        <p>ZeroHours is a downloadable, local-first academic organization and execution tool for students. It includes workflows for tasks, courses, assignments, exams, schedules, notes, reading, grades, study sessions, focus, progress, review, and recovery from procrastination.</p>
+        <p>ZeroHours is a browser-based, local-first academic organization and execution tool for students. It works on mobile and desktop without a download or install. It includes workflows for tasks, courses, assignments, exams, schedules, notes, reading, grades, study sessions, focus, progress, review, and recovery from procrastination.</p>
         <p>ZeroHours is a productivity aid, not medical, mental-health, educational, or professional advice. It does not guarantee grades, academic outcomes, focus, or freedom from procrastination. You remain responsible for your decisions, deadlines, schoolwork, backups, and use of the product.</p>
       </section>
 
       <section>
         <h2>3. License and ownership</h2>
-        <p>After a valid purchase, we grant you a limited, personal, non-exclusive, non-transferable, and revocable license to use your copy of ZeroHours for your own lawful purposes. The product is licensed, not sold, except for ownership of the physical or digital copy delivered to you where applicable.</p>
+        <p>After a valid purchase, we grant you a limited, personal, non-exclusive, non-transferable, and revocable license to use ZeroHours for your own lawful purposes. The product is licensed, not sold.</p>
         <p>Arrow Wilder retains all rights in ZeroHours, including its software, design, workflows, text, documentation, graphics, branding, and other intellectual property. These terms do not transfer ownership of that intellectual property to you.</p>
         <p>You may create, enter, and export your own content. You retain your rights in that content and grant us only the limited rights needed to process content you deliberately send to us for support or service delivery.</p>
       </section>
@@ -55,7 +55,7 @@ function TermsPage() {
           <li>probe, disrupt, overload, bypass, or interfere with security or technical limits;</li>
           <li>scrape the website or use automated access in a way that burdens or damages the service;</li>
           <li>reverse engineer, decompile, or attempt to extract source code except where applicable law expressly permits it;</li>
-          <li>copy, resell, sublicense, redistribute, publish, or commercially exploit the product or download link;</li>
+          <li>copy, resell, sublicense, redistribute, publish, or commercially exploit the product or access details;</li>
           <li>remove ownership notices or misrepresent ZeroHours as your own product; or</li>
           <li>infringe intellectual-property, privacy, or other legal rights.</li>
         </ul>
@@ -66,7 +66,7 @@ function TermsPage() {
         <p>ZeroHours is currently offered for a one-time price shown before checkout. There is no recurring subscription for the core product. Any future optional product will be clearly described and priced separately before purchase.</p>
         <p><strong>Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.</strong></p>
         <p>Payment, billing, applicable tax, cancellation, and refund mechanics are governed by <a href="https://www.paddle.com/legal/checkout-buyer-terms" rel="noreferrer">Paddle’s Buyer Terms</a> together with our <Link to="/refund-policy">Refund Policy</Link>. You must provide accurate purchase and delivery information.</p>
-        <p>Digital delivery is sent to the email address used at checkout and may also be made available immediately after a confirmed purchase. You are responsible for entering a working email address and keeping your delivered files and exported data backed up.</p>
+        <p>Your access link and code are sent to the email address used at checkout and may also be shown immediately after a confirmed purchase. Open the link in any browser, enter the code once, and ZeroHours unlocks permanently on that device without an install or repeat entry. You are responsible for entering a working email address and keeping your exported data backed up.</p>
       </section>
 
       <section>
@@ -78,7 +78,7 @@ function TermsPage() {
       <section>
         <h2>7. Suspension and termination</h2>
         <p>We may suspend delivery, support, access, or a license when reasonably necessary because of a material breach, non-payment or reversed payment, suspected fraud or security risk, unlawful use, or repeated or serious violations of these terms. Where practical, we will provide notice and an opportunity to correct the issue.</p>
-        <p>You may stop using ZeroHours at any time. On termination, your license ends and you must stop using and distributing the product. Terms that by their nature should continue—including ownership, liability, and dispute provisions—remain in effect. Local data stays on your device unless you delete it.</p>
+        <p>You may stop using ZeroHours at any time. On termination, your license ends and you must stop using the product. Terms that by their nature should continue—including ownership, liability, and dispute provisions—remain in effect. Local data stays on your device unless you delete it.</p>
       </section>
 
       <section>
