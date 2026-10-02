@@ -1,25 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import mobileVideo from "../assets/product/mobile-showcase.webm.asset.json";
+import mobileVideoFallback from "../assets/product/mobile-showcase-compatible.mp4.asset.json";
 import mobilePoster from "../assets/product/mobile-showcase-poster.jpg.asset.json";
 
 type PhoneSlide = {
   type: "image" | "video";
   src: string;
   poster?: string;
+  fallbackSrc?: string;
   caption: string;
 };
 
 // Replace a slot's type and src when its portrait media is ready.
 const phoneSlides: PhoneSlide[] = [
-  { type: "video", src: mobileVideo.url, poster: mobilePoster.url, caption: "Tell it what you're avoiding. Get one tiny next step." },
+  { type: "video", src: mobileVideo.url, fallbackSrc: mobileVideoFallback.url, poster: mobilePoster.url, caption: "Tell it what you're avoiding. Get one tiny next step." },
   { type: "image", src: "", caption: "Lock in with a focus timer." },
   { type: "image", src: "", caption: "Panic mode: exam in 3 days? Here's your plan." },
 ];
 
 type PhoneMockupProps = PhoneSlide & { index: number };
 
-export function PhoneMockup({ type, src, poster, caption, index }: PhoneMockupProps) {
+export function PhoneMockup({ type, src, fallbackSrc, poster, caption, index }: PhoneMockupProps) {
   const screenRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [near, setNear] = useState(false);
@@ -68,7 +70,10 @@ export function PhoneMockup({ type, src, poster, caption, index }: PhoneMockupPr
         <span className="phone-side-button phone-side-button-right" aria-hidden="true" />
         <div ref={screenRef} className="phone-screen">
           {src ? type === "video" ? (
-            <video ref={videoRef} src={near ? src : undefined} poster={poster} onCanPlay={playWhenReady} autoPlay muted loop playsInline preload="metadata" className="phone-media" aria-label={caption} />
+            <video ref={videoRef} poster={poster} onCanPlay={playWhenReady} autoPlay muted loop playsInline preload="metadata" className="phone-media" aria-label={caption}>
+              <source src={near ? src : undefined} type={src.endsWith(".webm") ? "video/webm" : "video/mp4"} />
+              {fallbackSrc && <source src={near ? fallbackSrc : undefined} type="video/mp4" />}
+            </video>
           ) : (
             <img src={src} alt={caption} loading="lazy" className="phone-media" />
           ) : (
