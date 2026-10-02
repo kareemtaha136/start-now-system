@@ -239,17 +239,20 @@
   .phone-empty-number { font-family: var(--font-display); font-size: 3.5rem; font-weight: 800; color: var(--color-ink-muted); }
   .phone-empty-rule { width: 2rem; height: 2px; background: var(--color-coral); }
   .phone-caption { min-height: 3.5rem; margin: 1.25rem auto 0; max-width: 18rem; text-align: center; font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; line-height: 1.45; }
-  .phone-slide:not([data-active="true"]) .phone-caption { visibility: hidden; }
+  @media (max-width: 639px) {
+    .phone-slide:not([data-active="true"]) .phone-caption { visibility: hidden; }
+  }
   .phone-dots { display: flex; align-items: center; justify-content: center; gap: 0.15rem; }
   .phone-dot-button { height: 2.5rem; width: 2.5rem; border-radius: 100%; padding: 0; }
   .phone-dot { display: block; height: 0.45rem; width: 0.45rem; border-radius: 100%; background: var(--color-muted-foreground); transition: width .2s ease, background .2s ease; }
   .phone-dot-active { width: 1.15rem; border-radius: 100px; background: var(--color-primary); }
   @media (min-width: 640px) {
-    .phone-track { justify-content: center; gap: 2rem; overflow: visible; padding: 2rem 0; scroll-snap-type: none; }
-    .phone-slide { flex: 0 1 15rem; }
-    .phone-slide:nth-child(2) { flex-basis: 17rem; transform: translateY(-1.5rem); }
-    .phone-slide:not([data-active="true"]) .phone-caption { visibility: visible; }
+    .phone-track { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); justify-items: center; gap: 2rem 1rem; overflow: visible; padding: 1rem 0; scroll-snap-type: none; }
+    .phone-slide { width: min(100%, 15rem); }
     .phone-dots { display: none; }
+  }
+  @media (min-width: 1024px) {
+    .phone-track { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.5rem 1.5rem; }
   }
 
   /* Mobile-first media card. Desktop values match the previous inline styling. */

@@ -3,6 +3,11 @@ import { Button } from "./ui/button";
 import mobileVideo from "../assets/product/mobile-showcase.webm.asset.json";
 import mobileVideoFallback from "../assets/product/mobile-showcase-compatible.mp4.asset.json";
 import mobilePoster from "../assets/product/mobile-showcase-poster.jpg.asset.json";
+import phoneHome from "../assets/product/phone-9292.png.asset.json";
+import phoneTasks from "../assets/product/phone-9293.png.asset.json";
+import phoneStudy from "../assets/product/phone-9294.png.asset.json";
+import phoneRescue from "../assets/product/phone-9296.png.asset.json";
+import phoneCourses from "../assets/product/phone-9297.png.asset.json";
 
 type PhoneSlide = {
   type: "image" | "video";
@@ -12,11 +17,14 @@ type PhoneSlide = {
   caption: string;
 };
 
-// Replace a slot's type and src when its portrait media is ready.
+// Portrait media lives here, independently of the desktop gallery.
 const phoneSlides: PhoneSlide[] = [
-  { type: "video", src: mobileVideo.url, fallbackSrc: mobileVideoFallback.url, poster: mobilePoster.url, caption: "Tell it what you're avoiding. Get one tiny next step." },
-  { type: "image", src: "", caption: "Lock in with a focus timer." },
-  { type: "image", src: "", caption: "Panic mode: exam in 3 days? Here's your plan." },
+  { type: "image", src: phoneHome.url, caption: "See your next move and start a lock-in session." },
+  { type: "video", src: mobileVideo.url, fallbackSrc: mobileVideoFallback.url, poster: mobilePoster.url, caption: "See ZeroHours in action on your phone." },
+  { type: "image", src: phoneTasks.url, caption: "Keep your tasks in view." },
+  { type: "image", src: phoneStudy.url, caption: "Plan a study session that fits your work." },
+  { type: "image", src: phoneRescue.url, caption: "Find a way forward when you're stuck." },
+  { type: "image", src: phoneCourses.url, caption: "Keep your courses together." },
 ];
 
 type PhoneMockupProps = PhoneSlide & { index: number };
@@ -113,8 +121,16 @@ export function PhoneShowcase() {
     setActive(nearest.index);
   };
 
+  const goToSlide = (index: number) => {
+    const track = trackRef.current;
+    const slide = track?.querySelectorAll<HTMLElement>(".phone-slide")[index];
+    if (!track || !slide) return;
+    track.scrollTo({ left: slide.offsetLeft - track.offsetLeft - (track.clientWidth - slide.clientWidth) / 2, behavior: "instant" });
+    setActive(index);
+  };
+
   return (
-    <div className="phone-showcase" aria-label="ZeroHours mobile showcase">
+    <div className="phone-showcase" aria-label="ZeroHours mobile screens and walkthrough">
       <div ref={trackRef} onScroll={updateActive} className="phone-track">
         {phoneSlides.map((slide, index) => (
           <div className="phone-slide" data-active={active === index} key={index}>
@@ -132,7 +148,7 @@ export function PhoneShowcase() {
             aria-label={`Show phone preview ${index + 1}`}
             aria-current={active === index ? "true" : undefined}
             className="phone-dot-button"
-            onClick={() => trackRef.current?.querySelectorAll<HTMLElement>(".phone-slide")[index]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })}
+            onClick={() => goToSlide(index)}
           >
             <span className={`phone-dot ${active === index ? "phone-dot-active" : ""}`} />
           </Button>
