@@ -125,7 +125,7 @@ export function PhoneShowcase() {
     const track = trackRef.current;
     const slide = track?.querySelectorAll<HTMLElement>(".phone-slide")[index];
     if (!track || !slide) return;
-    track.scrollTo({ left: slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2, behavior: "smooth" });
+    track.scrollTo({ left: slide.offsetLeft - track.offsetLeft - (track.clientWidth - slide.clientWidth) / 2, behavior: "instant" });
     setActive(index);
   };
 
