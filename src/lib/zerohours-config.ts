@@ -55,22 +55,16 @@ export const marketingAssets = {
   },
   problem: {
     src: tasksAsset.url,
-    mobileSrc: "",
-    mobileRatio: "4 / 5",
     alt: "ZeroHours task list showing schoolwork ordered by urgency and priority",
     caption: "Every assignment in one ordered list.",
   },
   transformation: {
     src: lockInAsset.url,
-    mobileSrc: "",
-    mobileRatio: "4 / 5",
     alt: "ZeroHours Lock-In Mode turning a difficult assignment into one focused next action",
     caption: "Lock-In Mode turns the assignment into one move.",
   },
   features: {
     src: rescueAsset.url,
-    mobileSrc: "",
-    mobileRatio: "4 / 5",
     alt: "ZeroHours Rescue screen offering practical ways to restart when work feels stuck",
     caption: "Rescue gets you moving again when you stall.",
   },
