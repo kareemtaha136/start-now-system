@@ -171,6 +171,7 @@ function Index() {
               </div>
               <p className="mt-3 text-sm font-medium text-muted-foreground">One-time purchase • No subscription • Works in your browser, no install needed</p>
             </div>
+            <div className="mx-auto mt-10 w-full max-w-60 sm:hidden"><PhoneMockup {...phoneMedia.home} index={0} /></div>
             <div className="mt-10 hidden sm:mt-14 sm:block">
               <ResponsiveMedia
                 desktopSrc={marketingAssets.hero.src}
@@ -296,7 +297,7 @@ function Index() {
         </section>
 
         <section className="section-shell">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div className="mx-auto w-full max-w-60 sm:hidden"><PhoneMockup {...phoneMedia.home} index={0} /></div><div className="hidden sm:block"><ResponsiveMedia desktopSrc={marketingAssets.transformation.src} mobileSrc={marketingAssets.transformation.mobileSrc} mobileRatio={marketingAssets.transformation.mobileRatio} alt={marketingAssets.transformation.alt} caption={marketingAssets.transformation.caption} /></div><div><p className="eyebrow">The shift</p><h2 className="section-title mt-4"><span className="text-muted-foreground">From: “I'll do it later.”</span><span className="mt-3 block">To: “I'm already started.”</span></h2><div className="mt-8 grid grid-cols-2 gap-3">{["Overwhelm", "Clarity", "Small action", "Momentum"].map((x,i) => <div key={x} className={`rounded-lg border p-4 font-bold ${i === 3 ? "border-coral bg-coral-soft text-coral-strong" : "border-border bg-card"}`}>{String(i+1).padStart(2,"0")}<span className="mt-7 block text-sm">{x}</span></div>)}</div></div></div>
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div className="hidden sm:block"><ResponsiveMedia desktopSrc={marketingAssets.transformation.src} mobileSrc={marketingAssets.transformation.mobileSrc} mobileRatio={marketingAssets.transformation.mobileRatio} alt={marketingAssets.transformation.alt} caption={marketingAssets.transformation.caption} /></div><div><p className="eyebrow">The shift</p><h2 className="section-title mt-4"><span className="text-muted-foreground">From: “I'll do it later.”</span><span className="mt-3 block">To: “I'm already started.”</span></h2><div className="mt-8 grid grid-cols-2 gap-3">{["Overwhelm", "Clarity", "Small action", "Momentum"].map((x,i) => <div key={x} className={`rounded-lg border p-4 font-bold ${i === 3 ? "border-coral bg-coral-soft text-coral-strong" : "border-border bg-card"}`}>{String(i+1).padStart(2,"0")}<span className="mt-7 block text-sm">{x}</span></div>)}</div></div></div>
         </section>
 
         <section className="section-shell bg-surface">

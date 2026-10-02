@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
 import mobileVideo from "../assets/product/phone-walkthrough-clear.webm.asset.json";
-import mobileVideoFallback from "../assets/product/mobile-showcase-compatible.mp4.asset.json";
+import mobileVideoFallback from "../assets/product/phone-walkthrough-clear.mp4.asset.json";
 import mobilePoster from "../assets/product/phone-walkthrough-poster.jpg.asset.json";
 import phoneHome from "../assets/product/phone-9292.png.asset.json";
 import phoneTasks from "../assets/product/phone-9293.png.asset.json";
