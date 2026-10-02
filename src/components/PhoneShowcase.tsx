@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
-import mobileVideo from "../assets/product/mobile-showcase-compatible.mp4.asset.json";
+import mobileVideo from "../assets/product/mobile-showcase.webm.asset.json";
 import mobilePoster from "../assets/product/mobile-showcase-poster.jpg.asset.json";
 
 type PhoneSlide = {
