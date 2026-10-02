@@ -54,6 +54,13 @@ export function PhoneMockup({ type, src, poster, caption, index }: PhoneMockupPr
     }
   }, [visible, near]);
 
+  const playWhenReady = () => {
+    const video = videoRef.current;
+    if (video && visible && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      void video.play().catch(() => {});
+    }
+  };
+
   return (
     <figure className="phone-figure">
       <div className="phone-shell" aria-label={src ? caption : `Preview slot ${index + 1}`}>
@@ -61,7 +68,7 @@ export function PhoneMockup({ type, src, poster, caption, index }: PhoneMockupPr
         <span className="phone-side-button phone-side-button-right" aria-hidden="true" />
         <div ref={screenRef} className="phone-screen">
           {src ? type === "video" ? (
-            <video ref={videoRef} src={near ? src : undefined} poster={poster} autoPlay muted loop playsInline preload="metadata" className="phone-media" aria-label={caption} />
+            <video ref={videoRef} src={near ? src : undefined} poster={poster} onCanPlay={playWhenReady} autoPlay muted loop playsInline preload="metadata" className="phone-media" aria-label={caption} />
           ) : (
             <img src={src} alt={caption} loading="lazy" className="phone-media" />
           ) : (
