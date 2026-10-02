@@ -227,7 +227,7 @@ function Index() {
           <div className="mx-auto max-w-7xl">
             <p className="eyebrow">See the system</p>
             <h2 id="showcase-title" className="section-title mt-4 max-w-4xl">A real workspace for the moments that stop you.</h2>
-             <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground hidden sm:block">Every screen below is the actual ZeroHours app — no mockups, no renders.</p>
+              <p className="mt-5 hidden max-w-2xl text-lg leading-8 text-muted-foreground sm:block">See the actual ZeroHours app on desktop and mobile.</p>
              <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground sm:hidden">A closer look at ZeroHours on your phone.</p>
              <div className="mt-8 sm:hidden"><PhoneShowcase /></div>
              <div className="-mx-2 mt-8 hidden gap-5 sm:mx-0 sm:mt-10 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
@@ -268,6 +268,13 @@ function Index() {
                 className="sm:rounded-xl"
                />
             </div>
+             <div className="mt-14 hidden border-t border-border pt-10 sm:block sm:pt-12">
+               <div className="mb-6 max-w-3xl">
+                 <p className="eyebrow">On your phone</p>
+                 <h3 className="mt-3 font-display text-2xl font-extrabold uppercase sm:text-3xl">ZeroHours goes with you.</h3>
+               </div>
+               <PhoneShowcase />
+             </div>
             <div className="mt-8"><button className="btn-primary w-full sm:w-auto" disabled={checkoutLoading} onClick={checkout}>Get ZeroHours — $29.99 <ArrowRight aria-hidden="true" /></button></div>
           </div>
         </section>
