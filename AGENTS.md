@@ -10,4 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Keep purchased-app access URL and code centralized in the product configuration so the purchase page and delivery email cannot drift apart; PDF guides remain separate downloadable assets.
-- Keep phone-only portrait showcase media in PhoneShowcase's slide configuration while preserving the existing desktop gallery and walkthrough separately, because widescreen desktop captures should never be cropped into phone frames.
+- Keep portrait showcase media in PhoneShowcase's slide configuration, show each phone screen once on mobile, and preserve the desktop-only gallery, marketing screenshots, and walkthrough separately; this prevents repetition and widescreen captures appearing on phones.
