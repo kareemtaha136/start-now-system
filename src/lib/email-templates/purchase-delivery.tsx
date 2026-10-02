@@ -167,6 +167,10 @@ function PurchaseDeliveryEmail({ orderId }: PurchaseDeliveryProps) {
               </Text>
             </Section>
             <Hr style={styles.hr} />
+            <Text style={styles.text}>
+              Your purchase also includes <strong>The ZeroHours Guide</strong>{" "}
+              (PDF):
+            </Text>
             <Button href={includedGuideUrl} style={styles.secondaryButton}>
               Download the ZeroHours Guide
             </Button>
