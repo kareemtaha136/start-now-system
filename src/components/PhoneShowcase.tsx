@@ -26,6 +26,13 @@ export function PhoneMockup({ type, src, fallbackSrc, poster, caption, index }: 
   const videoRef = useRef<HTMLVideoElement>(null);
   const [near, setNear] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [videoSource, setVideoSource] = useState("");
+
+  useEffect(() => {
+    if (!near || type !== "video" || !src) return;
+    const probe = document.createElement("video");
+    setVideoSource(fallbackSrc && !probe.canPlayType("video/webm; codecs=vp9") ? fallbackSrc : src);
+  }, [near, type, src, fallbackSrc]);
 
   useEffect(() => {
     const screen = screenRef.current;
@@ -70,10 +77,7 @@ export function PhoneMockup({ type, src, fallbackSrc, poster, caption, index }: 
         <span className="phone-side-button phone-side-button-right" aria-hidden="true" />
         <div ref={screenRef} className="phone-screen">
           {src ? type === "video" ? (
-            <video ref={videoRef} poster={poster} onCanPlay={playWhenReady} autoPlay muted loop playsInline preload="metadata" className="phone-media" aria-label={caption}>
-              <source src={near ? src : undefined} type={src.endsWith(".webm") ? "video/webm" : "video/mp4"} />
-              {fallbackSrc && <source src={near ? fallbackSrc : undefined} type="video/mp4" />}
-            </video>
+            <video ref={videoRef} src={videoSource || undefined} poster={poster} onCanPlay={playWhenReady} autoPlay muted loop playsInline preload="metadata" className="phone-media" aria-label={caption} />
           ) : (
             <img src={src} alt={caption} loading="lazy" className="phone-media" />
           ) : (
