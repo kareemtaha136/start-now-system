@@ -53,6 +53,21 @@ export const marketingAssets = {
     alt: "Student using ZeroHours on a laptop at a clean study desk",
     caption: "ZeroHours open and ready for the next move.",
   },
+  problem: {
+    src: tasksAsset.url,
+    alt: "ZeroHours task list showing schoolwork ordered by urgency and priority",
+    caption: "Every assignment in one ordered list.",
+  },
+  transformation: {
+    src: lockInAsset.url,
+    alt: "ZeroHours Lock-In Mode turning a difficult assignment into one focused next action",
+    caption: "Lock-In Mode turns the assignment into one move.",
+  },
+  features: {
+    src: rescueAsset.url,
+    alt: "ZeroHours Rescue screen offering practical ways to restart when work feels stuck",
+    caption: "Rescue gets you moving again when you stall.",
+  },
 } as const;
 
 /**
