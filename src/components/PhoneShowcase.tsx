@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
-import mobileVideo from "../assets/product/mobile-showcase.webm.asset.json";
-import mobileVideoFallback from "../assets/product/mobile-showcase-compatible.mp4.asset.json";
-import mobilePoster from "../assets/product/mobile-showcase-poster.jpg.asset.json";
+import mobileVideo from "../assets/product/phone-walkthrough-clear.mp4.asset.json";
+import mobilePoster from "../assets/product/phone-walkthrough-poster.jpg.asset.json";
 import phoneHome from "../assets/product/phone-9292.png.asset.json";
 import phoneTasks from "../assets/product/phone-9293.png.asset.json";
 import phoneStudy from "../assets/product/phone-9294.png.asset.json";
@@ -17,15 +16,18 @@ type PhoneSlide = {
   caption: string;
 };
 
-// Portrait media lives here, independently of the desktop gallery.
-const phoneSlides: PhoneSlide[] = [
-  { type: "image", src: phoneHome.url, caption: "See your next move and start a lock-in session." },
-  { type: "video", src: mobileVideo.url, fallbackSrc: mobileVideoFallback.url, poster: mobilePoster.url, caption: "See ZeroHours in action on your phone." },
-  { type: "image", src: phoneTasks.url, caption: "Keep your tasks in view." },
-  { type: "image", src: phoneStudy.url, caption: "Plan a study session that fits your work." },
-  { type: "image", src: phoneRescue.url, caption: "Find a way forward when you're stuck." },
-  { type: "image", src: phoneCourses.url, caption: "Keep your courses together." },
-];
+// All portrait media lives here. The mobile page places each image only once.
+export const phoneMedia = {
+  home: { type: "image", src: phoneHome.url, caption: "See your next move and start a lock-in session." },
+  video: { type: "video", src: mobileVideo.url, poster: mobilePoster.url, caption: "Watch ZeroHours in action on your phone." },
+  tasks: { type: "image", src: phoneTasks.url, caption: "Keep your tasks in view." },
+  study: { type: "image", src: phoneStudy.url, caption: "Plan a study session that fits your work." },
+  rescue: { type: "image", src: phoneRescue.url, caption: "Find a way forward when you're stuck." },
+  courses: { type: "image", src: phoneCourses.url, caption: "Keep your courses together." },
+} satisfies Record<string, PhoneSlide>;
+
+const desktopSlides: PhoneSlide[] = Object.values(phoneMedia);
+const mobileSlides: PhoneSlide[] = [phoneMedia.video, phoneMedia.study, phoneMedia.courses];
 
 type PhoneMockupProps = PhoneSlide & { index: number };
 
@@ -104,9 +106,10 @@ export function PhoneMockup({ type, src, fallbackSrc, poster, caption, index }: 
   );
 }
 
-export function PhoneShowcase() {
+export function PhoneShowcase({ mobileGallery = false }: { mobileGallery?: boolean }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const phoneSlides = mobileGallery ? mobileSlides : desktopSlides;
 
   const updateActive = () => {
     const track = trackRef.current;
