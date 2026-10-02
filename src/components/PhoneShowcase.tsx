@@ -121,6 +121,14 @@ export function PhoneShowcase() {
     setActive(nearest.index);
   };
 
+  const goToSlide = (index: number) => {
+    const track = trackRef.current;
+    const slide = track?.querySelectorAll<HTMLElement>(".phone-slide")[index];
+    if (!track || !slide) return;
+    track.scrollTo({ left: slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2, behavior: "smooth" });
+    setActive(index);
+  };
+
   return (
     <div className="phone-showcase" aria-label="ZeroHours mobile screens and walkthrough">
       <div ref={trackRef} onScroll={updateActive} className="phone-track">
@@ -140,7 +148,7 @@ export function PhoneShowcase() {
             aria-label={`Show phone preview ${index + 1}`}
             aria-current={active === index ? "true" : undefined}
             className="phone-dot-button"
-            onClick={() => trackRef.current?.querySelectorAll<HTMLElement>(".phone-slide")[index]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })}
+            onClick={() => goToSlide(index)}
           >
             <span className={`phone-dot ${active === index ? "phone-dot-active" : ""}`} />
           </Button>
