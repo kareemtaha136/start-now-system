@@ -12,8 +12,8 @@ type PhoneSlide = {
 
 // Replace a slot's type and src when its portrait media is ready.
 const phoneSlides: PhoneSlide[] = [
-  { type: "image", src: "", caption: "Tell it what you're avoiding. Get one tiny next step." },
-  { type: "video", src: mobileVideo.url, poster: mobilePoster.url, caption: "Explore ZeroHours on your phone." },
+  { type: "video", src: mobileVideo.url, poster: mobilePoster.url, caption: "Tell it what you're avoiding. Get one tiny next step." },
+  { type: "image", src: "", caption: "Lock in with a focus timer." },
   { type: "image", src: "", caption: "Panic mode: exam in 3 days? Here's your plan." },
 ];
 
@@ -101,7 +101,7 @@ export function PhoneShowcase() {
     <div className="phone-showcase" aria-label="ZeroHours mobile showcase">
       <div ref={trackRef} onScroll={updateActive} className="phone-track">
         {phoneSlides.map((slide, index) => (
-          <div className="phone-slide" key={index}>
+          <div className="phone-slide" data-active={active === index} key={index}>
             <PhoneMockup {...slide} index={index} />
           </div>
         ))}
