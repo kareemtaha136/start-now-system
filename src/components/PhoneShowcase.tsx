@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "./ui/button";
-import mobileVideo from "../assets/product/phone-walkthrough-clear.mp4.asset.json";
+import mobileVideo from "../assets/product/phone-walkthrough-clear.webm.asset.json";
+import mobileVideoFallback from "../assets/product/mobile-showcase-compatible.mp4.asset.json";
 import mobilePoster from "../assets/product/phone-walkthrough-poster.jpg.asset.json";
 import phoneHome from "../assets/product/phone-9292.png.asset.json";
 import phoneTasks from "../assets/product/phone-9293.png.asset.json";
@@ -19,7 +20,7 @@ type PhoneSlide = {
 // All portrait media lives here. The mobile page places each image only once.
 export const phoneMedia = {
   home: { type: "image", src: phoneHome.url, caption: "See your next move and start a lock-in session." },
-  video: { type: "video", src: mobileVideo.url, poster: mobilePoster.url, caption: "Watch ZeroHours in action on your phone." },
+  video: { type: "video", src: mobileVideo.url, fallbackSrc: mobileVideoFallback.url, poster: mobilePoster.url, caption: "Watch ZeroHours in action on your phone." },
   tasks: { type: "image", src: phoneTasks.url, caption: "Keep your tasks in view." },
   study: { type: "image", src: phoneStudy.url, caption: "Plan a study session that fits your work." },
   rescue: { type: "image", src: phoneRescue.url, caption: "Find a way forward when you're stuck." },
