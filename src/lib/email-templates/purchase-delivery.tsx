@@ -14,8 +14,7 @@ import {
 import type { TemplateEntry } from "./registry";
 import { productConfig } from "@/lib/zerohours-config";
 
-// The stable production URL for this project — download links in the email
-// must be absolute, so they point here (works once the site is published).
+// Guide PDF links in email must be absolute.
 const SITE_URL = "https://project--8bdcf2c0-cd83-44f5-956b-6e817c0f0074.lovable.app";
 
 export interface PurchaseDeliveryProps {
@@ -81,29 +80,31 @@ const styles = {
 } satisfies Record<string, React.CSSProperties>;
 
 function PurchaseDeliveryEmail({ orderId }: PurchaseDeliveryProps) {
-  const appUrl = `${SITE_URL}${productConfig.appDownloadUrl}`;
   const includedGuideUrl = `${SITE_URL}${productConfig.includedGuideUrl}`;
   const guideUrl = `${SITE_URL}${productConfig.freeGuideUrl}`;
 
   return (
     <Html lang="en">
       <Head />
-      <Preview>Your ZeroHours download is ready</Preview>
+      <Preview>Your ZeroHours access link and code are ready</Preview>
       <Body style={styles.body}>
         <Container style={styles.container}>
           <Section>
             <Heading style={styles.heading}>You're in.</Heading>
             <Text style={styles.text}>
-              Thanks for getting ZeroHours. Your download is ready — tap the
-              button below to save it to your device.
+              Thanks for getting ZeroHours. Open the link below on any device
+              to get started right in your browser.
             </Text>
-            <Button href={appUrl} style={styles.button}>
-              Download ZeroHours
+            <Button href={productConfig.appAccessUrl} style={styles.button}>
+              Open ZeroHours
             </Button>
             <Text style={styles.text}>
-              Open the file in any browser — it works offline and keeps your
-              data on your own device. Save the file somewhere you'll find it
-              again.
+              Your access code: <strong>{productConfig.appAccessCode}</strong>
+            </Text>
+            <Text style={styles.text}>
+              Enter the code once to unlock ZeroHours permanently on that
+              device. No file to download, no install, and no need to enter the
+              code again each time.
             </Text>
             <Hr style={styles.hr} />
             <Text style={styles.text}>
@@ -138,7 +139,7 @@ function PurchaseDeliveryEmail({ orderId }: PurchaseDeliveryProps) {
 
 export const template = {
   component: PurchaseDeliveryEmail,
-  subject: "Your ZeroHours download is ready",
-  displayName: "Purchase delivery — ZeroHours download",
+  subject: "Your ZeroHours access is ready",
+  displayName: "Purchase delivery — ZeroHours access",
   previewData: { orderId: "txn_test_1234" },
 } satisfies TemplateEntry;

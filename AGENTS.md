@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep purchased-app access URL and code centralized in the product configuration so the purchase page and delivery email cannot drift apart; PDF guides remain separate downloadable assets.

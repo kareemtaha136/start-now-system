@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createHmac, timingSafeEqual } from "node:crypto";
 
 // Purchase delivery webhook. Paddle (the payment provider) posts payment
-// events here; on a completed purchase we email the buyer their download.
+// events here; on a completed purchase we email the buyer their access details.
 // Lives under /api/public — the caller is verified by Paddle's webhook
 // signature before anything is processed.
 

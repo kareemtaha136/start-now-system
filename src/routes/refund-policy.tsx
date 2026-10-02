@@ -46,12 +46,12 @@ function RefundPolicyPage() {
       <section>
         <h2>Processing</h2>
         <p>Approved refunds are returned to the original payment method. The time for funds to appear depends on the payment method and financial institution. Paddle will provide the applicable status and confirmation.</p>
-        <p>After a full refund, your license to use ZeroHours ends and you should delete downloaded copies. Data you created locally remains under your control.</p>
+        <p>After a full refund, your license to use ZeroHours ends and you should stop using the app. Data you created locally remains under your control.</p>
       </section>
 
       <section>
         <h2>Duplicate charges and technical issues</h2>
-        <p>If you see a duplicate charge, cannot access your delivered file, or experience another order problem, contact Paddle through <a href="https://paddle.net" rel="noreferrer">paddle.net</a>. Delivery problems can often be corrected without affecting your right to request a refund within the 14-day period.</p>
+        <p>If you see a duplicate charge, cannot access the app using your link and code, or experience another order problem, contact Paddle through <a href="https://paddle.net" rel="noreferrer">paddle.net</a>. Access problems can often be corrected without affecting your right to request a refund within the 14-day period.</p>
       </section>
 
       <section>

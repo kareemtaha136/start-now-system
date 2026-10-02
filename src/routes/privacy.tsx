@@ -25,7 +25,7 @@ function PrivacyPage() {
     <LegalPage
       eyebrow="Legal"
       title="Privacy Notice"
-      summary="This notice explains what information is handled when you visit ZeroHours, buy the product, receive delivery emails, or use the downloaded app."
+      summary="This notice explains what information is handled when you visit ZeroHours, buy the product, receive delivery emails, or use the app in your browser."
     >
       <section>
         <h2>1. Who controls your information</h2>
@@ -39,7 +39,7 @@ function PrivacyPage() {
           <li><strong>Purchase and delivery information:</strong> your name, email address, country or region, order reference, product purchased, transaction status, and refund status. Paddle processes payment-card and other payment-method details; ZeroHours does not collect or store full card details.</li>
           <li><strong>Communications:</strong> messages and information you provide when requesting support, exercising a privacy right, reporting intellectual-property concerns, or discussing an order.</li>
           <li><strong>Website and security data:</strong> IP address, browser and device information, request logs, timestamps, and similar technical information automatically processed by our hosting and security providers.</li>
-          <li><strong>Product data:</strong> the downloadable ZeroHours app is local-first. Courses, tasks, assignments, notes, grades, schedules, study sessions, and similar working data are stored on your device unless you choose to export or share them. We do not receive that local app data merely because you use the app.</li>
+          <li><strong>Product data:</strong> ZeroHours is local-first and runs in your browser. Courses, tasks, assignments, notes, grades, schedules, study sessions, and similar working data are stored on your device unless you choose to export or share them. We do not receive that local app data merely because you use the app.</li>
           <li><strong>Free-guide information:</strong> the current free-guide form downloads the guide directly and does not save the email address entered. If email collection is enabled later, this notice will be updated before that use begins.</li>
         </ul>
       </section>
@@ -60,7 +60,7 @@ function PrivacyPage() {
         <p>We share only what is reasonably necessary with:</p>
         <ul>
           <li><strong>Paddle, our Merchant of Record,</strong> for product sales, checkout, payments, tax compliance, invoicing, refund handling, fraud prevention, and purchase support.</li>
-          <li><strong>Service providers</strong> that provide website hosting, security, file delivery, transactional email, and technical infrastructure.</li>
+          <li><strong>Service providers</strong> that provide website hosting, security, product access, transactional email, and technical infrastructure.</li>
           <li><strong>Professional advisers</strong> such as legal, tax, or accounting advisers where necessary.</li>
           <li><strong>Public authorities</strong> where disclosure is required by law or needed to protect legal rights and safety.</li>
           <li><strong>A successor organization</strong> if the business is reorganized, sold, or transferred, subject to appropriate safeguards.</li>

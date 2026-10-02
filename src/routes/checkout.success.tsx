@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Check, Download, Mail } from "lucide-react";
+import { ArrowUpRight, Check, Download, Mail } from "lucide-react";
 import { productConfig } from "@/lib/zerohours-config";
 
 export const Route = createFileRoute("/checkout/success")({
@@ -24,8 +24,11 @@ function CheckoutSuccess() {
         <span className="mx-auto grid size-14 place-items-center rounded-full bg-success-soft text-success"><Check className="size-7" /></span>
         <p className="eyebrow mt-6">Purchase received</p>
         <h1 className="mt-3 font-display text-3xl font-extrabold uppercase sm:text-4xl">You're in.</h1>
-        <div className="mt-6 flex items-start gap-3 rounded-lg bg-secondary p-4 text-left"><Mail className="mt-0.5 size-5 shrink-0 text-primary" /><p className="text-sm leading-6">A download link is on its way to the email you used at checkout — it usually arrives within a minute.</p></div>
-        <a href={productConfig.appDownloadUrl} download className="btn-primary mt-4 flex w-full items-center justify-center gap-2"><Download className="size-5" />Download ZeroHours now</a>
+        <div className="mt-6 flex items-start gap-3 rounded-lg bg-secondary p-4 text-left"><Mail className="mt-0.5 size-5 shrink-0 text-primary" /><p className="text-sm leading-6">Your access link and code are on their way to the email you used at checkout. You can start right now below.</p></div>
+        <p className="mt-5 text-sm leading-6 text-muted-foreground">Open ZeroHours on any device in your browser. Enter the code once to unlock it permanently on that device — no download, install, or repeat entry.</p>
+        <p className="mt-4 text-sm font-semibold">Your access code</p>
+        <p className="mt-1 select-all break-all rounded-md border border-border bg-surface px-4 py-3 font-mono text-lg font-bold tracking-normal">{productConfig.appAccessCode}</p>
+        <a href={productConfig.appAccessUrl} target="_blank" rel="noopener noreferrer" className="btn-primary mt-4 flex w-full items-center justify-center gap-2">Open ZeroHours <ArrowUpRight className="size-5" /></a>
         <a href={productConfig.includedGuideUrl} download className="btn-secondary mt-3 flex w-full items-center justify-center gap-2"><Download className="size-5" />Download the ZeroHours Guide (PDF)</a>
         <Link to="/" className="btn-secondary mt-3 w-full">Return to ZeroHours</Link>
       </div>
