@@ -202,6 +202,56 @@
 @utility shadow-strong { box-shadow: 0 28px 70px -38px color-mix(in oklab, var(--color-foreground) 45%, transparent); }
 
 @layer components {
+  .phone-showcase { width: 100%; }
+  .phone-track {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: calc((100% - min(72vw, 18rem)) / 2);
+    padding: 1rem calc((100% - min(72vw, 18rem)) / 2) 2rem;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+  }
+  .phone-track::-webkit-scrollbar { display: none; }
+  .phone-slide { flex: 0 0 min(72vw, 18rem); min-width: 0; scroll-snap-align: center; }
+  .phone-figure { margin: 0; width: 100%; }
+  .phone-shell {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 19.5;
+    padding: 0.45rem;
+    border: 1px solid var(--color-ink-border);
+    border-radius: 12% / 5.5%;
+    background: linear-gradient(115deg, var(--color-ink-soft), var(--color-border) 38%, var(--color-ink) 55%, var(--color-muted-foreground) 84%, var(--color-ink));
+    box-shadow: inset 0 0 0 1px var(--color-card), 0 24px 40px -22px color-mix(in oklab, var(--color-foreground) 55%, transparent);
+  }
+  .phone-screen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 11.5% / 5.25%; background: var(--color-ink); }
+  .phone-media { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .phone-island { position: absolute; top: 1.25%; left: 50%; z-index: 2; width: 29%; height: 3.3%; transform: translateX(-50%); border-radius: 100px; background: var(--color-ink); box-shadow: 0 0 0 1px var(--color-ink-border); }
+  .phone-home-indicator { position: absolute; bottom: 1.1%; left: 50%; z-index: 2; width: 31%; height: 0.55%; transform: translateX(-50%); border-radius: 100px; background: var(--color-ink-foreground); }
+  .phone-side-button { position: absolute; z-index: 1; width: 2px; border-radius: 2px; background: var(--color-ink-border); }
+  .phone-side-button-left { left: -2px; top: 19%; height: 10%; }
+  .phone-side-button-right { right: -2px; top: 27%; height: 13%; }
+  .phone-empty { display: flex; height: 100%; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; background: radial-gradient(circle at 50% 37%, var(--color-ink-soft), var(--color-ink) 75%); color: var(--color-ink-foreground); }
+  .phone-empty-mark { display: grid; width: 3.25rem; height: 3.25rem; place-items: center; border: 1px solid var(--color-ink-border); border-radius: 0.7rem; font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--color-primary-border); }
+  .phone-empty-number { font-family: var(--font-display); font-size: 3.5rem; font-weight: 800; color: var(--color-ink-muted); }
+  .phone-empty-rule { width: 2rem; height: 2px; background: var(--color-coral); }
+  .phone-caption { min-height: 3.5rem; margin: 1.25rem auto 0; max-width: 18rem; text-align: center; font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; line-height: 1.45; }
+  .phone-slide:not([data-active="true"]) .phone-caption { visibility: hidden; }
+  .phone-dots { display: flex; align-items: center; justify-content: center; gap: 0.15rem; }
+  .phone-dot-button { height: 2.5rem; width: 2.5rem; border-radius: 100%; padding: 0; }
+  .phone-dot { display: block; height: 0.45rem; width: 0.45rem; border-radius: 100%; background: var(--color-muted-foreground); transition: width .2s ease, background .2s ease; }
+  .phone-dot-active { width: 1.15rem; border-radius: 100px; background: var(--color-primary); }
+  @media (min-width: 640px) {
+    .phone-track { justify-content: center; gap: 2rem; overflow: visible; padding: 2rem 0; scroll-snap-type: none; }
+    .phone-slide { flex: 0 1 15rem; }
+    .phone-slide:nth-child(2) { flex-basis: 17rem; transform: translateY(-1.5rem); }
+    .phone-slide:not([data-active="true"]) .phone-caption { visibility: visible; }
+    .phone-dots { display: none; }
+  }
+
   /* Mobile-first media card. Desktop values match the previous inline styling. */
   .media-card {
     margin-left: -0.5rem;
