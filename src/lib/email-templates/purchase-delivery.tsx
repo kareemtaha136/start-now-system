@@ -120,10 +120,53 @@ function PurchaseDeliveryEmail({ orderId }: PurchaseDeliveryProps) {
               code again each time.
             </Text>
             <Hr style={styles.hr} />
-            <Text style={styles.text}>
-              Your purchase also includes <strong>The ZeroHours Guide</strong>{" "}
-              (PDF):
-            </Text>
+            <Section>
+              <Heading
+                as="h2"
+                style={{
+                  fontFamily: "'Sora', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+                  fontSize: "18px",
+                  fontWeight: 700,
+                  letterSpacing: "-0.01em",
+                  margin: "0 0 12px",
+                  color: "#20242e",
+                }}
+              >
+                Put it on your home screen
+              </Heading>
+              <Text style={styles.text}>
+                For a one-tap ZeroHours icon right next to your other apps, add
+                it to your phone's home screen:
+              </Text>
+              <Text style={styles.subheading}>On iPhone (Safari)</Text>
+              <Text style={styles.step}>
+                1. Open {productConfig.appAccessUrl.replace(/^https?:\/\//, "")} in Safari and enter your access code.
+              </Text>
+              <Text style={styles.step}>
+                2. Tap the <strong>Share</strong> button (the square with an
+                arrow pointing up).
+              </Text>
+              <Text style={styles.step}>
+                3. Scroll down and tap <strong>Add to Home Screen</strong>, then
+                tap <strong>Add</strong>.
+              </Text>
+              <Text style={styles.subheading}>On Android (Chrome)</Text>
+              <Text style={styles.step}>
+                1. Open {productConfig.appAccessUrl.replace(/^https?:\/\//, "")} in Chrome and enter your access code.
+              </Text>
+              <Text style={styles.step}>
+                2. Tap the <strong>three-dot menu</strong> at the top right.
+              </Text>
+              <Text style={styles.step}>
+                3. Tap <strong>Add to Home screen</strong> (or <strong>Add to
+                Home screen &gt; Install</strong>), then confirm.
+              </Text>
+              <Text style={styles.text}>
+                You'll get a ZeroHours icon that opens the app instantly — no
+                app store needed.
+              </Text>
+            </Section>
+            <Hr style={styles.hr} />
             <Button href={includedGuideUrl} style={styles.secondaryButton}>
               Download the ZeroHours Guide
             </Button>
