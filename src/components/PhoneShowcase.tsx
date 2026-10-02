@@ -28,7 +28,7 @@ export const phoneMedia = {
 } satisfies Record<string, PhoneSlide>;
 
 const desktopSlides: PhoneSlide[] = Object.values(phoneMedia);
-const mobileSlides: PhoneSlide[] = [phoneMedia.video, phoneMedia.study, phoneMedia.courses];
+const mobileSlides: PhoneSlide[] = [phoneMedia.video, phoneMedia.tasks, phoneMedia.study, phoneMedia.rescue, phoneMedia.courses];
 
 type PhoneMockupProps = PhoneSlide & { index: number };
 

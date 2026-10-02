@@ -195,17 +195,6 @@ function Index() {
           <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
             <div><p className="eyebrow text-coral">The problem</p><h2 className="section-title mt-4">You know what you need to do.<span className="block text-coral">You just can't start.</span></h2><p className="mt-6 max-w-xl text-lg leading-8 text-ink-muted">Another list isn't the answer. You already know the assignment exists. The hard part is crossing the gap between “I should do this” and “I'm actually doing it.”</p></div>
              <div>
-               <div className="mx-auto w-full max-w-60 sm:hidden"><PhoneMockup {...phoneMedia.tasks} index={0} /></div>
-               <div className="hidden sm:block">
-              <ResponsiveMedia
-                desktopSrc={marketingAssets.problem.src}
-                mobileSrc={marketingAssets.problem.mobileSrc}
-                mobileRatio={marketingAssets.problem.mobileRatio}
-                alt={marketingAssets.problem.alt}
-                caption={marketingAssets.problem.caption}
-                tone="dark"
-              />
-               </div>
               <div className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs font-bold uppercase text-ink-muted">{["Assignment", "Overthinking", "Avoidance", "Phone", "Pressure"].map((item, index) => <span key={item} className="contents"><span className="rounded-full border border-ink-border px-3 py-2">{item}</span>{index < 4 && <ArrowRight className="size-3" />}</span>)}</div>
             </div>
           </div>
@@ -297,11 +286,11 @@ function Index() {
         </section>
 
         <section className="section-shell">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div className="hidden sm:block"><ResponsiveMedia desktopSrc={marketingAssets.transformation.src} mobileSrc={marketingAssets.transformation.mobileSrc} mobileRatio={marketingAssets.transformation.mobileRatio} alt={marketingAssets.transformation.alt} caption={marketingAssets.transformation.caption} /></div><div><p className="eyebrow">The shift</p><h2 className="section-title mt-4"><span className="text-muted-foreground">From: “I'll do it later.”</span><span className="mt-3 block">To: “I'm already started.”</span></h2><div className="mt-8 grid grid-cols-2 gap-3">{["Overwhelm", "Clarity", "Small action", "Momentum"].map((x,i) => <div key={x} className={`rounded-lg border p-4 font-bold ${i === 3 ? "border-coral bg-coral-soft text-coral-strong" : "border-border bg-card"}`}>{String(i+1).padStart(2,"0")}<span className="mt-7 block text-sm">{x}</span></div>)}</div></div></div>
+          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center"><div><p className="eyebrow">The shift</p><h2 className="section-title mt-4"><span className="text-muted-foreground">From: “I'll do it later.”</span><span className="mt-3 block">To: “I'm already started.”</span></h2></div><div className="grid grid-cols-2 gap-3">{["Overwhelm", "Clarity", "Small action", "Momentum"].map((x,i) => <div key={x} className={`rounded-lg border p-4 font-bold ${i === 3 ? "border-coral bg-coral-soft text-coral-strong" : "border-border bg-card"}`}>{String(i+1).padStart(2,"0")}<span className="mt-7 block text-sm">{x}</span></div>)}</div></div>
         </section>
 
         <section className="section-shell bg-surface">
-          <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_.95fr] lg:items-center"><div><p className="eyebrow">Beyond reminders</p><h2 className="section-title mt-4">More than a to-do list.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">ZeroHours doesn't just remind you that the work exists. It helps you move through the part that keeps you from starting.</p><div className="mt-7 grid grid-cols-2 gap-2 text-sm font-semibold">{["Next Action", "5-Minute Rescue", "Lock-In", "Study Sessions", "Exam Rescue", "Catch-Up"].map(x => <div className="flex items-center gap-2" key={x}><Check className="size-4 text-primary" />{x}</div>)}</div><a href="#showcase-title" className="btn-secondary mt-8 w-full sm:w-auto">See ZeroHours in action <Play className="size-4" /></a></div><div className="mx-auto w-full max-w-60 sm:hidden"><PhoneMockup {...phoneMedia.rescue} index={0} /></div><div className="hidden sm:block"><ResponsiveMedia desktopSrc={marketingAssets.features.src} mobileSrc={marketingAssets.features.mobileSrc} mobileRatio={marketingAssets.features.mobileRatio} alt={marketingAssets.features.alt} caption={marketingAssets.features.caption} /></div></div>
+          <div className="mx-auto max-w-7xl"><p className="eyebrow">Beyond reminders</p><h2 className="section-title mt-4">More than a to-do list.</h2><p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">ZeroHours doesn't just remind you that the work exists. It helps you move through the part that keeps you from starting.</p><div className="mt-7 grid max-w-3xl grid-cols-2 gap-2 text-sm font-semibold sm:grid-cols-3">{["Next Action", "5-Minute Rescue", "Lock-In", "Study Sessions", "Exam Rescue", "Catch-Up"].map(x => <div className="flex items-center gap-2" key={x}><Check className="size-4 text-primary" />{x}</div>)}</div><a href="#showcase-title" className="btn-secondary mt-8 w-full sm:w-auto">See ZeroHours in action <Play className="size-4" /></a></div>
         </section>
 
         <section className="section-shell">
