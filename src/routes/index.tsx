@@ -7,7 +7,6 @@ import {
   ChevronDown,
   Clock3,
   LockKeyhole,
-  Maximize2,
   Menu,
   Monitor,
 
@@ -23,6 +22,7 @@ import { trackEvent } from "../lib/analytics";
 import { marketingAssets, productConfig, showcaseShots } from "../lib/zerohours-config";
 import { MediaPlaceholder } from "../components/MediaPlaceholder";
 import { ResponsiveMedia, ResponsiveVideo } from "../components/ResponsiveMedia";
+import { PhoneShowcase } from "../components/PhoneShowcase";
 import { openPaymentCheckout } from "../lib/paddle";
 import { sendFreeGuide } from "../lib/guide.functions";
 import { PaymentTestModeBanner } from "../components/PaymentTestModeBanner";
@@ -84,8 +84,6 @@ function Index() {
   const navigate = useNavigate();
   const sendGuide = sendFreeGuide;
   const pricingRef = useRef<HTMLElement>(null);
-  const demoFrameRef = useRef<HTMLDivElement>(null);
-  const demoVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     trackEvent("page_view");
@@ -134,13 +132,6 @@ function Index() {
       setGuideSending(false);
     }
     await navigate({ to: "/guide/thank-you" });
-  };
-
-  const openDemoFullscreen = () => {
-    const frame = demoFrameRef.current;
-    if (frame?.requestFullscreen) { void frame.requestFullscreen(); return; }
-    const video = demoVideoRef.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void }) | null;
-    video?.webkitEnterFullscreen?.();
   };
 
   return (
@@ -236,8 +227,10 @@ function Index() {
           <div className="mx-auto max-w-7xl">
             <p className="eyebrow">See the system</p>
             <h2 id="showcase-title" className="section-title mt-4 max-w-4xl">A real workspace for the moments that stop you.</h2>
-            <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">Every screen below is the actual ZeroHours app — no mockups, no renders.</p>
-            <div className="-mx-2 mt-8 grid gap-5 sm:mx-0 sm:mt-10 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+             <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground hidden sm:block">Every screen below is the actual ZeroHours app — no mockups, no renders.</p>
+             <p className="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground sm:hidden">A closer look at ZeroHours on your phone.</p>
+             <div className="mt-8 sm:hidden"><PhoneShowcase /></div>
+             <div className="-mx-2 mt-8 hidden gap-5 sm:mx-0 sm:mt-10 sm:grid sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
               {showcaseShots.map((shot) => (
                 <figure key={shot.title} className="showcase-card">
 
@@ -261,7 +254,7 @@ function Index() {
                 </figure>
               ))}
             </div>
-            <div className="mt-14 border-t border-border pt-10 sm:mt-16 sm:pt-12">
+             <div className="mt-14 hidden border-t border-border pt-10 sm:mt-16 sm:block sm:pt-12">
               <div className="mb-7 max-w-3xl">
                 <p className="eyebrow">Watch the walkthrough</p>
                 <h3 className="mt-3 font-display text-2xl font-extrabold uppercase sm:text-3xl">See ZeroHours in action.</h3>
@@ -273,12 +266,7 @@ function Index() {
                 poster={productConfig.demoPosterUrl}
                 ariaLabel="ZeroHours product demonstration"
                 className="sm:rounded-xl"
-                frameRef={demoFrameRef}
-                videoRef={demoVideoRef}
-                caption="A real walkthrough of the ZeroHours app. Tap the expand icon for full screen."
-              >
-                <button type="button" onClick={openDemoFullscreen} className="icon-button absolute bottom-3 right-3 shadow-soft sm:hidden" aria-label="Watch demo fullscreen"><Maximize2 /></button>
-              </ResponsiveVideo>
+               />
             </div>
             <div className="mt-8"><button className="btn-primary w-full sm:w-auto" disabled={checkoutLoading} onClick={checkout}>Get ZeroHours — $29.99 <ArrowRight aria-hidden="true" /></button></div>
           </div>
