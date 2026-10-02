@@ -76,6 +76,19 @@ const styles = {
     padding: "12px 24px",
   },
   hr: { borderColor: "#e8e5df", margin: "28px 0" },
+  subheading: {
+    fontFamily: "'Sora', 'Helvetica Neue', Helvetica, Arial, sans-serif",
+    fontSize: "15px",
+    fontWeight: 700,
+    color: "#20242e",
+    margin: "0 0 6px",
+  },
+  step: {
+    fontSize: "14px",
+    lineHeight: "22px",
+    margin: "0 0 4px",
+    color: "#4b5160",
+  },
   footer: { fontSize: "12px", lineHeight: "18px", color: "#8a8f9c", margin: "0" },
 } satisfies Record<string, React.CSSProperties>;
 
