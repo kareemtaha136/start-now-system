@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Pause, Play } from "lucide-react";
 import { Button } from "./ui/button";
 import mobileVideo from "../assets/product/phone-walkthrough-clear.webm.asset.json";
 import mobileVideoFallback from "../assets/product/phone-walkthrough-clear.mp4.asset.json";
@@ -38,6 +39,8 @@ export function PhoneMockup({ type, src, fallbackSrc, poster, caption, index }: 
   const [near, setNear] = useState(false);
   const [visible, setVisible] = useState(false);
   const [videoSource, setVideoSource] = useState("");
+  const [playing, setPlaying] = useState(false);
+  const [failed, setFailed] = useState(false);
 
   useEffect(() => {
     if (!near || type !== "video" || !src) return;
@@ -64,31 +67,43 @@ export function PhoneMockup({ type, src, fallbackSrc, poster, caption, index }: 
   }, [src, type]);
 
   useEffect(() => {
+    if (!visible) videoRef.current?.pause();
+  }, [visible]);
+
+  const togglePlayback = () => {
     const video = videoRef.current;
     if (!video) return;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (visible && near && !reduced) {
-      void video.play().catch(() => {});
-    } else {
-      video.pause();
-    }
-  }, [visible, near]);
+    if (!video.paused) { video.pause(); return; }
+    if (!videoSource) setVideoSource(src);
+    void video.play().catch(() => setFailed(true));
+  };
 
-  const playWhenReady = () => {
-    const video = videoRef.current;
-    if (video && visible && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      void video.play().catch(() => {});
+  const handleVideoError = () => {
+    if (fallbackSrc && videoSource !== fallbackSrc) {
+      setVideoSource(fallbackSrc);
+    } else {
+      setFailed(true);
     }
   };
 
   return (
     <figure className="phone-figure">
       <div className="phone-shell" aria-label={src ? caption : `Preview slot ${index + 1}`}>
-        <span className="phone-side-button phone-side-button-left" aria-hidden="true" />
-        <span className="phone-side-button phone-side-button-right" aria-hidden="true" />
+        <span className="phone-side-button phone-action-button" aria-hidden="true" />
+        <span className="phone-side-button phone-volume-up" aria-hidden="true" />
+        <span className="phone-side-button phone-volume-down" aria-hidden="true" />
+        <span className="phone-side-button phone-power-button" aria-hidden="true" />
+        <span className="phone-side-button phone-camera-button" aria-hidden="true" />
         <div ref={screenRef} className="phone-screen">
           {src ? type === "video" ? (
-            <video ref={videoRef} src={videoSource || undefined} poster={poster} onCanPlay={playWhenReady} autoPlay muted loop playsInline preload="metadata" className="phone-media" aria-label={caption} />
+            <>
+              <video ref={videoRef} src={videoSource || undefined} poster={poster} onPlay={() => { setPlaying(true); setFailed(false); }} onPause={() => setPlaying(false)} onError={handleVideoError} muted loop playsInline preload="metadata" className="phone-media" aria-label={caption} />
+              {!failed ? (
+                <Button type="button" variant="ghost" size="icon" onClick={togglePlayback} aria-label={playing ? "Pause phone walkthrough" : "Play phone walkthrough"} className={`phone-video-button ${playing ? "phone-video-button-playing" : ""}`}>
+                  {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" fill="currentColor" />}
+                </Button>
+              ) : <span className="phone-video-error" role="status">Video unavailable</span>}
+            </>
           ) : (
             <img src={src} alt={caption} loading="lazy" className="phone-media" />
           ) : (
@@ -98,7 +113,7 @@ export function PhoneMockup({ type, src, fallbackSrc, poster, caption, index }: 
               <span className="phone-empty-rule" />
             </div>
           )}
-          <span className="phone-island" aria-hidden="true" />
+          <span className="phone-island" aria-hidden="true"><span className="phone-camera-lens" /></span>
           <span className="phone-home-indicator" aria-hidden="true" />
         </div>
       </div>
