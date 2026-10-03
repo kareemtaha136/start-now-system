@@ -20,4 +20,5 @@
 - [x] Add a mobile-only phone showcase with the uploaded vertical video while preserving desktop gallery and walkthrough
 - [x] Replace mobile showcase placeholders with all five uploaded phone screens; show the phone gallery below the unchanged desktop gallery and walkthrough on desktop
 - [x] Remove all desktop media from the phone page, show each supplied phone screen once, and make the walkthrough distinct and clearer
+- [x] Make the phone walkthrough tap-to-play and refine the phone frames to a modern iPhone style
 - [ ] Publish so guide delivery emails send from the live site
