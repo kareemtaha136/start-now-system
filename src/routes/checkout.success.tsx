@@ -43,7 +43,7 @@ function CheckoutSuccess() {
             </ul>
             <p>Using a school email? Schools often filter outside emails or hold them in quarantine. Check there, or use a personal email next time.</p>
             <p>Found it in spam or promotions? Move it to your main inbox so future updates from us land there.</p>
-            <p>Still nothing after 30 minutes? Double-check you typed your email right at checkout, then contact us at <a href="mailto:mail@zerohours.store" className="font-bold text-primary underline underline-offset-2">mail@zerohours.store</a> with the email you used, and we'll sort it out.</p>
+            <p>Still nothing after 30 minutes? Double-check you typed your email right at checkout, then send us a message on our <Link to="/support" className="font-bold text-primary underline underline-offset-2">support page</Link> with the email you used, and we'll sort it out.</p>
           </div>
         </details>
         <Link to="/" className="btn-secondary mt-6 w-full">Return to ZeroHours</Link>
