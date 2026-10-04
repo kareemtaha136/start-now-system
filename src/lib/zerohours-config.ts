@@ -16,9 +16,8 @@ export const productConfig = {
   checkoutPriceId: "zerohours_one_time",
   /** Free lead-magnet PDF (ZeroHours — Just Start). */
   freeGuideUrl: guideAsset.url,
-  /** Browser access details delivered to buyers after purchase. */
+  /** Browser app link delivered to buyers; they unlock with their checkout email. */
   appAccessUrl: "https://app.zerohours.store",
-  appAccessCode: "LOCKEDIN2026",
   /** The full ZeroHours guide PDF included with every purchase. */
   includedGuideUrl: includedGuideAsset.url,
   /** Wide (16:9) demo video used on tablet and desktop. */
