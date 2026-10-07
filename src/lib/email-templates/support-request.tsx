@@ -32,7 +32,7 @@ function SupportRequestEmail({ name, email, topic, message }: Props) {
 
 export const template = {
   component: SupportRequestEmail,
-  subject: (d: Record<string, any>) => `ZeroHours support: ${d.topic ?? "New request"}`,
+  subject: (d: Record<string, any>) => `ZeroHours support: ${d["topic"] ?? "New request"}`,
   displayName: "Support request (owner)",
   to: "kareemthenigget@gmail.com",
   previewData: { name: "Jane", email: "jane@example.com", topic: "Can't unlock the app", message: "Hi, my email isn't working." },
