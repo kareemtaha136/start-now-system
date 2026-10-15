@@ -66,11 +66,10 @@ function GuideThankYou() {
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-ink-muted">You grabbed the guide because starting is the hard part. ZeroHours is the system built for exactly that moment — and it pairs with everything in the guide.</p>
 
           <div className="mt-8 overflow-hidden rounded-xl border border-coral bg-card text-left text-foreground shadow-strong">
-            <div className="border-b border-border bg-coral px-6 py-3 text-center text-sm font-bold uppercase text-white">Guide readers — get the full system</div>
+            <div className="relative border-b border-border bg-coral px-6 py-3 text-center text-sm font-bold uppercase text-white">Guide readers — get the full system<span className="price-was-chip">was <s>$29.99</s></span></div>
             <div className="p-6 sm:p-8">
               <div className="flex items-end gap-3">
                 <span className="font-display text-5xl font-extrabold">$19.99</span>
-                <span className="pb-1.5 font-display text-xl font-bold text-muted-foreground line-through">$29.99</span>
                 <span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span>
               </div>
               <ul className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -78,7 +77,7 @@ function GuideThankYou() {
                   <li key={x} className="flex items-center gap-2 text-sm font-medium"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" /></span>{x}</li>
                 ))}
               </ul>
-              <button onClick={buy} disabled={loading} className="btn-coral mt-7 w-full">{loading ? "Opening checkout…" : <>Get ZeroHours — <s className="font-normal opacity-60">$29.99</s> $19.99</>} <ArrowRight /></button>
+              <button onClick={buy} disabled={loading} className="btn-coral mt-7 w-full">{loading ? "Opening checkout…" : <>Get ZeroHours — <span className="btn-price-was"><span className="sr-only">was </span>$29.99</span> $19.99</>} <ArrowRight /></button>
               <p className="mt-4 flex items-center justify-center gap-1.5 rounded-md bg-surface px-3 py-2 text-center text-xs font-semibold text-foreground"><Monitor className="size-3.5 shrink-0" aria-hidden="true" />Works on mobile and desktop in your browser. No install needed.</p><p className="mt-2 text-center text-xs font-medium text-muted-foreground">You'll unlock the app with the email you use at checkout.</p>
               <p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No subscription. Delivered by email.</p>
               {error && <p role="alert" className="mt-4 rounded-md bg-coral-soft p-3 text-center text-sm text-coral-strong">{error}</p>}
@@ -118,11 +117,10 @@ function GuideThankYou() {
 
       <section className="section-shell bg-surface">
         <div className="mx-auto max-w-2xl overflow-hidden rounded-xl border border-primary bg-card shadow-strong">
-          <div className="border-b border-border bg-primary px-6 py-4 text-center text-sm font-bold uppercase text-primary-foreground">ZeroHours — Complete system</div>
+          <div className="relative border-b border-border bg-primary px-6 py-4 text-center text-sm font-bold uppercase text-primary-foreground">ZeroHours — Complete system<span className="price-was-chip">was <s>$29.99</s></span></div>
           <div className="p-6 sm:p-10">
             <div className="flex items-end gap-3">
               <span className="font-display text-5xl font-extrabold">$19.99</span>
-              <span className="pb-1.5 font-display text-xl font-bold text-muted-foreground line-through">$29.99</span>
               <span className="pb-1 text-sm font-semibold text-muted-foreground">one time</span>
             </div>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -130,7 +128,7 @@ function GuideThankYou() {
                 <li key={x} className="flex items-center gap-2 text-sm font-medium"><span className="grid size-5 shrink-0 place-items-center rounded-full bg-success-soft text-success"><Check className="size-3" /></span>{x}</li>
               ))}
             </ul>
-            <button onClick={buy} disabled={loading} className="btn-coral mt-9 w-full">{loading ? "Opening checkout…" : <>Get ZeroHours — <s className="font-normal opacity-60">$29.99</s> $19.99</>} <ArrowRight /></button>
+            <button onClick={buy} disabled={loading} className="btn-coral mt-9 w-full">{loading ? "Opening checkout…" : <>Get ZeroHours — <span className="btn-price-was"><span className="sr-only">was </span>$29.99</span> $19.99</>} <ArrowRight /></button>
             <p className="mt-4 flex items-center justify-center gap-1.5 rounded-md bg-surface px-3 py-2 text-center text-xs font-semibold text-foreground"><Monitor className="size-3.5 shrink-0" aria-hidden="true" />Works on mobile and desktop in your browser. No install needed.</p><p className="mt-2 text-center text-xs font-medium text-muted-foreground">You'll unlock the app with the email you use at checkout.</p>
             <p className="mt-3 text-center text-xs font-medium text-muted-foreground">One-time purchase. No monthly subscription. Delivered by email.</p>
             {error && <p role="alert" className="mt-5 rounded-md bg-coral-soft p-3 text-center text-sm text-coral-strong">{error}</p>}
@@ -140,7 +138,7 @@ function GuideThankYou() {
       </section>
 
       <div className="sticky-cta fixed inset-x-0 bottom-0 z-50 border-t border-border bg-background/95 backdrop-blur-md md:hidden">
-        <button className="btn-primary w-full" disabled={loading} onClick={buy}>{loading ? "Opening checkout…" : <>Get ZeroHours — <s className="font-normal opacity-60">$29.99</s> $19.99</>} <ArrowRight /></button>
+        <button className="btn-primary w-full" disabled={loading} onClick={buy}>{loading ? "Opening checkout…" : <>Get ZeroHours — <span className="btn-price-was"><span className="sr-only">was </span>$29.99</span> $19.99</>} <ArrowRight /></button>
       </div>
     </main>
   );
