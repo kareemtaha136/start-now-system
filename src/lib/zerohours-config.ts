@@ -12,7 +12,7 @@ import studentHeroMobile from "../assets/zerohours-student-hero-mobile-v3.jpg";
 
 export const productConfig = {
   name: "ZeroHours",
-  price: "$29.99",
+  price: "$19.99",
   checkoutPriceId: "zerohours_one_time",
   /** Free lead-magnet PDF (ZeroHours — Just Start). */
   freeGuideUrl: guideAsset.url,
