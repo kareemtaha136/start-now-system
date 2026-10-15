@@ -22,3 +22,4 @@
 - [x] Remove all desktop media from the phone page, show each supplied phone screen once, and make the walkthrough distinct and clearer
 - [x] Make the phone walkthrough tap-to-play and refine the phone frames to a modern iPhone style
 - [ ] Publish so guide delivery emails send from the live site
+- [ ] Undo the top-right crossed-out price change and restore the previous version (revert via chat history or History tab)
