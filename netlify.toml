@@ -1,0 +1,30 @@
+# Static zerohours.store (branch: netlify-static). No build step: pages are pre-built HTML in /site.
+[build]
+  publish = "site"
+  command = ""
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# Old URLs without trailing slashes keep working.
+[[redirects]]
+  from = "/checkout/success"
+  to = "/checkout/success/"
+  status = 301
+
+[[redirects]]
+  from = "/guide/thank-you"
+  to = "/guide/thank-you/"
+  status = 301
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
