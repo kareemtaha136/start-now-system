@@ -8,6 +8,8 @@
 //
 // Follow-up emails (day 2/4/7) are run by a Brevo Automation triggered by "contact added to list".
 
+import { brevo as brevoCall, ensureAttributes, listId as getListId } from "../lib/brevo.mjs";
+
 export const config = { path: "/api/guide" };
 
 const SITE = "https://zerohours.store";
@@ -38,18 +40,50 @@ function guideEmailHtml() {
 const guideEmailText = () =>
   `Here's your guide.\n\nThanks for grabbing ZeroHours — Just Start.\nDownload it here: ${GUIDE_URL}\n\nWhen you want the full system, ZeroHours is a one-time purchase: ${SITE}/#pricing\n\nYou received this because you requested the free guide at zerohours.store.`;
 
-async function brevo(path, apiKey, body) {
-  const res = await fetch(`https://api.brevo.com/v3${path}`, {
-    method: "POST",
-    headers: { "api-key": apiKey, "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok && res.status !== 204) {
-    throw new Error(`Brevo ${path} ${res.status}: ${(await res.text()).slice(0, 300)}`);
+const brevo = (path, _key, body) => brevoCall("POST", path, body);
+
+// Use BREVO_SENDER_EMAIL if set; otherwise the first active sender already set up in Brevo.
+let cachedSender;
+async function pickSender() {
+  const name = process.env.BREVO_SENDER_NAME || "ZeroHours";
+  if (process.env.BREVO_SENDER_EMAIL) return { email: process.env.BREVO_SENDER_EMAIL, name };
+  if (cachedSender) return cachedSender;
+  try {
+    const list = (await brevoCall("GET", "/senders"))?.senders || [];
+    const pick = list.find((x) => x.active && /@zerohours\.store$/i.test(x.email)) || list.find((x) => x.active);
+    if (pick) return (cachedSender = { email: pick.email, name });
+  } catch (err) {
+    console.error("sender lookup failed", err.message);
   }
+  return { email: "noreply@zerohours.store", name };
+}
+
+// GET /api/guide?check=1 — safe setup check (no secrets returned).
+async function diagnose() {
+  const out = { keySet: Boolean((process.env.BREVO_API_KEY || "").trim()), listId: getListId() };
+  if (!out.keySet) return out;
+  try { const a = await brevoCall("GET", "/account"); out.keyWorks = true; out.account = a?.companyName || a?.email ? "ok" : "ok"; }
+  catch (e) { out.keyWorks = false; out.keyError = e.status; return out; }
+  try { const l = await brevoCall("GET", `/contacts/lists/${out.listId}`); out.list = { found: true, name: l?.name, contacts: l?.uniqueSubscribers ?? l?.totalSubscribers }; }
+  catch (e) { out.list = { found: false, status: e.status }; }
+  try {
+    const d = await brevoCall("GET", "/senders/domains");
+    const dom = (d?.domains || []).find((x) => String(x.domain_name || x.domainName || "").toLowerCase() === "zerohours.store");
+    out.domain = dom ? { found: true, authenticated: Boolean(dom.authenticated), verified: Boolean(dom.verified) } : { found: false };
+  } catch (e) { out.domain = { error: e.status }; }
+  try {
+    const s = await brevoCall("GET", "/senders");
+    out.senders = (s?.senders || []).map((x) => ({ email: x.email, active: x.active }));
+  } catch (e) { out.senders = { error: e.status }; }
+  for (const id of [1, 2, 3]) {
+    try { const t = await brevoCall("GET", `/smtp/templates/${id}`); out[`template${id}`] = { found: true, active: Boolean(t?.isActive), name: t?.name }; }
+    catch (e) { out[`template${id}`] = { found: false, status: e.status }; }
+  }
+  return out;
 }
 
 export default async (req) => {
+  if (req.method === "GET") return reply(200, await diagnose());
   if (req.method !== "POST") return reply(405, { ok: false, reason: "method" });
   let input;
   try { input = await req.json(); } catch { return reply(400, { ok: false, reason: "bad_request" }); }
@@ -64,17 +98,15 @@ export default async (req) => {
   const apiKey = (process.env.BREVO_API_KEY || "").trim();
   if (!apiKey) return reply(500, { ok: false, reason: "not_configured" });
 
-  const listId = parseInt(process.env.BREVO_LIST_ID || "5", 10) || 5;
-  const sender = {
-    email: process.env.BREVO_SENDER_EMAIL || "noreply@zerohours.store",
-    name: process.env.BREVO_SENDER_NAME || "ZeroHours",
-  };
+  const listId = getListId();
+  const sender = await pickSender();
 
   const result = { ok: true, emailed: false, listed: false };
 
   if (consent) {
     try {
-      await brevo("/contacts", apiKey, { email, listIds: [listId], updateEnabled: true, attributes: { SOURCE: "free-guide" } });
+      await ensureAttributes();
+      await brevo("/contacts", apiKey, { email, listIds: [listId], updateEnabled: true, attributes: { SOURCE: "free-guide", GUIDE_SIGNUP_AT: new Date().toISOString() } });
       result.listed = true;
     } catch (err) {
       console.error("brevo contact failed", err);
@@ -93,8 +125,9 @@ export default async (req) => {
     result.emailed = true;
   } catch (err) {
     console.error("brevo send failed", err);
+    result.emailError = err.status || "unknown";
   }
 
-  if (!result.emailed && !result.listed) return reply(502, { ok: false, reason: "upstream" });
+  if (!result.emailed && !result.listed) return reply(502, { ok: false, reason: "upstream", emailError: result.emailError });
   return reply(200, result);
 };
