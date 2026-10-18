@@ -10,7 +10,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 APP_URL = "https://app.zerohours.store"
 PRICE, WAS = "$19.99", "$29.99"
-V = "4"  # cache-buster for css/js
+V = "5"  # cache-buster for css/js
 
 # ---------- icons (lucide, MIT) ----------
 ICONS = {
@@ -363,7 +363,7 @@ def build_home():
         <input id="guide-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" class="mt-2 h-12 w-full rounded-md border border-ink-border bg-ink px-4 text-base outline-none placeholder:text-ink-muted focus:border-coral focus:ring-2 focus:ring-coral">
         <label for="guide-consent" class="mt-4 flex items-start gap-2.5 text-xs leading-5 text-ink-muted"><input id="guide-consent" name="marketingConsent" type="checkbox" class="mt-0.5 size-4 shrink-0 rounded border-ink-border bg-ink accent-coral"><span>Yes, email me occasional ZeroHours tips and offers. Unsubscribe any time.</span></label>
         <button class="btn-coral mt-3 w-full" type="submit">Get the free guide {icon("arrow-right")}</button>
-        <p class="mt-3 text-xs leading-5 text-ink-muted">Download it instantly on the next page. No spam.</p>
+        <p class="mt-3 text-xs leading-5 text-ink-muted">We email your copy straight away, and you can download it on the next page too. No spam.</p>
       </form>
     </div>
   </section>
@@ -467,7 +467,7 @@ def build_guide():
         <span class="grid size-9 shrink-0 place-items-center rounded-full bg-success-soft text-success">{icon("check", "size-5")}</span>
         <div>
           <p class="text-sm font-bold text-ink-foreground">Your guide is ready.</p>
-          <p class="mt-1 text-sm leading-6 text-ink-muted"><strong class="text-ink-foreground">ZeroHours — Just Start</strong> is a short PDF you can read on your phone in a few minutes.</p>
+          <p class="mt-1 text-sm leading-6 text-ink-muted">{icon("mail", "mr-1.5 inline size-4 text-coral")}We've also emailed <strong class="text-ink-foreground">ZeroHours — Just Start</strong> to you. If it's not in your inbox in a minute, check Promotions or Spam.</p>
           <a href="/assets/docs/zerohours-just-start-free-guide.pdf" download class="btn-coral mt-3 !min-h-11 !text-xs">{icon("download")}Download the free guide (PDF)</a>
         </div>
       </div>

@@ -81,6 +81,37 @@
     }
   });
 
+  // ---------- free guide form: email the guide (Brevo) + keep a copy in Netlify Forms ----------
+  const guideForm = document.querySelector('form[name="free-guide"]');
+  if (guideForm && window.fetch) {
+    guideForm.addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const btn = guideForm.querySelector('button[type="submit"]');
+      const orig = btn ? btn.innerHTML : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Sending your guide…"; }
+      const fd = new FormData(guideForm);
+      const withTimeout = (p) => Promise.race([p, new Promise((r) => setTimeout(r, 6000))]);
+      await Promise.allSettled([
+        withTimeout(fetch("/api/guide", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: fd.get("email"),
+            marketingConsent: fd.get("marketingConsent") === "on",
+            website: fd.get("website") || "",
+          }),
+        })),
+        withTimeout(fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(fd).toString(),
+        })),
+      ]);
+      if (btn) { btn.disabled = false; btn.innerHTML = orig; }
+      window.location.href = "/guide/thank-you/";
+    });
+  }
+
   // ---------- checkout (Paddle, straight from the browser) ----------
   let configPromise;
   const getConfig = () => {
