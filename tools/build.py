@@ -78,6 +78,7 @@ def head(title, desc, path, extra="", noindex=False, og_type="website", card="su
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Work+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/assets/site.css?v={V}">
 {extra}
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{{"token": "8310b4ce6b86484aa0a72d47a7d9fbe7"}}'></script>
 </head>
 """
 
