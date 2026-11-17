@@ -7,8 +7,7 @@ import lockInAsset from "../assets/product/lock-in.png.asset.json";
 import rescueAsset from "../assets/product/rescue.png.asset.json";
 import studySessionAsset from "../assets/product/study-session.png.asset.json";
 import tasksAsset from "../assets/product/tasks.png.asset.json";
-import studentHeroDesktop from "../assets/zerohours-student-hero-desktop-v3.jpg";
-import studentHeroMobile from "../assets/zerohours-student-hero-mobile-v3.jpg";
+import studentHeroDesktop from "../assets/zerohours-student-hero-dark.webp";
 
 export const productConfig = {
   name: "ZeroHours",
@@ -46,9 +45,9 @@ export const productConfig = {
 export const marketingAssets = {
   hero: {
     src: studentHeroDesktop,
-    mobileSrc: studentHeroMobile,
-    desktopRatio: "8 / 5",
-    mobileRatio: "4 / 5",
+    mobileSrc: "",
+    desktopRatio: "1167 / 782",
+    mobileRatio: "1167 / 782",
     alt: "Student using ZeroHours on a laptop at a clean study desk",
     caption: "ZeroHours open and ready for the next move.",
   },
