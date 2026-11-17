@@ -7,7 +7,7 @@ import lockInAsset from "../assets/product/lock-in.png.asset.json";
 import rescueAsset from "../assets/product/rescue.png.asset.json";
 import studySessionAsset from "../assets/product/study-session.png.asset.json";
 import tasksAsset from "../assets/product/tasks.png.asset.json";
-import studentHeroDesktop from "../assets/zerohours-student-hero-desktop-v3.jpg";
+import studentHeroDesktop from "../assets/zerohours-student-hero-desktop-v5.png";
 import studentHeroMobile from "../assets/zerohours-student-hero-mobile-v3.jpg";
 
 export const productConfig = {
