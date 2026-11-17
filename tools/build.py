@@ -273,7 +273,7 @@ def build_home():
       </div>
       <div class="mx-auto mt-10 w-full max-w-60 sm:hidden">{phone_mockup(*PHONE["home"], eager=True)}</div>
       <div class="mt-10 hidden sm:mt-14 sm:block">
-        {media_card("/assets/media/student-hero-desktop-v3.webp", "Student using ZeroHours on a laptop at a clean study desk", "ZeroHours open and ready for the next move.", mobile_src="/assets/media/student-hero-mobile-v3.webp", desktop_ratio="8 / 5", mobile_ratio="4 / 5", eager=True, media_cls="rounded-lg object-cover", cls="sm:rounded-xl")}
+        {media_card("/assets/media/student-hero-desktop-v5.webp", "Student using ZeroHours on a laptop at a clean study desk", "ZeroHours open and ready for the next move.", mobile_src="/assets/media/student-hero-mobile-v3.webp", desktop_ratio="8 / 5", mobile_ratio="4 / 5", eager=True, media_cls="rounded-lg object-cover", cls="sm:rounded-xl")}
       </div>
       <div class="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-4">
         {"".join(f'<div class="flex min-h-20 items-center justify-center gap-2 bg-card px-3 text-center text-sm font-semibold">{icon("check", "size-4 shrink-0 text-primary")}{x}</div>' for x in ["One-time payment", "Instant digital access", "Local-first", "Built for students"])}
