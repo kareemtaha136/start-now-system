@@ -44,8 +44,27 @@ function isH3SwallowedErrorBody(body: string): boolean {
   }
 }
 
+// The live store moved to https://zerohours.store. This old published copy
+// (*.lovable.app) forwards page visits there. API routes are left alone so
+// any webhook or scheduled job still pointed here keeps working.
+const LIVE_SITE = "https://zerohours.store";
+
+function redirectToLiveSite(request: Request): Response | null {
+  if (request.method !== "GET" && request.method !== "HEAD") return null;
+  const url = new URL(request.url);
+  const host = url.hostname;
+  if (!host.endsWith(".lovable.app") || host.startsWith("id-preview--")) return null;
+  if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/lovable/")) return null;
+  return new Response(null, {
+    status: 301,
+    headers: { location: LIVE_SITE + url.pathname + url.search, "cache-control": "public, max-age=3600" },
+  });
+}
+
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
+    const moved = redirectToLiveSite(request);
+    if (moved) return moved;
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
