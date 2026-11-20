@@ -10,7 +10,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 SITE = ROOT / "site"
 APP_URL = "https://app.zerohours.store"
 PRICE, WAS = "$19.99", "$29.99"
-V = "5"  # cache-buster for css/js
+V = "6"  # cache-buster for css/js
 
 # ---------- icons (lucide, MIT) ----------
 ICONS = {
@@ -120,7 +120,7 @@ FAQS = [
     ("How does it help with procrastination?", "It guides you from the reason you are avoiding a task to one useful next action, a five-minute start, and focused continuation."),
     ("Is it a subscription?", f"No. ZeroHours is a one-time purchase — {PRICE}, down from {WAS}."),
     ("How do I get access after buying?", "Open app.zerohours.store and enter the email you used at checkout. You only do it once per device."),
-    ("Can I use it on my phone and laptop?", "Yes, on up to 3 devices with the same purchase email."),
+    ("Can I use it on my phone and laptop?", "Yes, on up to 7 devices with the same purchase email."),
     ("I got a new phone / it's asking me to unlock again", 'Just enter your purchase email again. If it says you\'ve hit the device limit, send us a message on the <a class="font-bold text-primary underline underline-offset-2" href="/support/">support page</a> and we\'ll reset it.'),
     ("Is my data private?", "ZeroHours uses local-first data storage, keeping your working data on your device. Import and export tools help you manage your own copy."),
     ("Do I need an account?", "No. You unlock ZeroHours with the email you used at checkout — no account or password."),
@@ -564,7 +564,7 @@ def build_support():
 
 
 # ---------- legal ----------
-def legal(path, title_tag, desc, eyebrow, title, summary, body):
+def legal(path, title_tag, desc, eyebrow, title, summary, body, effective="October 18, 2026"):
     page = head(title_tag, desc, path, card="summary") + f"""<body>
 <div class="min-h-screen bg-background text-foreground">
   {MOBILE_NOTE("max-w-5xl", "px-4")}
@@ -583,7 +583,7 @@ def legal(path, title_tag, desc, eyebrow, title, summary, body):
         <p class="eyebrow">{eyebrow}</p>
         <h1 class="mt-4 max-w-4xl font-display text-4xl font-extrabold uppercase leading-tight sm:text-6xl">{title}</h1>
         <p class="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">{summary}</p>
-        <p class="mt-4 text-sm font-semibold text-muted-foreground">Effective October 18, 2026</p>
+        <p class="mt-4 text-sm font-semibold text-muted-foreground">Effective {effective}</p>
       </div>
     </div>
     <article class="legal-copy mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">{body}</article>
@@ -610,7 +610,7 @@ def build_legal():
     for name in ["privacy", "terms", "refund-policy"]:
         meta = json.loads((ROOT / "tools" / "legal" / f"{name}.json").read_text())
         body = (ROOT / "tools" / "legal" / f"{name}.html").read_text()
-        legal(f"/{name}/", meta["titleTag"], meta["description"], meta["eyebrow"], meta["title"], meta["summary"], body)
+        legal(f"/{name}/", meta["titleTag"], meta["description"], meta["eyebrow"], meta["title"], meta["summary"], body, meta.get("effective", "October 18, 2026"))
 
 
 def build_404():

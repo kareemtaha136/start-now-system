@@ -57,7 +57,7 @@ function PurchaseDeliveryEmail({ orderId }: PurchaseDeliveryProps) {
             <Text style={styles.text}>
               The first time you open it on a device, enter the email you used to buy ZeroHours (this one). That's it — no code, no account, no download. It remembers you after that.
             </Text>
-            <Text style={styles.text}>Works on your phone and laptop (up to 3 devices).</Text>
+            <Text style={styles.text}>Works on your phone and laptop (up to 7 devices).</Text>
             <Text style={styles.text}>
               Bookmark the link or add it to your home screen so it's always one tap away.
             </Text>

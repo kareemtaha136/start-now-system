@@ -68,7 +68,7 @@ const faqs: ReadonlyArray<readonly [string, string]> = [
   ["How does it help with procrastination?", "It guides you from the reason you are avoiding a task to one useful next action, a five-minute start, and focused continuation."],
   ["Is it a subscription?", "No. ZeroHours is a one-time purchase — $19.99, down from $29.99."],
   ["How do I get access after buying?", "Open app.zerohours.store and enter the email you used at checkout. You only do it once per device."],
-  ["Can I use it on my phone and laptop?", "Yes, on up to 3 devices with the same purchase email."],
+  ["Can I use it on my phone and laptop?", "Yes, on up to 7 devices with the same purchase email."],
   ["I got a new phone / it's asking me to unlock again", "Just enter your purchase email again. If it says you've hit the device limit, reply to your receipt email and we'll reset it."],
   ["Is my data private?", "ZeroHours uses local-first data storage, keeping your working data on your device. Import and export tools help you manage your own copy."],
   ["Do I need an account?", "No. You unlock ZeroHours with the email you used at checkout — no account or password."],

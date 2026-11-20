@@ -66,7 +66,7 @@ function TermsPage() {
         <p>ZeroHours is currently offered for a one-time price shown before checkout. There is no recurring subscription for the core product. Any future optional product will be clearly described and priced separately before purchase.</p>
         <p><strong>Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for all our orders. Paddle provides all customer service inquiries and handles returns.</strong></p>
         <p>Payment, billing, applicable tax, cancellation, and refund mechanics are governed by <a href="https://www.paddle.com/legal/checkout-buyer-terms" rel="noreferrer">Paddle’s Buyer Terms</a> together with our <Link to="/refund-policy">Refund Policy</Link>. You must provide accurate purchase and delivery information.</p>
-        <p>Your access link is sent to the email address used at checkout and is also shown immediately after a confirmed purchase. Open the link in any browser and enter your purchase email once per device to unlock ZeroHours, on up to 3 devices, without an install or account. You are responsible for entering a working email address and keeping your exported data backed up.</p>
+        <p>Your access link is sent to the email address used at checkout and is also shown immediately after a confirmed purchase. Open the link in any browser and enter your purchase email once per device to unlock ZeroHours, on up to 7 devices, without an install or account. You are responsible for entering a working email address and keeping your exported data backed up.</p>
       </section>
 
       <section>
