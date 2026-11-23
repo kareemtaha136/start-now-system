@@ -13,7 +13,7 @@ import { brevo as brevoCall, ensureAttributes, listId as getListId } from "../li
 export const config = { path: "/api/guide" };
 
 const SITE = "https://zerohours.store";
-const GUIDE_URL = `${SITE}/assets/docs/zerohours-just-start-free-guide.pdf`;
+const GUIDE_URL = `${SITE}/assets/docs/zerohours-just-start-free-guide.pdf?v=2`;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const JSON_HEADERS = { "Content-Type": "application/json", "Cache-Control": "no-store" };
 
