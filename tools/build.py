@@ -469,7 +469,7 @@ def build_guide():
         <div>
           <p class="text-sm font-bold text-ink-foreground">Your guide is ready.</p>
           <p class="mt-1 text-sm leading-6 text-ink-muted">{icon("mail", "mr-1.5 inline size-4 text-coral")}We've also emailed <strong class="text-ink-foreground">ZeroHours — Just Start</strong> to you. If it's not in your inbox in a minute, check Promotions or Spam.</p>
-          <a href="/assets/docs/zerohours-just-start-free-guide.pdf" download class="btn-coral mt-3 !min-h-11 !text-xs">{icon("download")}Download the free guide (PDF)</a>
+          <a href="/assets/docs/zerohours-just-start-free-guide.pdf?v=2" download class="btn-coral mt-3 !min-h-11 !text-xs">{icon("download")}Download the free guide (PDF)</a>
         </div>
       </div>
       <p class="eyebrow mt-10 text-coral">Before you go</p>
